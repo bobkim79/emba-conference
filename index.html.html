@@ -1,0 +1,351 @@
+<title>EMBA 모의 IR 피칭데이</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Archivo+Black&display=swap">
+<style>
+/* Layout: 포스터와 같은 네이비 바탕에 노랑 사선 라벨. 왼쪽 정렬 본문, 신청 방법을 페이지 중심에 둔다. */
+:root{
+  --bg:#0A1240; --panel:#111A57; --panel-2:#16206B; --line:#2A3690;
+  --ink:#F5F7FF; --muted:#B4BCE6; --yellow:#FFC81E; --yellow-ink:#141A46;
+  --font-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-display:"Archivo Black","Noto Sans KR",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+.wrap{max-width:980px;margin:0 auto}
+a{color:var(--yellow)}
+h1,h2,h3{line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font-family:var(--font-display);letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:var(--yellow)}
+.slab{display:inline-block;background:var(--yellow);color:var(--yellow-ink);font-weight:900;padding:4px 22px 4px 14px;
+  clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);font-size:14px;letter-spacing:.02em}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.top b{font-size:15px}
+.top .sep{width:1px;height:18px;background:var(--line)}
+.top .emba{color:var(--yellow);font-family:var(--font-display);font-size:20px}
+
+/* hero */
+.hero{padding:56px 0 48px;display:grid;gap:22px}
+.hero h1{font-size:clamp(34px,7vw,64px);font-weight:900;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero .lead{font-size:clamp(16px,2.4vw,19px);color:var(--muted);max-width:40em}
+.facts{display:flex;flex-wrap:wrap;gap:10px 22px;font-weight:700;margin-top:4px}
+.facts span{display:inline-flex;gap:8px;align-items:center}
+.facts i{font-style:normal;color:var(--yellow);font-family:var(--font-display);font-size:12px;letter-spacing:.08em}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.btn{display:inline-block;border:2px solid var(--yellow);padding:12px 22px;font-weight:900;text-decoration:none;font-size:16px;
+  background:transparent;color:var(--yellow);cursor:pointer;font-family:inherit;line-height:1.3}
+.btn.solid{background:var(--yellow);color:var(--yellow-ink)}
+.btn:hover{filter:brightness(1.1)}
+.btn:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* sections */
+section{padding:52px 0;border-top:1px solid var(--line)}
+section>.wrap>h2{font-size:clamp(26px,4.4vw,38px);font-weight:900;margin:12px 0 10px}
+.sub{color:var(--muted);max-width:42em}
+.grid{display:grid;gap:14px;margin-top:26px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.panel{background:var(--panel);border:1px solid var(--line);padding:20px;min-width:0}
+.big{font-family:var(--font-display);font-size:clamp(34px,5vw,48px);color:var(--yellow);line-height:1}
+.big small{font-size:.4em;margin-left:4px;font-family:var(--font-body);font-weight:900}
+.panel h3{font-size:18px;margin:10px 0 6px}
+.panel p{color:var(--muted);font-size:15px}
+.panel .label{font-size:13px;color:var(--muted);font-weight:700}
+
+ul.check{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+ul.check li{display:flex;gap:12px;align-items:flex-start;font-size:17px;font-weight:500}
+ul.check li::before{content:"";flex:none;width:18px;height:18px;margin-top:5px;background:var(--yellow);
+  clip-path:polygon(0 50%,12% 38%,38% 62%,88% 8%,100% 22%,38% 92%)}
+
+/* format timeline */
+.timeline{display:flex;margin-top:26px;height:64px;font-weight:900}
+.timeline div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.t1{flex:7;background:var(--yellow);color:var(--yellow-ink);clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.t2{flex:3;background:var(--panel-2);border:1px solid var(--line);margin-left:-6px}
+.tl-note{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-top:10px}
+ol.flow{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+ol.flow li{counter-increment:s;display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+ol.flow li::before{content:counter(s);font-family:var(--font-display);color:var(--yellow);font-size:20px;min-width:22px}
+ol.flow b{min-width:5.5em;display:inline-block}
+
+/* judges */
+.judge .role{font-size:13px;color:var(--yellow);font-weight:700}
+.judge h3{font-size:22px;margin:6px 0 2px}
+.judge .org{color:var(--muted);font-size:15px}
+
+/* prizes */
+.prize{position:relative;overflow:hidden}
+.prize .rank{font-family:var(--font-display);font-size:64px;line-height:1;color:var(--yellow)}
+.prize.p1{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
+.prize.p1 .rank{color:var(--yellow-ink)}
+.prize.p1 p,.prize.p1 .label{color:#2B3170}
+
+/* apply */
+.apply{background:var(--panel);border:2px solid var(--yellow);padding:clamp(20px,4vw,36px);margin-top:26px;display:grid;gap:22px}
+.mail{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.mail code{font-family:var(--font-display);font-size:clamp(20px,4vw,30px);color:var(--yellow);overflow-wrap:anywhere;user-select:all}
+.needs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.needs .panel{background:var(--panel-2)}
+textarea{width:100%;min-height:210px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:14px;font:15px/1.7 var(--font-body);resize:vertical}
+.copied{color:var(--yellow);font-weight:700;font-size:14px;min-height:1.4em}
+
+/* steps */
+.step .n{font-family:var(--font-display);font-size:13px;letter-spacing:.1em;color:var(--yellow)}
+.notice{margin-top:22px;padding:14px 18px;border-left:4px solid var(--yellow);background:var(--panel);color:var(--muted);font-size:15px}
+
+/* about */
+.about-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:12px}
+.about-head p{color:var(--muted)}
+.about-head p+p{margin-top:12px}
+.facts-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.facts-list li{display:grid;grid-template-columns:7em 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.facts-list b{color:var(--yellow);font-size:13px}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:30px}
+.gallery figure{margin:0;min-width:0}
+.gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line)}
+.gallery figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+.gallery figcaption b{color:var(--ink);display:block;font-size:14px}
+@media (max-width:760px){.about-head{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery img{aspect-ratio:3/2}}
+@media (max-width:480px){.facts-list li{grid-template-columns:1fr;gap:2px}}
+
+/* part 1 list */
+ol.sess{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:0}
+ol.sess li{display:grid;grid-template-columns:3.2em 1fr;gap:6px 14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+ol.sess .no{font-family:var(--font-display);color:var(--yellow)}
+ol.sess .who{grid-column:2;color:var(--muted);font-size:14px}
+ol.sess .tm{color:var(--yellow);font-family:var(--font-display);font-weight:400;margin-right:8px;letter-spacing:.02em}
+.lucky{margin-top:22px;padding:18px 20px;background:var(--yellow);color:var(--yellow-ink);font-weight:900;font-size:clamp(17px,2.6vw,21px);clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%)}
+.lucky small{display:block;font-weight:700;font-size:13px;letter-spacing:.08em;margin-bottom:2px}
+
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:700;font-size:17px}
+details p{color:var(--muted);margin-top:8px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 44px;color:var(--muted);font-size:14px;display:grid;gap:6px}
+footer b{color:var(--ink)}
+
+@media (max-width:760px){
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .needs{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .g4,.g3,.g2{grid-template-columns:1fr}
+  .timeline{height:56px;font-size:14px}
+  ol.flow b{min-width:0;display:block}
+  ol.flow li{flex-direction:column;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <b>경희대학교 경영대학원</b><span class="sep"></span><span class="emba">EMBA</span>
+  </div>
+
+  <header class="hero">
+    <span class="slab">EMBA Conference · Part 2 기업투자</span>
+    <h1>내 사업을 <em>전문가 앞에서</em><br>진짜 IR로 발표해 보세요</h1>
+    <p class="lead">경영혁신·성장 컨퍼런스 2부, 모의 IR 피칭데이에 참가할 7개 팀을 선착순으로 모집합니다. 발표 직후 심사위원에게 질문을 받고, 항목별 피드백을 가져가세요.</p>
+    <div class="facts">
+      <span><i>DATE</i> 2026.12.12 (토) 14:00</span>
+      <span><i>PLACE</i> 경희대학교 경영대학원 오비스홀 111호</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn solid" href="#apply">참가 신청 방법 보기</a>
+      <a class="btn" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">모의투자자로 참관하기</a>
+    </div>
+  </header>
+</div>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">At a glance</span>
+    <h2>한눈에 보기</h2>
+    <div class="grid g2">
+      <div class="panel"><div class="big">7<small>팀</small></div><h3>선착순 접수</h3><p>마감 후 신청은 대기로 받고, 취소가 나오면 순서대로 올라갑니다.</p></div>
+      <div class="panel"><div class="big">7+3<small>분</small></div><h3>발표 + 질의응답</h3><p>발표 7분, 심사위원과 질의응답 3분입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Who should apply</span>
+    <h2>이런 분을 기다립니다</h2>
+    <ul class="check">
+      <li>창업했거나 창업을 준비하면서, IR을 진짜 전문가 앞에서 해 보고 싶은 분</li>
+      <li>투자 유치나 정부지원사업 신청 전에 내 사업을 점검받고 싶은 분</li>
+      <li>발표 자료는 있는데 "투자자가 어떻게 볼지" 모르겠는 분</li>
+      <li>EMBA 원우·동문뿐 아니라 학교 구성원, 창업을 준비하는 분 모두 신청할 수 있습니다</li>
+    </ul>
+    <p class="notice">이 자리는 실제 투자 유치가 목적이 아닌 모의고사형 피칭데이입니다. 준비하고 발표하는 과정 자체가 사업을 점검하는 훈련이 됩니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Format</span>
+    <h2>발표는 이렇게 진행됩니다</h2>
+    <div class="timeline" role="img" aria-label="발표 7분, 질의응답 3분">
+      <div class="t1">발표 7분</div><div class="t2">Q&amp;A 3분</div>
+    </div>
+    <div class="tl-note"><span>팀당 총 10분이 기본이며, 진행 상황에 따라 약간의 여유 시간을 둡니다.</span></div>
+    <ol class="flow">
+      <li><span><b>문제</b> 누구의 어떤 문제를 푸는가</span></li>
+      <li><span><b>솔루션</b> 무엇을 어떻게 해결하는가</span></li>
+      <li><span><b>시장</b> 고객은 누구이고 얼마나 큰가</span></li>
+      <li><span><b>사업모델</b> 어떻게 돈을 버는가</span></li>
+      <li><span><b>요청사항</b> 오늘 전문가에게 받고 싶은 도움</span></li>
+    </ol>
+    <p class="sub" style="margin-top:20px">심사위원이 가장 궁금해하는 것은 "시장에 어떤 단계로 들어가 어떻게 돈을 벌 것인가"입니다. 시장 진입 전략과 수익 구조를 꼭 넣어 주세요.</p>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <span class="eyebrow">How to apply</span>
+    <h2>메일 한 통이면 신청됩니다</h2>
+    <p class="sub">간단한 회사(팀) 소개와 피칭 자료를 보내 주세요. 접수 순서대로 7팀이 확정됩니다.</p>
+    <div class="apply">
+      <div>
+        <div class="label" style="color:var(--muted);font-weight:700;font-size:13px;margin-bottom:6px">접수 이메일</div>
+        <div class="mail">
+          <code id="mailaddr">bob@khu.ac.kr</code>
+          <button class="btn" type="button" id="copyMail">주소 복사</button>
+          <a class="btn solid" id="mailto" href="mailto:bob@khu.ac.kr?subject=%5BEMBA%20IR%20%ED%94%BC%EC%B9%AD%5D%20%ED%8C%80%EB%AA%85%20%EC%8B%A0%EC%B2%AD">메일 쓰기</a>
+        </div>
+      </div>
+      <div class="needs">
+        <div class="panel"><div class="label">보낼 것 1</div><h3>간단한 회사·팀 소개</h3><p>팀(회사)명, 대표자, 한 줄 소개, 사업 단계, 연락처를 적어 주세요.</p></div>
+        <div class="panel"><div class="label">보낼 것 2</div><h3>피칭 자료</h3><p>PDF 또는 PPT 파일. 완성본이 아니어도 지금 가진 자료로 괜찮습니다.</p></div>
+      </div>
+      <div>
+        <div class="label" style="color:var(--muted);font-weight:700;font-size:13px;margin-bottom:8px">메일 양식 (복사해서 사용하세요)</div>
+        <textarea id="tpl" readonly>제목: [EMBA IR 피칭] 팀명 신청
+
+1. 팀(회사)명:
+2. 대표자 성함 / 소속 기수(해당 시):
+3. 연락처(전화, 이메일):
+4. 한 줄 소개:
+5. 사업 단계(아이디어 / 시제품 / 매출 발생 등):
+6. 오늘 전문가에게 받고 싶은 피드백:
+7. 첨부: 피칭 자료(PDF 또는 PPT)</textarea>
+        <div class="cta-row"><button class="btn" type="button" id="copyTpl">양식 복사</button></div>
+        <div class="copied" id="copied" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="notice">선착순 7팀이 마감되면 대기 접수로 전환합니다. 접수 마감일과 세부 운영사항은 최종 확정 후 이 페이지와 별도 공지로 안내합니다.</p>
+  </div>
+</section>
+
+<section id="investor">
+  <div class="wrap">
+    <span class="eyebrow">For visitors</span>
+    <h2>듣고, 판단하고, 투자하세요</h2>
+    <p class="sub">발표를 보기만 하지 않습니다. 참관하는 모든 분이 가상 투자자가 되어 마음에 드는 팀에 모의투자하고, 결과는 현장에서 바로 공개됩니다.</p>
+    <div class="grid g3">
+      <div class="panel step"><div class="n">STEP 1</div><h3>IR 발표 관람</h3><p>7개 팀의 모의 IR 피칭을 보고 질의응답을 듣습니다.</p></div>
+      <div class="panel step"><div class="n">STEP 2</div><h3>모의투자</h3><p>받은 가상 투자금을 원하는 팀에 자유롭게 나눠 투자합니다.</p></div>
+      <div class="panel step"><div class="n">STEP 3</div><h3>결과 공개</h3><p>모의투자 결과를 집계해 원우 모의투자 1위 팀을 발표합니다.</p></div>
+    </div>
+    <div class="grid g2">
+      <div class="panel"><div class="label">참관 대상</div><h3>EMBA 원우·동문, 가족, 학교 구성원</h3><p>창업과 투자에 관심 있는 분이면 함께하실 수 있습니다.</p></div>
+      <div class="panel"><div class="label">참여 혜택</div><h3>모의투자 경험 + 럭키드로우</h3><p>투자자의 시선으로 사업을 보는 경험을 드립니다. 추첨 경품은 확정 후 안내합니다.</p></div>
+    </div>
+    <div class="lucky"><small>LUCKY DRAW</small>마지막까지 행사장을 지켜주신 모의투자자분들께 럭키드로우를 꼭 받아가세요.</div>
+    <div class="cta-row" style="margin-top:22px"><a class="btn solid" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">참관 신청하기 (온오프믹스)</a></div>
+    <p class="notice">실제 금전 투자가 아닌 가상 투자금으로 진행하는 모의투자입니다. 참관 신청은 온오프믹스에서 받으며, 문의는 bob@khu.ac.kr로 받습니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Part 1</span>
+    <h2>AX시대에 꼭 필요한 전문가 강연이 있습니다.</h2>
+    <ol class="sess">
+      <li><span class="no">01</span><span>세무담당자는 알고, 대표는 모르는 것들</span><span class="who"><b class="tm">14:10–14:30</b> EMBA 21기 전다슬</span></li>
+      <li><span class="no">02</span><span>기업 AX전환 사례발표</span><span class="who"><b class="tm">14:30–14:50</b> EMBA 25기 손소희 · CJ ENM 출신 콘텐츠 PD</span></li>
+      <li><span class="no">03</span><span>기업인증이 중소기업들에 미치는 영향</span><span class="who"><b class="tm">14:50–15:10</b> EMBA 23기 정석진·김학미 · SG솔루션 대표</span></li>
+      <li><span class="no">04</span><span>모두의 창업 경험담</span><span class="who"><b class="tm">15:10–15:30</b> EMBA 23기 김의선 · 제로에스 대표</span></li>
+      <li><span class="no">05</span><span>나만의 아이디어를 브랜드로 만드는 방법</span><span class="who"><b class="tm">15:30–15:50</b> EMBA 24기 김승진 · 인터M 신사업개발팀</span></li>
+      <li><span class="no">06</span><span>AI 시대 기업들의 브랜드 홍보</span><span class="who"><b class="tm">15:50–16:10</b> EMBA 23기 김경수 · AI마케팅뉴스 대표</span></li>
+      <li><span class="no">07</span><span>엑셀러레이터가 알려주는 대한민국 지원사업의 모든 것</span><span class="who"><b class="tm">16:10–16:40</b> 호남벤처스 조성철 이사</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2>자주 묻는 질문</h2>
+    <details><summary>EMBA 재학생·동문만 신청할 수 있나요?</summary><p>아닙니다. EMBA 원우·동문, 타 학과와 학교 구성원, 창업을 준비하는 분 모두 신청할 수 있습니다.</p></details>
+    <details><summary>아직 사업 초기라 자료가 부족해도 되나요?</summary><p>괜찮습니다. 아이디어 단계도 환영합니다. 지금 가진 자료를 보내 주시면 발표 틀(문제, 솔루션, 시장, 사업모델, 요청사항)에 맞춰 정리하는 데 참고하실 수 있습니다.</p></details>
+    <details><summary>실제 투자를 받을 수 있나요?</summary><p>이번 행사는 투자 유치를 약속하는 자리가 아닙니다. 우수 사업모델은 투자 연계와 정부지원사업 연계 가능성을 검토합니다.</p></details>
+    <details><summary>7팀이 넘으면 어떻게 되나요?</summary><p>마감 후 신청은 대기로 받고, 취소 팀이 생기면 접수 순서대로 올라갑니다.</p></details>
+    <details><summary>발표 자료는 언제까지 보내야 하나요?</summary><p>신청 시 첨부해 주시면 됩니다. 최종 발표 자료의 제출일은 팀 확정 후 따로 안내합니다.</p></details>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <span class="eyebrow">About EMBA</span>
+    <h2>경희대학교 경영대학원 EMBA학과</h2>
+    <div class="about-head">
+      <div>
+        <p>경희대학교 경영대학원 EMBA(Executive MBA)학과는 기업 경영자와 전문직 원우가 함께 배우고 교류하는 과정입니다. 강의실에서 배운 내용을 각자의 사업과 조직에 바로 적용하고, 원우끼리 서로의 경험과 네트워크를 나눕니다.</p>
+        <p>학과의 방향은 "함께 배우고, 도전하고, 성장의 길을 연결하다"입니다. 이번 경영혁신·성장 컨퍼런스는 그 방향을 강연과 모의 IR 피칭으로 구체화한 첫 행사입니다.</p>
+      </div>
+      <ul class="facts-list">
+        <li><b>소속</b><span>경희대학교 경영대학원 EMBA학과</span></li>
+        <li><b>개원</b><span>2026년 경영대학원 개원 60주년</span></li>
+        <li><b>학과 행사</b><span>신입생 환영회·개강연, 원장배 골프대회, 산행, 전문가 강연, 워크숍, 송년의 밤</span></li>
+        <li><b>운영</b><span>원우 학회가 주관해 행사를 기획하고 운영합니다</span></li>
+      </ul>
+    </div>
+    <div class="gallery">
+      <figure><img src="img/welcome.jpg" alt="2026년 EMBA학과 신입생 환영회 및 개강연 단체 사진" loading="lazy"><figcaption><b>신입생 환영회 및 개강연</b>2026년 3월 7일(토)</figcaption></figure>
+      <figure><img src="img/golf.jpg" alt="제9회 EMBA TOUR 원장배 골프대회 단체 사진" loading="lazy"><figcaption><b>제9회 EMBA TOUR 원장배 골프대회</b>2026년 6월 10일(수) 서원힐스</figcaption></figure>
+      <figure><img src="img/hike.jpg" alt="안전산행을 기원하는 현수막 앞 단체 사진" loading="lazy"><figcaption><b>원우 산행</b>2025년 5월 24일(토)</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <b>경희대학교 경영대학원 EMBA학과</b>
+    <span>EMBA Conference · 경영혁신·성장 컨퍼런스 · 2026.12.12 (토) 14:00 · 경희대학교 경영대학원 오비스홀 111호</span>
+    <span>문의 bob@khu.ac.kr</span>
+    <span>일부 세부 운영사항은 최종 확정 후 별도 공지됩니다.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var msg = document.getElementById('copied');
+  function flash(t){ msg.textContent = t; setTimeout(function(){ msg.textContent=''; }, 2400); }
+  function copyText(text, el){
+    var done = function(){ flash('복사했습니다.'); };
+    var fallback = function(){
+      try{
+        if(el && el.select){ el.focus(); el.select(); }
+        else { var r=document.createRange(); r.selectNodeContents(document.getElementById('mailaddr')); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+        flash('선택했습니다. 길게 눌러 복사해 주세요.');
+      }catch(e){ flash('직접 선택해서 복사해 주세요.'); }
+    };
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    }catch(e){ fallback(); }
+  }
+  document.getElementById('copyMail').addEventListener('click', function(){ copyText('bob@khu.ac.kr', null); });
+  var tpl = document.getElementById('tpl');
+  document.getElementById('copyTpl').addEventListener('click', function(){ copyText(tpl.value, tpl); });
+})();
+</script>
