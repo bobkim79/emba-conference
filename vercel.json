@@ -2,5 +2,10 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/index.html.html", "destination": "/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/index.html" },
+    { "source": "/robots.txt", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/robots.txt" },
+    { "source": "/sitemap.xml", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/sitemap.xml" }
   ]
 }
