@@ -106,6 +106,7 @@ main{min-width:0}
 .video strong{display:block;font-size:clamp(22px,3.4vw,40px);font-weight:900;line-height:1.2;letter-spacing:-.03em;text-shadow:0 3px 14px rgba(0,0,0,.45)}
 .video strong em{font-style:normal;color:#FF9AA8}
 .video p{margin-top:10px;font-size:clamp(12.5px,1.4vw,16px);font-weight:500;max-width:640px;margin-inline:auto;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+@media (min-width:761px){#v-event .video p{white-space:nowrap;max-width:none;font-size:clamp(11px,1.12vw,15px)}}
 .video .meta{display:flex;gap:10px 24px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:15px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.5)}
 .video .meta span b{color:#FF9AA8;font-family:var(--en);font-weight:800;margin-right:8px;font-size:12px}
 
@@ -253,7 +254,8 @@ input,select,textarea{font:400 15px var(--kr);color:var(--ink);background:#fff;b
 footer{position:relative;z-index:2;margin-top:100px;background:#F4F4F5;border-top:1px solid var(--line);color:#666;font-size:13.5px;padding:36px 20px}
 footer .in{max-width:1250px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:28px}
 footer b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:6px}
-footer .logo .mk{font-size:28px}
+footer .logo .mk{font-size:28px;white-space:nowrap}
+footer .logo .mk b{display:inline;font-size:inherit;margin:0;color:var(--orange)}
 footer .copy{grid-column:1/-1;border-top:1px solid var(--line);padding-top:16px}
 footer a{color:var(--orange-d)}
 .mcta{display:none}
@@ -355,7 +357,7 @@ footer a{color:var(--orange-d)}
   <div class="tab"><span>상세요강</span></div>
   <div class="grid g4 stats">
     <div class="box"><span class="en">PART 1</span><b>전문가 강연 7개</b><p>EMBA 원우·동문 + 엑셀러레이터</p></div>
-    <div class="box b2"><span class="en">PART 2</span><b>모의 IR 7팀</b><p>선착순 접수, 발표 7분 + Q&A 3분</p></div>
+    <div class="box b2"><span class="en">PART 2</span><b>모의 IR 7팀</b><p>선착순 접수, 발표 7분<br>+ Q&A 5분</p></div>
     <div class="box"><span class="en">VISITOR</span><b>모의투자 참관</b><p>가상 투자금 + 럭키드로우</p></div>
     <div class="box b2"><span class="en">PRESS</span><b>언론 3곳 보도</b><p>2026.11.04 기사 게재</p></div>
   </div>
@@ -456,7 +458,7 @@ footer a{color:var(--orange-d)}
     <div class="hd"><i>07.</i><b>PRESS</b></div>
     <ul class="arrows">
       <li><span><b>서울경제TV · 2026.11.04 :</b> <a href="https://www.sentv.co.kr/article/view/sentv202611030199" target="_blank" rel="noopener" style="text-decoration:underline">경희대 경영대학원 EMBA학과, 내달 12일 ‘경영혁신·성장 컨퍼런스’ 개최</a></span></li>
-      <li><span><b>데일리경제 · 2026.11.04 :</b> <a href="https://www.kdpress.co.kr/news/articleView.html?idxno=209711" target="_blank" rel="noopener" style="text-decoration:underline">경희대 경영대학원 EMBA학과, 12월 12일 「경영혁신·성장 컨퍼런스」 개최… 전문가 강연에 모의 IR 피칭까지</a></span></li>
+      <li><span><b>데일리경제 · 2026.11.04 :</b> <a href="https://www.kdpress.co.kr/news/articleView.html?idxno=209711" target="_blank" rel="noopener" style="text-decoration:underline">경희대 경영대학원 EMBA학과, 12월 12일 「경영혁신·성장 컨퍼런스」 개최</a></span></li>
       <li><span><b>비즈니스코리아 · 2026.11.04 :</b> <a href="https://www.businesskorea.co.kr/news/articleView.html?idxno=280365" target="_blank" rel="noopener" style="text-decoration:underline">경희대 경영대학원 EMBA, 12월 경영혁신 컨퍼런스 개최</a></span></li>
     </ul>
   </section>
@@ -881,7 +883,7 @@ var DDAY=dd>0?'D-'+dd:(dd===0?'D-DAY':'종료');
 
 /* ================= 오른쪽 카드(페이지별) ================= */
 var ASIDE={
- event:'<div class="info"><div class="st"><span class="pill">모집중</span><span>행사까지 <b>'+DDAY+'</b></span></div><h2>2026 경영혁신·성장 컨퍼런스</h2><dl><div><dt>일시</dt><dd>2026.12.12 (토) 14:00</dd></div><div><dt>장소</dt><dd class="s">경희대 경영대학원 오비스홀 111호</dd></div><div><dt>Part 1</dt><dd class="s">전문가 강연 7개 (14:10~16:40)</dd></div><div><dt>Part 2 모집</dt><dd class="s">모의 IR 7팀 선착순 · 발표 7분 + Q&A 3분</dd></div><div><dt>접수</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="e-apply">IR 피칭 신청 방법</button></div><a class="btn-o" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">참관 신청하기</a>',
+ event:'<div class="info"><div class="st"><span class="pill">모집중</span><span>행사까지 <b>'+DDAY+'</b></span></div><h2>2026 경영혁신·성장 컨퍼런스</h2><dl><div><dt>일시</dt><dd>2026.12.12 (토) 14:00</dd></div><div><dt>장소</dt><dd class="s">경희대 경영대학원 오비스홀 111호</dd></div><div><dt>Part 1</dt><dd class="s">전문가 강연 7개 (14:10~16:40)</dd></div><div><dt>Part 2 모집</dt><dd class="s">모의 IR 7팀 선착순 · 발표 7분<br>+ Q&A 5분</dd></div><div><dt>접수</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="e-apply">IR 피칭 신청 방법</button></div><a class="btn-o" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">참관 신청하기</a>',
  guide:'<div class="info"><div class="st"><span class="pill">신입생</span><span>2026 2학기 이후</span></div><h2>한눈에 보기</h2><dl><div><dt>수업연한</dt><dd>4학기</dd></div><div><dt>졸업이수학점</dt><dd>30학점</dd></div><div><dt>수업</dt><dd class="s">토요일 1교시 10:00 · 2교시 14:00</dd></div><div><dt>등록금</dt><dd>700만원 / 학기</dd></div><div><dt>입학금</dt><dd class="s">100만원 (최초 1회)</dd></div></dl><button class="btn-w" data-go="g-faq">질문 검색하기</button></div><a class="btn-o" href="tel:029612384">신입생 상담 전화</a>',
  about:'<div class="info"><div class="st"><span class="pill">EMBA</span><span>SINCE 1966</span></div><h2>경희 EMBA학과</h2><dl><div><dt>소속</dt><dd class="s">경희대학교 경영대학원</dd></div><div><dt>방향</dt><dd class="s">함께 배우고, 도전하고, 성장의 길을 연결하다</dd></div><div><dt>학과장</dt><dd>강창동 교수</dd></div><div><dt>행정실</dt><dd class="s">오비스홀 414호 · 02-961-2384~5</dd></div></dl><button class="btn-w" data-go="a-curri">커리큘럼 보기</button></div><a class="btn-o" href="#/guide">신입생 안내 보기</a>',
  network:'<div class="info"><div class="st"><span class="pill">DB</span><span>교수·동문·재학생</span></div><h2>EMBA 네트워크</h2><dl><div><dt>등록 원우</dt><dd id="cnt2">0명</dd></div><div><dt>동문회</dt><dd class="s">EMBA 350여 명</dd></div><div><dt>총동문회</dt><dd class="s">경영대학원 1만 5천여 명</dd></div><div><dt>등록 요청</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="n-join">등록 방법 보기</button></div><a class="btn-o" href="mailto:bob@khu.ac.kr?subject=%5BEMBA%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%5D%20%EB%93%B1%EB%A1%9D%20%EC%9A%94%EC%B2%AD">등록 요청하기</a>'
