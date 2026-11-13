@@ -6,6 +6,9 @@
   "rewrites": [
     { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/index.html" },
     { "source": "/robots.txt", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/robots.txt" },
-    { "source": "/sitemap.xml", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/sitemap.xml" }
+    { "source": "/sitemap.xml", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/sitemap.xml" },
+    { "source": "/", "destination": "/conf/index.html" },
+    { "source": "/robots.txt", "destination": "/conf/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/conf/sitemap.xml" }
   ]
 }
