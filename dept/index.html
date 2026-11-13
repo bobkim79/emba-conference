@@ -94,13 +94,14 @@ main{min-width:0}
 .video{aspect-ratio:16/9;width:100%;border-radius:14px;overflow:hidden;position:relative;display:grid;place-items:center;text-align:center;color:#fff;padding:24px;
   background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.5)),url(assets/khu-spring.jpg) center/cover no-repeat}
 /* 행사 히어로: 자동재생 영상 + 어둡게 */
-.video.has-v{background:#111}
+.video.has-v{background:#111 url(assets/hero-event.jpg) center/cover no-repeat}
 .video .bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .video.has-v::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.62));z-index:1}
 .video.has-v>div{position:relative;z-index:2}
-#v-guide .video{background-position:center,20% 40%}
-#v-about .video{background-position:center,85% 30%}
-#v-network .video{background-position:center,50% 75%}
+/* 탭별 배경 사진 (글씨가 보이도록 어둡게) */
+#v-guide .video{background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.62)),url(assets/hero-guide.jpg) 50% 62%/cover no-repeat}
+#v-about .video{background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.62)),url(assets/hero-about.jpg) 60% 30%/cover no-repeat}
+#v-network .video{background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.62)),url(assets/hero-network.jpg) 50% 60%/cover no-repeat}
 .video .tag{display:inline-block;font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.08em;color:#fff;background:var(--btn-grad);padding:4px 14px;border-radius:999px;margin-bottom:14px;box-shadow:var(--btn-shadow)}
 .video strong{display:block;font-size:clamp(24px,4.4vw,48px);font-weight:900;line-height:1.2;letter-spacing:-.03em;text-shadow:0 3px 14px rgba(0,0,0,.45)}
 .video strong em{font-style:normal;color:#FF9AA8}
@@ -341,7 +342,7 @@ footer a{color:var(--orange-d)}
     <h1 class="title">2026 경희 EMBA 경영혁신·성장 컨퍼런스</h1>
     <div class="video has-v" aria-label="컨퍼런스 영상">
       <!-- 영상 파일을 assets/event-hero.mp4 로 넣으면 자동재생됩니다 (없으면 사진이 보임) -->
-      <video class="bgv" id="heroV" src="assets/event-hero.mp4" poster="assets/khu-spring.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      <video class="bgv" id="heroV" src="assets/event-hero.mp4" poster="assets/hero-event.jpg" autoplay muted loop playsinline preload="metadata"></video>
       <div>
         <span class="tag">EMBA CONFERENCE · 2026.12.12 (토)</span>
         <strong>2026 경희 EMBA<br><em>경영혁신·성장</em> 컨퍼런스</strong>
