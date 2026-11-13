@@ -4,10 +4,10 @@
     { "source": "/index.html.html", "destination": "/", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/index.html" },
+    { "source": "/", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept" },
     { "source": "/robots.txt", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/robots.txt" },
     { "source": "/sitemap.xml", "has": [{ "type": "host", "value": "(www\\.)?e-mba\\.io" }], "destination": "/dept/sitemap.xml" },
-    { "source": "/", "destination": "/conf/index.html" },
+    { "source": "/", "destination": "/conf" },
     { "source": "/robots.txt", "destination": "/conf/robots.txt" },
     { "source": "/sitemap.xml", "destination": "/conf/sitemap.xml" }
   ]
