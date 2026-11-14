@@ -258,7 +258,6 @@ footer .logo .mk{font-size:28px;white-space:nowrap}
 footer .logo .mk b{display:inline;font-size:inherit;margin:0;color:var(--orange)}
 footer .copy{grid-column:1/-1;border-top:1px solid var(--line);padding-top:16px}
 footer a{color:var(--orange-d)}
-.mcta{display:none}
 #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:20}
 #toast.on{opacity:1}
 
@@ -309,8 +308,7 @@ footer a{color:var(--orange-d)}
   footer .in{grid-template-columns:1fr}
   section{padding-top:60px}.tab{margin-top:50px}
   .deco{height:700px}
-  .mcta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;width:auto;z-index:9}
-  footer{padding-bottom:96px}
+  footer{padding-bottom:40px}
 }
 @media (max-width:460px){.g2,.g3,.g4,.org-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -767,7 +765,6 @@ footer a{color:var(--orange-d)}
 <aside id="aside"></aside>
 </div>
 
-<a class="btn-o mcta" id="mcta" href="#">신청하기</a>
 
 <footer>
   <div class="in">
@@ -888,7 +885,6 @@ var ASIDE={
  about:'<div class="info"><div class="st"><span class="pill">EMBA</span><span>SINCE 1966</span></div><h2>경희 EMBA학과</h2><dl><div><dt>소속</dt><dd class="s">경희대학교 경영대학원</dd></div><div><dt>방향</dt><dd class="s">함께 배우고, 도전하고, 성장의 길을 연결하다</dd></div><div><dt>학과장</dt><dd>강창동 교수</dd></div><div><dt>행정실</dt><dd class="s">오비스홀 414호 · 02-961-2384~5</dd></div></dl><button class="btn-w" data-go="a-curri">커리큘럼 보기</button></div><a class="btn-o" href="#/guide">신입생 안내 보기</a>',
  network:'<div class="info"><div class="st"><span class="pill">DB</span><span>교수·동문·재학생</span></div><h2>EMBA 네트워크</h2><dl><div><dt>등록 원우</dt><dd id="cnt2">0명</dd></div><div><dt>동문회</dt><dd class="s">EMBA 350여 명</dd></div><div><dt>총동문회</dt><dd class="s">경영대학원 1만 5천여 명</dd></div><div><dt>등록 요청</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="n-join">등록 방법 보기</button></div><a class="btn-o" href="mailto:bob@khu.ac.kr?subject=%5BEMBA%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%5D%20%EB%93%B1%EB%A1%9D%20%EC%9A%94%EC%B2%AD">등록 요청하기</a>'
 };
-var MCTA={event:["참관 신청하기","https://onoffmix.com/event/352720"],guide:["신입생 상담 전화","tel:029612384"],about:["신입생 안내 보기","#/guide"],network:["등록 요청하기","mailto:bob@khu.ac.kr"]};
 
 /* ================= 라우터 ================= */
 var VIEWS=['event','guide','about','network'],cur='event',io;
@@ -900,7 +896,6 @@ function route(){
   $$('#tabs a').forEach(function(a){a.classList.toggle('on',a.dataset.v===h)});
   document.title=$('#v-'+h).dataset.title;
   $('#aside').innerHTML=ASIDE[h];
-  var m=MCTA[h],mc=$('#mcta');mc.textContent=m[0];mc.href=m[1];
   if(h==='network')updateCount();
   buildSide();
   syncHero();
