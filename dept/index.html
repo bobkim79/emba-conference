@@ -20,12 +20,14 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://e-mba.io/img/og-emba.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"EducationalOrganization","@id":"https://e-mba.io/#org","name":"경희대학교 경영대학원 EMBA학과","alternateName":["경희 EMBA","Kyung Hee University Executive MBA"],"url":"https://e-mba.io/","logo":"https://e-mba.io/icon-emba-512.png","email":"bob@khu.ac.kr","parentOrganization":{"@type":"CollegeOrUniversity","name":"경희대학교 경영대학원"}},
+{"@type":"EducationalOrganization","@id":"https://e-mba.io/#org","name":"경희대학교 경영대학원 EMBA학과","alternateName":["경희 EMBA","Kyung Hee University Executive MBA"],"url":"https://e-mba.io/","logo":"https://e-mba.io/icon-emba-512.png","email":"bob@khu.ac.kr","telephone":"+82-2-961-2384","foundingDate":"1966","sameAs":["https://khmba.khu.ac.kr"],"address":{"@type":"PostalAddress","streetAddress":"경희대로 26 경영대학원 오비스홀 414호","addressLocality":"동대문구","addressRegion":"서울","addressCountry":"KR"},"parentOrganization":{"@type":"CollegeOrUniversity","name":"경희대학교 경영대학원"}},
 {"@type":"WebSite","@id":"https://e-mba.io/#web","url":"https://e-mba.io/","name":"경희 EMBA","inLanguage":"ko","publisher":{"@id":"https://e-mba.io/#org"}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 /* 디자인: AIM(aimk.ai) 레이아웃·색상·폰트 그대로. 색: 경희 레드 #9E1915 (경희 로고 원본에서 추출, 변수명 --orange는 그대로 둠) / 버건디 #8C1D40 / 연분홍 #FBEDEF / 회색 #F5F5F5. 폰트: Paperlogy + Montserrat(영문). 배경: 좌우 여백에 경희 로고 3종 */
 @font-face{font-family:"Paperlogy";font-weight:300;font-display:swap;src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2) format("woff2")}
@@ -1037,13 +1039,23 @@ var ASIDE={
 
 /* ================= 라우터 ================= */
 var VIEWS=['event','guide','about','network'],cur='event',io;
+var TABMETA={
+ event:['경희대학교 경영대학원 EMBA학과 공식 안내: 2026 경영혁신·성장 컨퍼런스(12월 12일), 신입생 가이드, 학과 소개, 교수·동문·재학생 네트워크.','경희 EMBA | 경희대학교 경영대학원 EMBA학과'],
+ guide:['경희 EMBA 신입생 가이드: 4학기 30학점, 토요일 수업, 등록금·입학금, 수업 방식, 졸업 요건과 자주 묻는 질문.','경희 EMBA 신입생 가이드'],
+ about:['1966년 개설된 경희대학교 경영대학원 EMBA학과 소개: 교수진, 특징, AX 특화 커리큘럼 4단계, 갤러리, 학회 조직, 연간 행사.','경희 EMBA 학과 소개 | 교수진·커리큘럼'],
+ network:['경희 EMBA 네트워크: 교수·동문·재학생 원우 데이터베이스, EMBA LETTER(보도·행사소식), 경조사.','경희 EMBA 네트워크 | 원우 DB·EMBA LETTER']
+};
 function route(){
-  var h=(location.hash||'#/event').replace('#/','');
+  var h=location.hash?location.hash.replace('#/',''):(location.pathname.replace(/^\//,'').split('/')[0]||'event');
   if(VIEWS.indexOf(h)<0)h='event';
   cur=h;
   VIEWS.forEach(function(v){$('#v-'+v).classList.toggle('on',v===h)});
   $$('#tabs a').forEach(function(a){a.classList.toggle('on',a.dataset.v===h)});
   document.title=$('#v-'+h).dataset.title;
+  var M=TABMETA[h]||TABMETA.event,cu=SITE+(h==='event'?'':h);
+  function sm(q,k,v){var e=document.querySelector(q);if(e)e.setAttribute(k,v)}
+  sm('link[rel=canonical]','href',cu);sm('meta[name=description]','content',M[0]);
+  sm('meta[property="og:url"]','content',cu);sm('meta[property="og:title"]','content',M[1]);sm('meta[property="og:description"]','content',M[0]);
   $('#aside').innerHTML=ASIDE[h];
   if(h==='network')updateCount();
   buildSide();
