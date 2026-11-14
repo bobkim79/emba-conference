@@ -193,7 +193,7 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 .seg{display:flex;gap:4px;padding:3px;border-radius:999px;background:#F1E4E7}
 .seg button{border:0;background:transparent;border-radius:999px;padding:5px 14px;font:600 13px var(--kr);color:var(--body);cursor:pointer;transition:background-color .2s,color .2s}
 .seg button.on{background:#9E1915;color:#fff}
-.hb{display:grid;grid-template-columns:repeat(3,1fr);gap:9px 26px}
+.hb{display:grid;grid-auto-flow:column;grid-template-columns:repeat(3,1fr);gap:9px 26px}
 .hr{display:grid;grid-template-columns:118px 1fr 62px;gap:8px;align-items:center;font-size:13.5px}
 .hl{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ht{display:block;height:11px;border-radius:6px;background:#F1E4E7;overflow:hidden}
@@ -202,6 +202,7 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 .hv em{font-style:normal;font-weight:400;color:var(--mute);margin-left:5px;font-size:11.5px}
 #nMore{display:none;margin:12px auto 0;border:1px solid var(--line2);background:#fff;border-radius:999px;padding:7px 18px;font:600 13px var(--kr);color:var(--body);cursor:pointer}
 @media (max-width:1100px){.hb{grid-template-columns:repeat(2,1fr)}}
+.hr.etc .ht s{background:linear-gradient(90deg,#B9BDC8,#8A8F9C)}.hr.etc .hl{color:var(--mute)}
 .bars{display:flex;align-items:flex-end;gap:4px;height:130px;padding-top:6px}
 .bars div{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
 .bars s{display:block;width:100%;max-width:26px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#D8485E,#9E1915);height:0;transition:height .9s cubic-bezier(.2,.8,.2,1)}
@@ -545,8 +546,8 @@ footer a{color:var(--orange-d)}
   #v-event .grid.stats .box{padding:10px 9px 11px}#v-event .grid.stats .en{font-size:12px}#v-event .grid.stats .lb{display:block;font-size:11px;margin-top:1px}
   #v-event .grid.stats b{font-size:21px;margin-top:3px}#v-event .grid.stats p{display:none}.prog{margin-top:6px;height:6px}#v-event .grid.stats .lb::before{content:none}
   .nc{flex-basis:100%;padding:14px 14px 16px}.dn{gap:14px}.dn svg,.dn .ct{width:104px;height:104px}.lg{font-size:13px}
-  .hb{grid-template-columns:1fr;gap:8px}.hr{grid-template-columns:112px 1fr 64px;font-size:13px}
-  .hb.cl .hr:nth-child(n+9){display:none}.hb.cl.all .hr{display:grid}#nMore{display:block}#nMore[hidden]{display:none}
+  .hb{grid-auto-flow:row;grid-template-columns:1fr;gap:8px}.hr{grid-template-columns:112px 1fr 64px;font-size:13px}
+  .hb.cl .hr:nth-child(n+9){display:none}.hb.cl .hr.etc,.hb.cl.all .hr{display:grid}#nMore{display:block}#nMore[hidden]{display:none}
   .irs{grid-template-columns:repeat(2,1fr);gap:8px}.ir{height:150px;padding-top:30px}.ir .tn{font-size:17px}.ir.em svg{width:48px;height:48px}
   .irh em{margin-left:0;width:100%}
   .ir:nth-child(odd) .dt{left:0;right:auto}.ir:nth-child(even) .dt{right:0;left:auto}
@@ -1359,10 +1360,12 @@ function donut(box,rows,center){
   box.parentNode.hidden=false;
   setTimeout(function(){$$('circle',box).forEach(function(c){c.setAttribute('stroke-dasharray',c.dataset.d)})},200);
 }
+function fitCols(box){var n=box.children.length,w=window.innerWidth,c=w<=760?1:w<=1100?2:3;box.style.gridTemplateRows=c>1?'repeat('+Math.ceil(n/c)+',auto)':''}
+window.addEventListener('resize',function(){var b=$('#ncCat .hb');if(b&&b.children.length)fitCols(b)});
 function hbars(box,rows){
   var tot=rows.reduce(function(a,r){return a+r[1]},0),mx=Math.max.apply(null,rows.map(function(r){return r[1]}))||1;
-  box.innerHTML=rows.map(function(r){return '<div class="hr" title="'+esc(r[0])+' '+r[1]+'명"><span class="hl">'+esc(r[0])+'</span><span class="ht"><s data-w="'+Math.max(r[1]/mx*100,3)+'"></s></span><span class="hv">'+r[1]+'<em>'+(tot?Math.round(r[1]/tot*100):0)+'%</em></span></div>'}).join('');
-  var mo=$('#nMore');if(mo){mo.hidden=rows.length<=8;box.classList.add('cl');mo.textContent='전체 '+rows.length+'개 보기'}
+  box.innerHTML=rows.map(function(r){return '<div class="hr'+(r[2]?' etc':'')+'" title="'+esc(r[0])+' '+r[1]+'명"><span class="hl">'+esc(r[0])+'</span><span class="ht"><s data-w="'+Math.max(r[1]/mx*100,3)+'"></s></span><span class="hv">'+r[1]+'<em>'+(tot?Math.round(r[1]/tot*100):0)+'%</em></span></div>'}).join('');
+  fitCols(box);var mo=$('#nMore');if(mo){mo.hidden=rows.length<=8;box.classList.add('cl');mo.textContent='전체 '+rows.length+'개 보기'}
   box.parentNode.hidden=false;
   setTimeout(function(){$$('.ht s',box).forEach(function(s){s.style.width=s.dataset.w+'%'})},200);
 }
@@ -1373,7 +1376,10 @@ function isStu(m){return genNo(m)>=ENR_FROM}
 function maxGen(){return Math.max.apply(null,MEMBERS.map(genNo))}
 function drawCat(){
   var list=NSEG==='st'?MEMBERS.filter(isStu):NSEG==='al'?MEMBERS.filter(function(m){return !isStu(m)}):MEMBERS;
-  var cat=tally('cat',null,list);  cat.sort(function(a,b){return b[1]-a[1]});
+  var cat=tally('cat',null,list);  var etc=0,blank=list.filter(function(m){return !String(m.cat||'').trim()}).length;
+  cat=cat.filter(function(r){if(r[0]==='기타'){etc+=r[1];return false}return true});etc+=blank;
+  cat.sort(function(a,b){return b[1]-a[1]});
+  if(etc)cat.push(['기타·미분류',etc,true]);
   if(cat.length)hbars($('#ncCat .hb'),cat);else $('#ncCat').hidden=true;
   $$('#nSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.s===NSEG)});
 }
