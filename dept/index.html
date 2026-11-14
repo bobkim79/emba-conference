@@ -138,6 +138,10 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 .box.b3{background:linear-gradient(135deg,var(--peach),var(--peach-2))}
 .box.dk{background:linear-gradient(145deg,#C8374D 0%,#9E1915 45%,#7E120F 100%);color:#FFF1F3}
 .box.dk h3,.box.dk b,.box.dk .en{color:#fff}
+.box.wide{grid-column:1/-1}
+.box.wide ul{display:block;columns:3;column-gap:28px}
+.box.wide li{break-inside:avoid;padding:3px 0}
+.axsub{margin:2px 0 6px;font-size:14px;color:#FFD9DF;font-weight:300}
 .stats{margin-top:32px}
 .stats .en{font-family:var(--en);font-weight:700;font-size:14px;letter-spacing:-.01em;color:var(--ink)}
 .stats b{display:block;font-size:26px;font-weight:300;margin-top:12px;line-height:1.25;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
@@ -315,6 +319,7 @@ footer a{color:var(--orange-d)}
   section{padding-top:60px}.tab{margin-top:50px}
   .deco{height:700px}
   footer{padding-bottom:40px}
+  .box.wide ul{columns:1}
   .stats{margin-top:24px}
   .stats .box{padding:16px 18px}
   .stats .en{display:block;line-height:1.3}
@@ -635,11 +640,12 @@ footer a{color:var(--orange-d)}
 
   <section id="a-curri" data-nav="03. CURRICULUM">
     <div class="hd"><i>03.</i><b>CURRICULUM</b></div>
-    <p class="big">세부 전공 트랙 없이<br><b>기본 · 심화 · 융·복합 특화</b> 3단계</p>
+    <p class="big">세부 전공 트랙 없이<br><b>기본 · 심화 · 융·복합 특화 · AX 특화</b> 4단계</p>
     <div class="grid g3">
       <div class="box"><span class="en">STEP 1 · 기본</span><ul><li>경영학 연구</li><li>회계학 연구</li><li>경제학 연구</li><li>연구조사방법론</li><li>사례연구방법론</li><li>조직행동론</li><li>마케팅 관리론</li><li>경영전략론</li><li>경영정보시스템</li><li>AI 비즈니스 개론</li><li>전략적 인적자원 관리</li></ul></div>
       <div class="box b2"><span class="en">STEP 2 · 심화</span><ul><li>전략경영론</li><li>디지털 비즈니스경영</li><li>유통마케팅</li><li>서비스 품질경영</li><li>서비스 마케팅</li><li>글로벌 공급망 관리</li><li>고객경험관리</li><li>ESG 지속가능 경영</li><li>경영혁신 사례연구</li><li>비즈니스벤처창업론</li><li>지속가능경영전략 세미나</li></ul></div>
       <div class="box b3"><span class="en">STEP 3 · 융·복합 특화</span><ul><li>기업가정신</li><li>비즈니스 커뮤니케이션</li><li>창의발상론</li><li>인문학과 경영</li><li>CEO 명품 경영 세미나</li><li>문화콘텐츠 마케팅</li><li>메타버스 산업분석</li><li>비즈니스 레포트 라이팅</li></ul></div>
+      <div class="box dk wide"><span class="en">STEP 4 · AX(AI 전환) 특화</span><p class="axsub">AX시대 리더양성 과목</p><ul style="color:#FFF1F3"><li>생성형 AI 활용전략</li><li>AI 비즈니스 사례분석</li><li>AI 에이전트 개발과 활용</li><li>클로드 AI 분석론</li><li>피지컬 AI와 융합기술</li><li>AI 전략마케팅</li><li>AI 기반 마케팅과 브랜드전략</li><li>AI 퍼포먼스 마케팅</li><li>AI 유통마케팅</li><li>AI 시대의 인적자원관리</li><li>AI와 문화산업</li><li>스마트 헬스케어 비즈니스</li></ul></div>
     </div>
     <p class="sub">개설 과목은 학기별 운영에 따라 달라질 수 있습니다. 학기별 담당 교수는 경영대학원 홈페이지(khmba.khu.ac.kr)에서 확인하세요.</p>
   </section>
@@ -815,7 +821,7 @@ var GUIDE_FAQ = [
  {c:"수업·커리큘럼",q:"한 학기는 어떻게 구성되나요?",a:"<p>한 학기는 전반기 8회와 후반기 8회로 구성되며, 각각 2학점입니다. 신입생 수업연한은 4학기입니다.</p>"},
  {c:"수업·커리큘럼",q:"수업은 무슨 요일, 몇 시에 하나요?",a:"<p>오프라인 수업은 주로 토요일에 합니다.</p><ul><li>1교시 10:00 ~ 13:00 (3시간)</li><li>2교시 14:00 ~ 17:00 (3시간)</li></ul><p>온라인 수업도 병행되어 매주 캠퍼스에 나오지 않아도 되는 유연성이 있습니다.</p>"},
  {c:"수업·커리큘럼",q:"결석과 시험 규정은 어떻게 되나요?",a:"<p>3회 이상 결석하면 F학점입니다. 출장·경조사 같은 특별한 사정은 담당 교수님과 협의해 예외를 인정받을 수 있습니다.</p><p>중간고사와 기말고사가 있고, 과목에 따라 팀 프로젝트와 발표가 함께 진행됩니다. 강의계획서를 확인하세요.</p>"},
- {c:"수업·커리큘럼",q:"어떤 강의들이 있나요?",a:"<p>세부 전공 트랙 없이 기본, 심화, 융·복합 특화 3단계로 구성됩니다. 전체 과목은 ‘학과 소개 → CURRICULUM’에서 볼 수 있습니다. 개설 과목은 학기별 운영에 따라 달라질 수 있습니다.</p>"},
+ {c:"수업·커리큘럼",q:"어떤 강의들이 있나요?",a:"<p>세부 전공 트랙 없이 기본, 심화, 융·복합 특화, AX(AI 전환) 특화 4단계로 구성됩니다. 전체 과목은 ‘학과 소개 → CURRICULUM’에서 볼 수 있습니다. 개설 과목은 학기별 운영에 따라 달라질 수 있습니다.</p>"},
  {c:"학사 시스템",q:"인포21과 e-Campus는 무엇인가요?",a:"<ul><li>인포21(info21.khu.ac.kr): 수강신청, 성적 조회, 등록금 고지서, 증명서 발급, 학적 관리. 모바일은 경희대학교 통합앱.</li><li>e-Campus(e-campus.khu.ac.kr): 온라인 강의, 강의자료, 과제 제출, 출석 체크. 모바일 앱 이름은 LearningX.</li></ul><p>인포21은 크롬에 최적화되어 있고 khu.ac.kr 팝업 허용이 필요합니다.</p>"},
  {c:"학사 시스템",q:"처음 로그인할 때 준비할 것이 있나요?",a:"<p>최초 사용자는 통합아이디 등록이 필요합니다. info21.khu.ac.kr 로그인 화면에서 ‘통합아이디 등록’을 누르고 이메일, 휴대폰, 공동인증서 중 하나로 본인인증을 합니다.</p><p>아이디는 기존 학번으로 만들 수 없으며 영문 대문자와 숫자 조합 4~15자입니다. 도서관과 LearningX 같은 연계 시스템은 통합ID 비밀번호를 씁니다.</p>"},
  {c:"학사 시스템",q:"2026학년도 2학기 주요 일정은 어떻게 되나요?",a:"<ul><li>수강신청: 8월 24일(월) 11:00 ~ 8월 28일(금) 17:00</li><li>개강: 9월 1일(화)</li><li>수강정정: 9월 1일(화) 11:00 ~ 9월 5일(월) 17:00</li><li>전반기: 9월 1일 ~ 10월 26일 (8주)</li><li>후반기: 10월 27일 ~ 12월 21일 (8주)</li></ul><p>정정기간이 지나면 후반기 수업을 포함해 정정·철회가 불가합니다.</p>"},
