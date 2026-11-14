@@ -9,17 +9,18 @@
 <meta name="naver-site-verification" content="b81aa405d80f22bd699dbe0f8c0e079c40054ec4" />
 <meta name="theme-color" content="#9E1915">
 <link rel="canonical" href="https://e-mba.io/">
-<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon-emba.ico" sizes="48x48"><link rel="icon" href="/favicon-emba.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-emba.png"><link rel="manifest" href="/site-emba.webmanifest">
 <meta property="og:type" content="website"><meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="경희 EMBA">
 <meta property="og:title" content="경희 EMBA | 경희대학교 경영대학원 EMBA학과">
 <meta property="og:description" content="2026 경영혁신·성장 컨퍼런스, 신입생 안내, 학과 소개, 교수·동문·재학생 네트워크.">
 <meta property="og:url" content="https://e-mba.io/">
-<meta property="og:image" content="https://conf.e-mba.io/img/og.jpg">
+<meta property="og:image" content="https://e-mba.io/img/og-emba.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="경희 EMBA 경희대학교 경영대학원 EMBA학과">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://e-mba.io/img/og-emba.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"EducationalOrganization","@id":"https://e-mba.io/#org","name":"경희대학교 경영대학원 EMBA학과","alternateName":["경희 EMBA","Kyung Hee University Executive MBA"],"url":"https://e-mba.io/","logo":"https://e-mba.io/icon-512.png","email":"bob@khu.ac.kr","parentOrganization":{"@type":"CollegeOrUniversity","name":"경희대학교 경영대학원"}},
+{"@type":"EducationalOrganization","@id":"https://e-mba.io/#org","name":"경희대학교 경영대학원 EMBA학과","alternateName":["경희 EMBA","Kyung Hee University Executive MBA"],"url":"https://e-mba.io/","logo":"https://e-mba.io/icon-emba-512.png","email":"bob@khu.ac.kr","parentOrganization":{"@type":"CollegeOrUniversity","name":"경희대학교 경영대학원"}},
 {"@type":"WebSite","@id":"https://e-mba.io/#web","url":"https://e-mba.io/","name":"경희 EMBA","inLanguage":"ko","publisher":{"@id":"https://e-mba.io/#org"}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,6 +164,31 @@ section{padding-top:80px}
 /* 동문소식 게시판 */
 .nlist{list-style:none;margin:24px 0 0;padding:0;border-top:2px solid var(--ink)}
 .nlist li[hidden]{display:none}
+.nlist li{position:relative}
+.nlist li a{padding-right:56px}
+.nshare{position:absolute;right:30px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:0;background:transparent;color:var(--mute);cursor:pointer;display:grid;place-items:center;transition:background-color .2s,color .2s}
+.nshare:hover{background:#F2C9D1;color:var(--amber)}
+.nshare svg{width:16px;height:16px}
+.nlist li.hl a{background:#F9E3E8;box-shadow:inset 4px 0 0 var(--amber)}
+.shb{position:fixed;inset:0;z-index:300;background:rgba(20,8,10,.55);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s}
+.shb.on{opacity:1;pointer-events:auto}
+.shm{width:min(420px,92vw);background:#fff;border-radius:20px;padding:22px 20px 20px;box-shadow:0 24px 60px rgba(0,0,0,.35);transform:translateY(14px);transition:transform .25s}
+.shb.on .shm{transform:none}
+.shm h4{margin:0 0 2px;font-size:18px;color:var(--ink)}
+.shm p{margin:0 0 14px;font-size:13.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.shg button{border:1px solid var(--line2);background:#FBF3F5;border-radius:14px;padding:12px 4px 10px;font:600 13px var(--kr);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:background-color .2s,transform .2s}
+.shg button:hover{background:#F9E3E8;transform:translateY(-2px)}
+.shg i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:800 14px var(--en);font-style:normal;color:#fff}
+.shx{display:block;margin:14px auto 0;border:0;background:none;font:600 14px var(--kr);color:var(--mute);cursor:pointer}
+.sht{position:fixed;left:50%;bottom:40px;z-index:320;transform:translate(-50%,20px);background:rgba(30,30,36,.94);color:#fff;font-size:14px;padding:11px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:all .25s;max-width:90vw;text-align:center}
+.sht.on{opacity:1;transform:translate(-50%,0)}
+.gov-s{flex:none;height:46px;padding:0 16px;border-radius:23px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;font:600 14px var(--kr);cursor:pointer}
+.gov-s:hover{background:rgba(255,255,255,.3)}
+.gov-b{display:flex;gap:8px;align-items:center}
+.fshare{margin-top:10px;border:1px solid var(--line2);background:#fff;border-radius:999px;padding:7px 16px;font:600 13.5px var(--kr);color:var(--ink);cursor:pointer}
+.fshare:hover{background:#F9E3E8}
+
 .nlist a{display:grid;grid-template-columns:104px 1fr 24px;gap:14px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
 .nlist a:hover{background:#F9E3E8;transform:translateX(4px);box-shadow:inset 4px 0 0 var(--amber)}
 .nd{font-family:var(--en);font-size:14px;color:var(--mute);font-variant-numeric:tabular-nums}
@@ -400,25 +426,45 @@ footer a{color:var(--orange-d)}
   .flow li > div{grid-column:2}
   .dbtools .row{grid-template-columns:1fr}
   footer .in{grid-template-columns:1fr}
-  section{padding-top:60px}.tab{margin-top:50px}
+  section{padding-top:36px}.tab{margin-top:28px}
+  .hd{font-size:21px;padding:8px 0}
+  .big{margin:18px 0 12px;line-height:1.35}
+  .grid{gap:8px}
+  .box{padding:16px 15px;border-radius:14px}
+  .box h3{margin-bottom:6px}
+  .box li{margin-top:2px}
+  .person{padding:14px;gap:12px}
+  .person.t-prof{grid-template-columns:72px 1fr}.person.t-prof .avatar{width:72px;height:72px}
+  .person .role{margin-top:5px}.person .talk{margin-top:5px;padding-top:5px}
+  .org-grid{margin-top:14px;gap:8px}.org-grid .box{padding:14px 12px}.org-grid b{font-size:21px}
+  .cal{margin-top:16px;gap:8px}.cal .box{padding:16px 15px}
+  .flow{margin-top:16px}.flow li{padding:11px 8px}.flow .no{font-size:24px}
+  .faq{gap:7px}.faq summary{padding:13px 44px 13px 14px;font-size:16px}.faq summary::after{right:16px}.faq .ans{padding:0 16px 14px 40px;font-size:15px}
+  .dbtools{margin-top:14px;gap:8px}
+  .video{aspect-ratio:4/3;padding:16px 16px 18px}
+  .video .meta{margin-top:10px;gap:6px 14px;font-size:14px}
   .deco{height:700px}
-  footer{padding-bottom:40px}
-  .nlist a{grid-template-columns:1fr 22px;gap:6px 8px;padding:10px 6px}
+  footer{margin-top:50px;padding:26px 20px 34px}footer .in{gap:16px}
+  .nlist{margin-top:14px}
+  .nlist a{grid-template-columns:1fr 22px;gap:4px 8px;padding:9px 6px;padding-right:50px}
+  .nlist .nar{display:none}
+  .nlist li a{grid-template-columns:1fr}
+  .nshare{right:6px}
   .nd,.nsum{display:none}
   .ndm{display:inline;flex:none;font-family:var(--en);font-size:13px;color:var(--mute)}
-  .nlist h3{font-size:16px;white-space:normal}
-  .care{grid-template-columns:repeat(2,1fr)}
-  .gal{grid-template-columns:repeat(2,1fr)}
+  .nlist h3{font-size:16px;white-space:normal;line-height:1.35}
+  .care{grid-template-columns:repeat(2,1fr);gap:8px}
+  .gal{grid-template-columns:repeat(2,1fr);gap:8px}
   .gc-t{font-size:14px}
   .gov-g{grid-template-columns:repeat(2,1fr);gap:10px}
   .glb-p{left:8px}.glb-n{right:8px}
-  .cs{min-height:200px}
+  .cs{min-height:150px}
   .box.wide ul{columns:1}
-  .stats{margin-top:24px}
-  .stats .box{padding:16px 18px}
+  .stats{margin-top:16px}
+  .stats .box{padding:14px 16px}
   .stats .en{display:block;line-height:1.3}
-  .stats b{font-size:24px;margin-top:4px;line-height:1.25}
-  .stats p{margin:2px 0 0;line-height:1.45}
+  .stats b{font-size:22px;margin-top:2px;line-height:1.25}
+  .stats p{margin:2px 0 0;line-height:1.4}
 }
 @media (max-width:460px){.g2,.g3,.g4,.org-grid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -871,7 +917,7 @@ footer a{color:var(--orange-d)}
 
 <footer>
   <div class="in">
-    <div><div class="logo" style="margin-bottom:10px"><span class="mk">E<b>MBA</b></span></div>경희대학교 경영대학원 EMBA학과<br>함께 배우고, 도전하고, 성장의 길을 연결하다</div>
+    <div><div class="logo" style="margin-bottom:10px"><span class="mk">E<b>MBA</b></span></div>경희대학교 경영대학원 EMBA학과<br>함께 배우고, 도전하고, 성장의 길을 연결하다<br><button type="button" class="fshare" id="siteShare">이 사이트 공유하기</button></div>
     <div><b>문의</b>경영대학원 행정실 (오비스홀 414호)<br>대표·재학생 학사 02-961-0127~8<br>신입생 상담 02-961-2384~5<br>khsb2200@khu.ac.kr</div>
     <div><b>사이트 문의</b>EMBA 23기 학회장 김경수<br><a href="mailto:bob@khu.ac.kr">bob@khu.ac.kr</a><br>공식 홈페이지 khmba.khu.ac.kr</div>
     <div class="copy">© 2026 경희대학교 경영대학원 EMBA학과. 일부 세부 운영사항은 최종 확정 후 별도 공지됩니다. 일정·금액·규정은 변경될 수 있으며 학과 공지가 우선합니다.</div>
@@ -1211,13 +1257,62 @@ var NEWS=[
  {d:"2025-11-11",t:"news",src:"대학저널",title:"경희대 경영대학원 EMBA, 2026학년도 전기 신입생 모집… 오는 11월 24일 마감",sum:"전기 신입생 원서 접수 마감(11월 24일)과 면접·합격자 발표 일정, 과정의 특징을 전했습니다.",url:"https://dhnews.co.kr/news/view/1065590313607709"}
 ];
 var NEWS_SHOW=10;
+var SITE='https://e-mba.io/';
+var ICON_SH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg>';
+function nid(n){var h=0,t=n.url;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return h.toString(36)}
+var SHB=null,SHT=null,SHD=null;
+function toast(m){if(!SHT){SHT=document.createElement('div');SHT.className='sht';document.body.appendChild(SHT)}SHT.textContent=m;SHT.classList.add('on');clearTimeout(SHT._t);SHT._t=setTimeout(function(){SHT.classList.remove('on')},2400)}
+function copyText(t,msg){
+  function ok(){toast(msg||'링크를 복사했습니다')}
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(ok,function(){fb()});else fb();
+  function fb(){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();ok()}
+}
+function openShare(d){
+  SHD=d;
+  if(!SHB){
+    SHB=document.createElement('div');SHB.className='shb';
+    SHB.innerHTML='<div class="shm" role="dialog" aria-label="공유하기"><h4>공유하기</h4><p id="shT"></p><div class="shg">'+
+     '<button type="button" data-c="kakao"><i style="background:#FEE500;color:#3A1D1D">K</i>카카오톡</button>'+
+     '<button type="button" data-c="band"><i style="background:#06C755">B</i>밴드</button>'+
+     '<button type="button" data-c="blog"><i style="background:#03C75A">N</i>네이버 블로그</button>'+
+     '<button type="button" data-c="insta"><i style="background:linear-gradient(45deg,#F9A83A,#D6249F,#515BD4)">IG</i>인스타그램</button>'+
+     '<button type="button" data-c="fb"><i style="background:#1877F2">f</i>페이스북</button>'+
+     '<button type="button" data-c="copy"><i style="background:#6B7280">⧉</i>링크 복사</button></div><button type="button" class="shx">닫기</button></div>';
+    document.body.appendChild(SHB);
+    SHB.addEventListener('click',function(e){if(e.target===SHB||e.target.closest('.shx'))closeShare()});
+    $$('.shg button',SHB).forEach(function(b){b.addEventListener('click',function(){doShare(b.dataset.c)})});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&SHB.classList.contains('on'))closeShare()});
+  }
+  $('#shT').textContent=d.title;SHB.classList.add('on');
+}
+function closeShare(){if(SHB)SHB.classList.remove('on')}
+function doShare(c){
+  var d=SHD;if(!d)return;
+  var link=d.url.replace('?','?utm_source='+c+'&utm_medium=share&').replace(/^([^?]*)#/,'$1?utm_source='+c+'&utm_medium=share#');
+  var e=encodeURIComponent;
+  if(c==='kakao'){
+    if(navigator.share){navigator.share({title:d.title,text:d.text,url:link}).catch(function(){});}
+    else{copyText(link,'링크를 복사했습니다. 카카오톡에 붙여넣어 보내 주세요');}
+  }else if(c==='band')window.open('https://band.us/plugin/share?body='+e(d.title+'\n'+link)+'&route='+e(link),'_blank','noopener');
+  else if(c==='blog')window.open('https://blog.naver.com/openapi/share?url='+e(link)+'&title='+e(d.title),'_blank','noopener');
+  else if(c==='fb')window.open('https://www.facebook.com/sharer/sharer.php?u='+e(link),'_blank','noopener');
+  else if(c==='insta')copyText(link,'링크를 복사했습니다. 인스타그램 스토리·프로필 링크에 붙여넣어 주세요');
+  else copyText(link);
+  closeShare();
+}
+(function(){var q=location.search.match(/[?&]n=([^&#]+)/);if(!q)return;
+  function hl(){var b=document.querySelector('#nlist .nshare[data-s="'+q[1]+'"]');if(!b){var m=$('#nmoreBtn');if(m){m.click();b=document.querySelector('#nlist .nshare[data-s="'+q[1]+'"]')}}
+    if(b){var li=b.closest('li');li.classList.add('hl');setTimeout(function(){li.scrollIntoView({behavior:'smooth',block:'center'})},500)}}
+  if(!location.hash)location.hash='#/network';setTimeout(hl,600);
+})();
 function renderNews(all){
   var list=$('#nlist');if(!list)return;
   var arr=NEWS.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
   list.innerHTML=arr.map(function(n,i){
     var hid=(!all&&i>=NEWS_SHOW)?' hidden':'';
-    return '<li'+hid+'><a href="'+esc(n.url)+'" target="_blank" rel="noopener"><span class="nd">'+esc(n.d.replace(/-/g,'.'))+'</span><div class="nb"><div class="nt"><span class="ndm">'+esc(n.d.slice(2).replace(/-/g,'.'))+'</span><span class="ntag'+(n.t==='event'?' ev':'')+'">'+(n.t==='event'?'행사소식':'보도')+'</span><span class="nsrc">'+esc(n.src)+'</span><span class="nsum">'+esc(n.sum)+'</span></div><h3>'+esc(n.title)+'</h3></div><span class="nar" aria-hidden="true">↗</span></a></li>';
+    return '<li'+hid+'><a href="'+esc(n.url)+'" target="_blank" rel="noopener"><span class="nd">'+esc(n.d.replace(/-/g,'.'))+'</span><div class="nb"><div class="nt"><span class="ndm">'+esc(n.d.slice(2).replace(/-/g,'.'))+'</span><span class="ntag'+(n.t==='event'?' ev':'')+'">'+(n.t==='event'?'행사소식':'보도')+'</span><span class="nsrc">'+esc(n.src)+'</span><span class="nsum">'+esc(n.sum)+'</span></div><h3>'+esc(n.title)+'</h3></div><span class="nar" aria-hidden="true">↗</span></a><button type="button" class="nshare" data-s="'+nid(n)+'" aria-label="공유하기" title="공유하기">'+ICON_SH+'</button></li>';
   }).join('');
+  $$('#nlist .nshare').forEach(function(b){b.addEventListener('click',function(){var n=NEWS.filter(function(x){return nid(x)===b.dataset.s})[0];if(n)openShare({title:n.title,text:n.title+' - 경희 EMBA',url:SITE+'?n='+nid(n)+'#/network'})})});
   var w=$('#nmoreWrap');
   if(!all&&arr.length>NEWS_SHOW){w.innerHTML='<button type="button" class="nmore" id="nmoreBtn">더보기 ('+(arr.length-NEWS_SHOW)+')</button>';$('#nmoreBtn').addEventListener('click',function(){renderNews(true)})}
   else w.innerHTML='';
@@ -1260,16 +1355,19 @@ function renderGal(all){
   if(!all&&arr.length>GAL_SHOW){w.innerHTML='<button type="button" class="nmore" id="galMoreBtn">더보기 ('+(arr.length-GAL_SHOW)+')</button>';$('#galMoreBtn').addEventListener('click',function(){renderGal(true)})}
   else w.innerHTML='';
 }
+(function(){var q=location.search.match(/[?&]a=([^&#]+)/);if(!q)return;if(!location.hash)location.hash='#/about';
+  setTimeout(function(){var i=-1;GAL.forEach(function(a,k){if(a.id===q[1])i=k});var c=document.querySelector('#gal .gc[data-i="'+i+'"]');if(c){c.scrollIntoView({block:'center'});setTimeout(function(){c.click()},400)}},900)})();
 var GOV=null,GLB=null,GLB_I=0,GLB_A=null;
 function openAlbum(a,card){
   if(GOV)return;
   var r=card.getBoundingClientRect();
   var ov=document.createElement('div');ov.className='gov';
   ov.style.cssText='top:'+r.top+'px;left:'+r.left+'px;width:'+r.width+'px;height:'+r.height+'px';
-  ov.innerHTML='<div class="gov-bg" style="background-image:url('+galSrc(a,a.p[0],true)+')"></div><div class="gov-in"><div class="gov-h"><div><div class="gov-d">'+esc(a.d)+'</div><h3 class="gov-t">'+esc(a.t)+'</h3><div class="gov-c">사진 '+a.p.length+'장 · 사진을 누르면 크게 볼 수 있습니다</div></div><button type="button" class="gov-x" aria-label="닫기">✕</button></div><div class="gov-g">'+a.p.map(function(p,i){return '<button type="button" class="gp" style="--i:'+i+'" data-k="'+i+'"><img src="'+galSrc(a,p,true)+'" alt="'+esc(p[1])+'" loading="lazy"><span>'+esc(p[1])+'</span></button>'}).join('')+'</div></div>';
+  ov.innerHTML='<div class="gov-bg" style="background-image:url('+galSrc(a,a.p[0],true)+')"></div><div class="gov-in"><div class="gov-h"><div><div class="gov-d">'+esc(a.d)+'</div><h3 class="gov-t">'+esc(a.t)+'</h3><div class="gov-c">사진 '+a.p.length+'장 · 사진을 누르면 크게 볼 수 있습니다</div></div><div class="gov-b"><button type="button" class="gov-s">공유</button><button type="button" class="gov-x" aria-label="닫기">✕</button></div></div><div class="gov-g">'+a.p.map(function(p,i){return '<button type="button" class="gp" style="--i:'+i+'" data-k="'+i+'"><img src="'+galSrc(a,p,true)+'" alt="'+esc(p[1])+'" loading="lazy"><span>'+esc(p[1])+'</span></button>'}).join('')+'</div></div>';
   document.body.appendChild(ov);document.body.style.overflow='hidden';
   GOV={el:ov,card:card,a:a};
   ov.querySelector('.gov-x').addEventListener('click',closeAlbum);
+  ov.querySelector('.gov-s').addEventListener('click',function(){openShare({title:a.d+' '+a.t+' - 경희 EMBA 갤러리',text:a.t+' - 경희 EMBA',url:SITE+'?a='+a.id+'#/about'})});
   $$('.gp',ov).forEach(function(b){b.addEventListener('click',function(){openLb(a,+b.dataset.k)})});
   void ov.offsetWidth;ov.classList.add('open');
 }
@@ -1308,6 +1406,7 @@ document.addEventListener('keydown',function(e){
   if(GOV&&e.key==='Escape')closeAlbum();
 });
 renderGal();
+$('#siteShare').addEventListener('click',function(){openShare({title:'경희 EMBA | 경희대학교 경영대학원 EMBA학과',text:'경희 EMBA',url:SITE})});
 // 로그인: 비공개 항목은 로그인 서버(Apps Script)가 원우로 확인한 경우에만 받아서 표시
 $('#loginBtn').addEventListener('click',function(){
   if(PRIV)return logout();
