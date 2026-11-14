@@ -136,13 +136,6 @@ footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);f
 <div class="contact"><div class="panel"><h3>학과·학사 문의는 어디로 하나요?</h3><p>경영대학원 행정실 (오비스홀 414호)</p><ul><li>대표·재학생 학사: 02-961-0127~8 (등록, 학적, 졸업요건, 증명, 각종 신청서)</li><li>신입생 상담: 02-961-2384~5</li><li>팩스: 02-961-9604</li><li>이메일: khsb2200@khu.ac.kr</li><li>홈페이지: <a href="https://khmba.khu.ac.kr" target="_blank" rel="noopener">khmba.khu.ac.kr</a></li><li>EMBA 학과장 강창동 교수: cdkang@dooco.kr (수강 지도, 전공 상담)</li><li>EMBA 학과장 강창동 교수 전화: 010-3741-2535</li><li>원우회: 02-961-0365</li></ul></div></div></div></section>
 
 <div class="wrap"><footer><p>사이트 이용 문의: EMBA 23기 학회장 김경수 · bob@khu.ac.kr</p>본 안내는 신입생 오리엔테이션 자료를 바탕으로 정리했습니다. 일정·금액·규정은 변경될 수 있으며 학과 공지가 우선합니다.</footer></div>
-<script>
-(function(){var q=document.getElementById('q'),items=[].slice.call(document.querySelectorAll('.qa')),chips=[].slice.call(document.querySelectorAll('.chip')),cnt=document.getElementById('cnt'),none=document.getElementById('none'),sec='';
-function run(){var k=q.value.trim().toLowerCase(),n=0;items.forEach(function(d){var ok=(!sec||d.dataset.s===sec)&&(!k||d.textContent.toLowerCase().indexOf(k)>-1);d.hidden=!ok;if(ok){n++;if(k)d.open=true}else d.open=false});cnt.textContent=n+'개 항목';none.style.display=n?'none':'block'}
-q.addEventListener('input',run);chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');sec=c.dataset.s;run()})});run();
-var links=[].slice.call(document.querySelectorAll('nav.sticky a')),map=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
-function spy(){var y=window.scrollY+90,cur=-1;map.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}
-window.addEventListener('scroll',spy,{passive:true});spy()})();
-</script>
+<script src="/guide/app.js" defer></script>
 </body>
 </html>
