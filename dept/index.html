@@ -160,6 +160,22 @@ section{padding-top:80px}
 .txt b{font-weight:700;color:var(--ink)}
 .en{font-family:var(--en);font-weight:600;font-size:14px;color:var(--ink)}
 .sub{font-size:14px;color:var(--mute);margin-top:10px}
+/* 동문소식 게시판 */
+.nlist{list-style:none;margin:24px 0 0;padding:0;border-top:2px solid var(--ink)}
+.nlist li[hidden]{display:none}
+.nlist a{display:grid;grid-template-columns:112px 1fr 28px;gap:18px;align-items:center;padding:20px 14px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.nlist a:hover{background:#F9E3E8;transform:translateX(4px);box-shadow:inset 4px 0 0 var(--amber)}
+.nd{font-family:var(--en);font-size:15px;color:var(--mute);font-variant-numeric:tabular-nums}
+.nt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.ntag{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:#E6E8EE;color:#3E4560}
+.ntag.ev{background:#F6D5DB;color:#8C1D40}
+.nsrc{font-size:13px;color:var(--mute)}
+.nlist h3{margin:0;font-size:19px;font-weight:700;line-height:1.4;letter-spacing:-.02em;color:var(--ink)}
+.nlist p{margin:4px 0 0;font-size:15px;color:var(--body);font-weight:300;line-height:1.55}
+.nar{font-size:20px;color:var(--amber);text-align:right;transition:transform .2s ease}
+.nlist a:hover .nar{transform:translate(3px,-3px)}
+.nmore{display:block;margin:22px auto 0;min-width:220px;height:48px;border-radius:13px;border:1px solid var(--line2);background:#fff;font:600 16px var(--kr);color:var(--body);cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.08);transition:background-color .2s ease,transform .2s ease}
+.nmore:hover{background:#F9E3E8;transform:translateY(-2px)}
 .box ul{list-style:none;margin:8px 0 0;padding:0;font-size:15px;font-weight:300;color:#555;display:grid;gap:5px}
 .box li::before{content:"•";margin-right:6px}
 .box h3{font-size:21px;font-weight:700;margin:4px 0 10px}
@@ -322,6 +338,10 @@ footer a{color:var(--orange-d)}
   section{padding-top:60px}.tab{margin-top:50px}
   .deco{height:700px}
   footer{padding-bottom:40px}
+  .nlist a{grid-template-columns:1fr 24px;gap:6px 10px;padding:16px 8px}
+  .nd{grid-column:1/-1}
+  .nlist h3{font-size:17px}
+  .nlist p{font-size:14px}
   .box.wide ul{columns:1}
   .stats{margin-top:24px}
   .stats .box{padding:16px 18px}
@@ -777,6 +797,14 @@ footer a{color:var(--orange-d)}
       <li><span><b>총동문회 :</b> kyungheemba.com</span></li>
     </ul>
   </section>
+
+  <section id="n-news" data-nav="05. 동문소식">
+    <div class="hd"><i>05.</i><b>동문소식</b></div>
+    <p class="big">학과와 동문의 <b>행사소식·보도</b></p>
+    <ul class="nlist" id="nlist"></ul>
+    <div id="nmoreWrap"></div>
+    <p class="sub">제목을 누르면 원문 또는 밴드 게시글로 이동합니다. 밴드 글은 KHU EMBA학과 동문 Band 가입 회원만 열람할 수 있습니다.</p>
+  </section>
 </div>
 
 </main>
@@ -1113,6 +1141,32 @@ function renderProfs(){
   }).join('');
 }
 renderProfs();
+// 동문소식 게시판: 아래 목록에 한 줄씩 추가하면 날짜순(최신순)으로 자동 정렬되고, 10개까지 보이며 나머지는 더보기로 열립니다.
+// t: "news"(보도) | "event"(행사소식)
+var NEWS=[
+ {d:"2026-11-04",t:"news",src:"서울경제TV",title:"경희대 경영대학원 EMBA학과, 내달 12일 '경영혁신·성장 컨퍼런스' 개최",sum:"12월 12일 오후 2시, 강연 7개 세션과 선착순 7개 팀의 모의 IR 피칭으로 열리는 학과 컨퍼런스 소식입니다.",url:"https://www.sentv.co.kr/article/view/sentv202611030199"},
+ {d:"2026-08-28",t:"news",src:"비욘드포스트",title:"경희대 경영대학원 EMBA 관련 보도",sum:"비욘드포스트에 실린 경희대 경영대학원 EMBA 기사입니다. 제목을 누르면 원문으로 이동합니다.",url:"http://www.beyondpost.co.kr/view.php?ud=2026082816271318159aeda69934_30"},
+ {d:"2026-08-21",t:"event",src:"밴드 · 제23대 학회",title:"방향성 사전미팅 회의록 공유",sum:"7월 25일 열린 ‘미래지향적인 EMBA로 나아가기 위한 방향성 사전미팅’의 회의록을 학회가 공유했습니다.",url:"https://band.us/band/53620165/post/926300192"},
+ {d:"2026-08-19",t:"event",src:"밴드 · 제23대 학회",title:"20기 학위수여식 초대장 안내",sum:"8월 22일(토) 오후 4시, 오비스홀 308호에서 열린 20기 학위수여식 초대장을 공유했습니다.",url:"https://band.us/band/53620165/post/926300176"},
+ {d:"2026-08-19",t:"event",src:"밴드 · 제23대 학회",title:"2026학년도 2학기 주요 행사 일정 안내",sum:"2학기 주요 행사 일정을 공유하고, 8월 22일 25기 신입생 OT와 20기 학위수여식 개최를 알렸습니다.",url:"https://band.us/band/53620165/post/926300175"},
+ {d:"2026-08-05",t:"event",src:"밴드 · 제23대 학회",title:"원우·동문 인식조사 참여 안내",sum:"1기~25기 원우·동문을 대상으로 한 무기명 설문(약 10분)입니다. 결과는 학과 운영 협의의 근거자료로 쓰입니다.",url:"https://band.us/band/53620165/post/926300169"},
+ {d:"2026-04-24",t:"news",src:"비즈니스코리아",title:"경희대 경영대학원 EMBA, 2026학년도 후기 신입생 모집 접수",sum:"4월 13일부터 5월 15일까지 접수했으며, 운영 체계가 5학기에서 4학기로 바뀐 점을 전했습니다.",url:"https://www.businesskorea.co.kr/news/articleView.html?idxno=268429"},
+ {d:"2026-03-19",t:"news",src:"한국강사신문",title:"경희대 경영대학원 EMBA, 59년 전통 넘어 강력한 동문 네트워크로 '최고의 리더 양성소' 입증",sum:"24기 신입생 환영회·개강연과 등산·골프 등 동문회 연간 행사를 소개한 기사입니다.",url:"https://www.lecturernews.com/news/articleView.html?idxno=198931"},
+ {d:"2025-11-11",t:"news",src:"대학저널",title:"경희대 경영대학원 EMBA, 2026학년도 전기 신입생 모집… 오는 11월 24일 마감",sum:"전기 신입생 원서 접수 마감(11월 24일)과 면접·합격자 발표 일정, 과정의 특징을 전했습니다.",url:"https://dhnews.co.kr/news/view/1065590313607709"}
+];
+var NEWS_SHOW=10;
+function renderNews(all){
+  var list=$('#nlist');if(!list)return;
+  var arr=NEWS.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
+  list.innerHTML=arr.map(function(n,i){
+    var hid=(!all&&i>=NEWS_SHOW)?' hidden':'';
+    return '<li'+hid+'><a href="'+esc(n.url)+'" target="_blank" rel="noopener"><span class="nd">'+esc(n.d.replace(/-/g,'.'))+'</span><div><div class="nt"><span class="ntag'+(n.t==='event'?' ev':'')+'">'+(n.t==='event'?'행사소식':'보도')+'</span><span class="nsrc">'+esc(n.src)+'</span></div><h3>'+esc(n.title)+'</h3><p>'+esc(n.sum)+'</p></div><span class="nar" aria-hidden="true">↗</span></a></li>';
+  }).join('');
+  var w=$('#nmoreWrap');
+  if(!all&&arr.length>NEWS_SHOW){w.innerHTML='<button type="button" class="nmore" id="nmoreBtn">더보기 ('+(arr.length-NEWS_SHOW)+')</button>';$('#nmoreBtn').addEventListener('click',function(){renderNews(true)})}
+  else w.innerHTML='';
+}
+renderNews();
 // 로그인: 비공개 항목은 로그인 서버(Apps Script)가 원우로 확인한 경우에만 받아서 표시
 $('#loginBtn').addEventListener('click',function(){
   if(PRIV)return logout();
