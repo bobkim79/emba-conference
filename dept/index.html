@@ -189,6 +189,13 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 .lg i{width:10px;height:10px;border-radius:3px;flex:none}
 .lg span{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
 .lg em{font-style:normal;color:var(--mute);font-weight:400;margin-left:4px}
+.hb{display:grid;gap:9px}
+.hr{display:grid;grid-template-columns:104px 1fr 92px;gap:12px;align-items:center;font-size:14px}
+.hl{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ht{display:block;height:14px;border-radius:7px;background:#F1E4E7;overflow:hidden}
+.ht s{display:block;height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,#E0566B,#9E1915);transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.hv{text-align:right;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.hv em{font-style:normal;font-weight:400;color:var(--mute);margin-left:5px;font-size:13px}
 .bars{display:flex;align-items:flex-end;gap:4px;height:130px;padding-top:6px}
 .bars div{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
 .bars s{display:block;width:100%;max-width:26px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#D8485E,#9E1915);height:0;transition:height .9s cubic-bezier(.2,.8,.2,1)}
@@ -532,7 +539,7 @@ footer a{color:var(--orange-d)}
   #v-event .grid.stats .box{padding:10px 9px 11px}#v-event .grid.stats .en{font-size:12px}#v-event .grid.stats .lb{display:block;font-size:11px;margin-top:1px}
   #v-event .grid.stats b{font-size:21px;margin-top:3px}#v-event .grid.stats p{display:none}.prog{margin-top:6px;height:6px}#v-event .grid.stats .lb::before{content:none}
   .nc{flex-basis:100%;padding:14px 14px 16px}.dn{gap:14px}.dn svg,.dn .ct{width:104px;height:104px}.lg{font-size:13px}
-  .bars{gap:2px;height:110px}.bars div:nth-child(even) small{visibility:hidden}.bars small{font-size:9.5px}
+  .hr{grid-template-columns:78px 1fr 74px;gap:8px;font-size:13px}.hv em{display:none}
   .irs{grid-template-columns:repeat(2,1fr);gap:8px}.ir{height:150px;padding-top:30px}.ir .tn{font-size:17px}.ir.em svg{width:48px;height:48px}
   .irh em{margin-left:0;width:100%}
   .ir:nth-child(odd) .dt{left:0;right:auto}.ir:nth-child(even) .dt{right:0;left:auto}
@@ -930,9 +937,8 @@ footer a{color:var(--orange-d)}
 
   <div class="tab"><span>네트워크</span></div>
   <div class="nst" id="nst" hidden>
-    <div class="nc" id="ncCat" hidden><h4>구분별 비율</h4><div class="dn"></div></div>
+    <div class="nc wide" id="ncCat" hidden><h4>구분별 비율</h4><div class="hb"></div></div>
     <div class="nc" id="ncSex" hidden><h4>성별 비율</h4><div class="dn"></div></div>
-    <div class="nc wide" id="ncGen" hidden><h4>기수별 원우 수</h4><div class="bars"></div></div>
   </div>
   <div class="grid g4 stats">
     <div class="box"><span class="en">MEMBERS</span><b id="cnt">0명</b><p>명단에 등록된 원우</p></div>
@@ -1345,17 +1351,20 @@ function donut(box,rows,center){
   box.parentNode.hidden=false;
   setTimeout(function(){$$('circle',box).forEach(function(c){c.setAttribute('stroke-dasharray',c.dataset.d)})},200);
 }
+function hbars(box,rows){
+  var tot=rows.reduce(function(a,r){return a+r[1]},0),mx=Math.max.apply(null,rows.map(function(r){return r[1]}))||1;
+  box.innerHTML=rows.map(function(r){return '<div class="hr"><span class="hl">'+esc(r[0])+'</span><span class="ht"><s data-w="'+(r[1]/mx*100)+'"></s></span><span class="hv">'+r[1]+'명<em>'+(tot?Math.round(r[1]/tot*100):0)+'%</em></span></div>'}).join('');
+  box.parentNode.hidden=false;
+  setTimeout(function(){$$('.ht s',box).forEach(function(s){s.style.width=s.dataset.w+'%'})},200);
+}
 function tally(key,norm){var m={},o=[];MEMBERS.forEach(function(x){var k=norm?norm(x[key]):String(x[key]||'').trim();if(!k)return;if(!(k in m)){m[k]=0;o.push(k)}m[k]++});return o.map(function(k){return [k,m[k]]})}
 function renderNetStats(){
   var w=$('#nst');if(!w||!MEMBERS.length)return;w.hidden=false;
-  var cat=tally('cat').sort(function(a,b){return b[1]-a[1]});
-  if(cat.length>1){if(cat.length>5){var rest=cat.slice(5).reduce(function(a,r){return a+r[1]},0);cat=cat.slice(0,5).concat([['기타',rest]])}donut($('#ncCat .dn'),cat,function(t){return t+'<small>명</small>'})}else $('#ncCat').hidden=true;
+  var cat=tally('cat');['공무원','지자체의원'].forEach(function(k){if(!cat.some(function(r){return r[0]===k}))cat.push([k,0])});
+  cat.sort(function(a,b){return b[1]-a[1]});
+  if(cat.length>1)hbars($('#ncCat .hb'),cat);else $('#ncCat').hidden=true;
   var sx=tally('s',function(v){v=String(v||'').trim();return /^(남|m|male)/i.test(v)?'남성':/^(여|f|female)/i.test(v)?'여성':''}).sort(function(a,b){return a[0]<b[0]?-1:1});
   if(sx.length){var tm=sx.reduce(function(a,r){return a+r[1]},0);donut($('#ncSex .dn'),sx,function(t){var f=sx.filter(function(r){return r[0]==='여성'})[0];return Math.round((f?f[1]:0)/tm*100)+'%<small>여성</small>'})}else $('#ncSex').hidden=true;
-  var g=tally('g').sort(function(a,b){var x=parseInt(a[0],10),y=parseInt(b[0],10);return (isNaN(x)?999:x)-(isNaN(y)?999:y)}),mx=Math.max.apply(null,g.map(function(r){return r[1]}));
-  var gb=$('#ncGen .bars');gb.innerHTML=g.map(function(r){return '<div title="'+esc(r[0])+' '+r[1]+'명"><s data-h="'+(r[1]/mx*100)+'"></s><small>'+esc(String(r[0]).replace('기',''))+'</small></div>'}).join('');
-  $('#ncGen').hidden=false;
-  setTimeout(function(){$$('#ncGen s').forEach(function(s){s.style.height='calc('+s.dataset.h+'% - 17px)'})},200);
 }
 // 학사일정: data/schedule.json 에서 불러옴 (없으면 화면에 들어 있는 기본값 유지). 자동 수집 스크립트가 이 파일만 갱신하면 됩니다
 fetch('data/schedule.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
