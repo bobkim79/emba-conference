@@ -402,16 +402,16 @@ input,select,textarea{font:400 15px var(--kr);color:var(--ink);background:#fff;b
 .chip{border:0;background:var(--white-grad);color:var(--body);border-radius:12px;padding:8px 16px;font:600 15px var(--kr);cursor:pointer;box-shadow:inset 0 -2px 4px rgba(0,0,0,.06),0 3px 8px rgba(0,0,0,.1)}
 .chip.on{background:var(--btn-grad);color:#fff;box-shadow:var(--btn-shadow)}
 .chip small{font-weight:400;opacity:.75;margin-left:4px}
-.faq{margin-top:16px;display:grid;gap:10px}
+.faq{margin-top:14px;display:grid;gap:7px}
 .faq details{border-radius:14px;background:linear-gradient(135deg,var(--peach),#FBFBFB 70%)}
-.faq summary{cursor:pointer;list-style:none;padding:17px 52px 17px 20px;font-weight:700;font-size:17px;position:relative;color:var(--ink)}
+.faq summary{cursor:pointer;list-style:none;padding:12px 48px 12px 18px;font-weight:700;font-size:16.5px;line-height:1.4;position:relative;color:var(--ink)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::before{content:"Q.";font-family:var(--en);font-weight:800;color:var(--orange-d);margin-right:10px}
 .faq summary::after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font:300 26px var(--en)}
 .faq details[open] summary::after{content:"–"}
-.faq .ans{padding:0 22px 18px 50px;color:#555;font-weight:300;font-size:15.5px}
-.faq .ans p{margin-bottom:6px}
-.faq .ans ul{margin:4px 0 6px;padding-left:18px}
+.faq .ans{padding:0 20px 12px 44px;color:#555;font-weight:300;font-size:15px;line-height:1.5}
+.faq .ans p{margin-bottom:3px}
+.faq .ans ul{margin:2px 0 3px;padding-left:18px}.faq .ans li{margin:1px 0}
 .faq .cat{font-size:12px;font-weight:500;color:var(--orange-d);margin-left:8px}
 .faq mark{background:#F5C3CB;color:var(--ink)}
 .empty{padding:30px;text-align:center;color:var(--mute);background:var(--soft);border-radius:14px}
@@ -464,15 +464,16 @@ footer a{color:var(--orange-d)}
 .lockbar{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px 12px 18px;background:var(--peach);border:1px solid var(--peach-2);border-radius:14px;font-size:15px;color:var(--body)}
 .lockbar b{color:var(--orange-d)}
 .btn-lg{height:42px;padding:0 20px;border:0;border-radius:12px;background:var(--btn-grad);box-shadow:var(--btn-shadow);color:#fff;font-weight:600;font-size:15px;cursor:pointer}
-.mwrap{margin-top:12px;max-height:640px;overflow:auto;border:1px solid var(--line2);border-radius:14px;background:#fff}
-.mtable{width:100%;border-collapse:collapse;font-size:15px}
-.mtable thead th{position:sticky;top:0;z-index:1;font-size:14px;white-space:nowrap;padding:10px 12px}
-.mtable thead th.lk::before{content:"🔒 ";font-size:11px}
-.mtable td{padding:10px 12px;font-weight:400;white-space:nowrap}
-.mtable td.g{font-family:var(--en);font-weight:700;color:var(--orange-d);font-size:13.5px}
+.mwrap{margin-top:12px;max-height:640px;overflow-y:auto;overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff}
+.mtable{width:100%;border-collapse:collapse;font-size:13.5px;table-layout:fixed}
+.mtable thead th{position:sticky;top:0;z-index:1;font-size:13px;padding:8px 6px;line-height:1.25}
+.mtable thead th.lk::before{content:"🔒 ";font-size:10px}
+.mtable td{padding:7px 6px;font-weight:400;line-height:1.35;vertical-align:middle;overflow-wrap:anywhere;word-break:keep-all}
+.mtable th:nth-child(1){width:5.5%}.mtable th:nth-child(2){width:12%}.mtable th:nth-child(3){width:7.5%}.mtable th:nth-child(4){width:11%}.mtable th:nth-child(5){width:13%}.mtable th:nth-child(6){width:13%}.mtable th:nth-child(7){width:18%}.mtable th:nth-child(8){width:9%}.mtable th:nth-child(9){width:11%}
+.mtable td.g{font-family:var(--en);font-weight:700;color:var(--orange-d);font-size:13px}
 .mtable td.n{font-weight:700;color:var(--ink)}
-.mtable td .rl{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--peach);color:var(--brown);font-size:13px;font-weight:600}
-.mtable td a{color:var(--orange-d)}
+.mtable td .rl{display:inline-block;padding:1px 8px;border-radius:999px;background:var(--peach);color:var(--brown);font-size:12px;font-weight:600;line-height:1.35}
+.mtable td a{color:var(--orange-d);font-size:12px}
 .mtable td.lk{color:#B9B9B9;font-size:13px;letter-spacing:.1em}
 .lf{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .lf input{flex:1 1 200px;min-width:0;height:48px;border:1px solid var(--line2);border-radius:12px;padding:0 14px;font:inherit;font-size:16px}
@@ -481,9 +482,9 @@ footer a{color:var(--orange-d)}
 .lmsg{background:var(--peach);color:var(--orange-d);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-weight:600}
 .lhint{margin-top:12px;font-size:13.5px;color:var(--mute)}
 .lhint a{color:var(--orange-d)}
-.mtable td .ct{display:inline-block;padding:2px 9px;border-radius:6px;background:var(--soft);color:var(--body);font-size:12.5px;font-weight:500}
+.mtable td .ct{display:inline-block;padding:1px 7px;border-radius:6px;background:var(--soft);color:var(--body);font-size:12px;font-weight:500}
 .mtable td.co{font-weight:600;color:var(--ink)}
-.mtable td.ds{white-space:normal;min-width:260px;max-width:380px;font-size:13.5px;color:var(--body);line-height:1.5}
+.mtable td.ds{font-size:12.5px;color:var(--body);line-height:1.4}
 .modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:rgba(0,0,0,.45);padding:20px}
 .modal.on{display:grid}
 .modal .in{max-width:420px;width:100%;background:#fff;border-radius:20px;padding:26px 24px 20px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
@@ -518,7 +519,7 @@ footer a{color:var(--orange-d)}
   .org-grid{margin-top:14px;gap:8px}.org-grid .box{padding:14px 12px}.org-grid b{font-size:21px}
   .cal{margin-top:16px;gap:8px}.cal .box{padding:16px 15px}
   .flow{margin-top:16px}.flow li{padding:11px 8px}.flow .no{font-size:24px}
-  .faq{gap:7px}.faq summary{padding:13px 44px 13px 14px;font-size:16px}.faq summary::after{right:16px}.faq .ans{padding:0 16px 14px 40px;font-size:15px}
+  .faq{gap:6px}.faq summary{padding:11px 42px 11px 14px;font-size:15.5px}.faq summary::after{right:16px}.faq .ans{padding:0 14px 11px 38px;font-size:14.5px}
   .dbtools{margin-top:14px;gap:8px}
   .video{aspect-ratio:4/3;padding:16px 16px 18px}
   .video .meta{margin-top:10px;gap:6px 14px;font-size:14px}
@@ -545,6 +546,7 @@ footer a{color:var(--orange-d)}
   #v-event .grid.stats{grid-template-columns:repeat(3,1fr);gap:6px}
   #v-event .grid.stats .box{padding:10px 9px 11px}#v-event .grid.stats .en{font-size:12px}#v-event .grid.stats .lb{display:block;font-size:11px;margin-top:1px}
   #v-event .grid.stats b{font-size:21px;margin-top:3px}#v-event .grid.stats p{display:none}.prog{margin-top:6px;height:6px}#v-event .grid.stats .lb::before{content:none}
+  .mtable{min-width:720px}
   .nc{flex-basis:100%;padding:14px 14px 16px}.dn{gap:14px}.dn svg,.dn .ct{width:104px;height:104px}.lg{font-size:13px}
   .hb{grid-auto-flow:row;grid-template-columns:1fr;gap:8px}.hr{grid-template-columns:112px 1fr 64px;font-size:13px}
   .hb.cl .hr:nth-child(n+9){display:none}.hb.cl .hr.etc,.hb.cl.all .hr{display:grid}#nMore{display:block}#nMore[hidden]{display:none}
@@ -1244,7 +1246,8 @@ function webHref(w){w=w.replace(/\[추정\]/g,'').trim();if(!w)return '';return 
 // 한 사람 = 1줄: 기수 · EMBA 직책 · 이름 · 카테고리 · 회사명 · 직책 · 회사소개 · 홈페이지 · 이메일
 function memberRows(m){
   var p=PRIV&&PRIV[m.i],co,rest;
-  if(p){
+  if(m.x){co='<td></td>';rest='<td></td><td></td><td></td><td></td>'}
+  else if(p){
     var h=webHref(p.web||'');
     co='<td class="co">'+esc(p.co||'')+'</td>';
     rest='<td>'+esc(p.job||'')+'</td><td class="ds">'+esc(p.desc||'')+'</td><td>'+(h?'<a href="'+esc(h)+'" target="_blank" rel="noopener">'+esc(p.web.replace(/^https?:\/\//,''))+'</a>':'')+'</td><td>'+(p.email?'<a href="mailto:'+esc(p.email)+'">'+esc(p.email)+'</a>':'')+'</td>';
@@ -1331,16 +1334,18 @@ function renderMembers(){
     $('#mbody').innerHTML='<tr><td colspan="9" class="empty">'+(MEMBERS_STATE==='loading'?'원우 명단을 불러오고 있습니다…':'원우 명단을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.')+'</td></tr>';
     return;
   }
-  var roleN=MEMBERS.filter(function(m){return m.r}).length;
-  $('#nchips').innerHTML=[['all','전체',MEMBERS.length],['role','회장단',roleN]].map(function(x){return '<button class="chip'+(ncat===x[0]?' on':'')+'" data-t="'+x[0]+'">'+x[1]+'<small>'+x[2]+'</small></button>'}).join('');
+  var roleN=MEMBERS.filter(isBoard).length,secN=MEMBERS.filter(isSec).length;
+  $('#nchips').innerHTML=[['all','전체',MEMBERS.length],['role','회장단',roleN],['sec','사무총장',secN]].map(function(x){return '<button class="chip'+(ncat===x[0]?' on':'')+'" data-t="'+x[0]+'">'+x[1]+'<small>'+x[2]+'</small></button>'}).join('');
   var q=$('#nq').value.trim().toLowerCase(),g=$('#ngen').value,html='';
   var list=MEMBERS.filter(function(m){
-    if(ncat==='role'&&!m.r)return false;
+    if(ncat==='role'&&!isBoard(m))return false;
+    if(ncat==='sec'&&!isSec(m))return false;
     if(g&&m.g!==g)return false;
     if(!q)return true;
     var p=PRIV&&PRIV[m.i]||{};
     return [m.g,m.n,m.r,m.cat,m.co,p.co,p.job,p.desc].join(' ').toLowerCase().indexOf(q)>=0;
   });
+  if(ncat==='sec')list=list.slice().sort(function(a,b){return roleNo(b)-roleNo(a)});
   list.forEach(function(m){html+=memberRows(m)});
   $('#mbody').innerHTML=html||'<tr><td colspan="9" class="empty">조건에 맞는 원우가 없습니다.</td></tr>';
 }
@@ -1348,6 +1353,19 @@ $('#nchips').addEventListener('click',function(e){var b=e.target.closest('.chip'
 $('#nq').addEventListener('input',renderMembers);
 $('#ngen').addEventListener('change',renderMembers);
 renderMembers();
+// 직책 정리: 사무총장은 회장단과 분리, 학회장은 'N대 학회장'(대수=기수), 아래 목록은 시트 값보다 우선
+var ROLES=[["25기","손소희","25대 사무총장"],["24기","구민정","24대 사무총장"],["21기","전다슬","21대 사무총장"],["20기","김종헌","20기 회장"],["20기","김현창","20기 사무총장"],["20기","김정수","20대 사무총장"],["19기","조인우","19대 사무총장"],["18기","유진엽","18대 사무총장"],["17기","김태경","17대 사무총장"],["16기","이경일","16대 사무총장"],["14기","천승환","14대 사무총장"]];
+function isSec(m){return /사무(총장|국장)/.test(m.r||'')}
+function isBoard(m){return !!m.r&&!isSec(m)}
+function roleNo(m){var x=String(m.r||'').match(/(\d+)/);return x?+x[1]:0}
+function applyRoles(){
+  MEMBERS.forEach(function(m){var n=parseInt(m.g,10),r=String(m.r||'').trim();
+    if(r&&n&&/학회장/.test(r)&&!/\d+\s*[대기]/.test(r))m.r=(r==='학회장'?'':'')+n+'대 '+r});
+  ROLES.forEach(function(x){
+    var f=MEMBERS.filter(function(m){return m.g===x[0]&&m.n===x[1]})[0];
+    if(f)f.r=x[2];else MEMBERS.push({g:x[0],n:x[1],r:x[2],cat:'',x:1});
+  });
+}
 // 공개 명단 불러오기 (구글시트 → Apps Script GET)
 // 네트워크 통계: 명단(구분·기수·성별)에서 자동 집계. 성별은 명단에 s(남/여) 값이 있을 때만 표시
 function donut(box,rows,center){
@@ -1405,6 +1423,7 @@ function loadMembers(){
   fetch(AUTH.api).then(function(r){return r.json()}).then(function(d){
     if(!d.ok||!d.members)throw 0;
     MEMBERS=d.members.map(function(m,i){m.i=i;return m});
+    applyRoles();
     GENS=[];MEMBERS.forEach(function(m){if(GENS.indexOf(m.g)<0)GENS.push(m.g)});
     $('#ngen').innerHTML='<option value="">전체 기수</option>'+GENS.map(function(g){return '<option>'+esc(g)+'</option>'}).join('');
     MEMBERS_STATE='ok';updateCount();renderMembers();renderNetStats();restoreSession();
