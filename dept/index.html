@@ -198,6 +198,47 @@ section{padding-top:80px}
 .cs:hover,.cs:focus-within,.cs.open{transform:scale(1.12);z-index:6;box-shadow:0 18px 34px rgba(0,0,0,.24)}
 .cs:hover .cs-b,.cs:focus-within .cs-b,.cs.open .cs-b{opacity:1}
 .cs:hover .cs-f,.cs:focus-within .cs-f,.cs.open .cs-f{opacity:0}
+/* EMBA GALLERY */
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px}
+.gc{position:relative;aspect-ratio:1/1;border-radius:16px;overflow:hidden;cursor:pointer;border:0;padding:0;background:#222;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;font-family:inherit;text-align:left;color:#fff}
+.gc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .4s ease}
+.gc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 38%,rgba(20,0,5,.78) 100%);transition:opacity .3s}
+.gc:hover{transform:translateY(-6px);box-shadow:0 18px 32px rgba(126,18,15,.35)}
+.gc:hover img{transform:scale(1.1);filter:brightness(1.05) saturate(1.1)}
+.gc-i{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 13px;z-index:2}
+.gc-d{font-family:var(--en);font-size:12px;letter-spacing:.04em;opacity:.85}
+.gc-t{margin-top:2px;font-size:16px;font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.gc-n{position:absolute;top:10px;right:10px;z-index:2;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35)}
+.gc-h{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,10px);opacity:0;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);transition:all .3s ease;white-space:nowrap}
+.gc:hover .gc-h{opacity:1;transform:translate(-50%,0)}
+.gov{position:fixed;z-index:200;overflow:hidden;background:#14090B;border-radius:16px;transition:top .6s cubic-bezier(.2,.8,.2,1),left .6s cubic-bezier(.2,.8,.2,1),width .6s cubic-bezier(.2,.8,.2,1),height .6s cubic-bezier(.2,.8,.2,1),border-radius .6s ease,opacity .4s ease}
+.gov.open{top:0!important;left:0!important;width:100vw!important;height:100vh!important;border-radius:0}
+.gov-bg{position:absolute;inset:-6%;background-size:cover;background-position:center;filter:blur(26px) brightness(.38) saturate(1.3);transform:scale(1.15)}
+.gov-in{position:absolute;inset:0;overflow-y:auto;padding:34px clamp(18px,5vw,64px) 60px;opacity:0;transition:opacity .4s ease .35s}
+.gov.open .gov-in{opacity:1}
+.gov-h{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;color:#fff;margin-bottom:26px}
+.gov-d{font-family:var(--en);font-size:14px;letter-spacing:.06em;opacity:.8}
+.gov-t{color:#fff;margin:4px 0 0;font-size:clamp(24px,4vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.2}
+.gov-c{margin-top:6px;font-size:14px;opacity:.75}
+.gov-x{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer;transition:transform .25s ease,background .25s ease}
+.gov-x:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
+.gov-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.gp{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:0;padding:0;cursor:zoom-in;background:#333;opacity:0;transform:translateY(40px) scale(.82) rotate(-3deg)}
+.gov.open .gp{animation:gpin .7s cubic-bezier(.2,.9,.3,1.1) forwards;animation-delay:calc(var(--i)*70ms + .45s)}
+@keyframes gpin{to{opacity:1;transform:none}}
+.gp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.gp:hover img{transform:scale(1.12)}
+.gp span{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;font-size:12.5px;font-weight:600;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.7));opacity:0;transition:opacity .25s ease;text-align:left}
+.gp:hover span{opacity:1}
+.glb{position:fixed;inset:0;z-index:300;background:rgba(8,4,5,.94);display:none;align-items:center;justify-content:center;flex-direction:column;opacity:0;transition:opacity .25s ease}
+.glb.on{display:flex}.glb.show{opacity:1}
+.glb img{max-width:92vw;max-height:80vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:glbz .35s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes glbz{from{transform:scale(.92);opacity:.4}to{transform:none;opacity:1}}
+.glb-c{margin-top:14px;color:#fff;font-size:15px;text-align:center}
+.glb-c small{display:block;margin-top:2px;opacity:.65;font-size:13px}
+.glb button{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;width:52px;height:52px;border-radius:50%;font-size:24px;cursor:pointer;transition:background .2s}
+.glb button:hover{background:rgba(255,255,255,.32)}
+.glb-p{left:20px;top:50%;margin-top:-26px}.glb-n{right:20px;top:50%;margin-top:-26px}.glb-x{right:20px;top:20px}
 .nmore{display:block;margin:22px auto 0;min-width:220px;height:48px;border-radius:13px;border:1px solid var(--line2);background:#fff;font:600 16px var(--kr);color:var(--body);cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.08);transition:background-color .2s ease,transform .2s ease}
 .nmore:hover{background:#F9E3E8;transform:translateY(-2px)}
 .box ul{list-style:none;margin:8px 0 0;padding:0;font-size:15px;font-weight:300;color:#555;display:grid;gap:5px}
@@ -367,6 +408,10 @@ footer a{color:var(--orange-d)}
   .ndm{display:inline;flex:none;font-family:var(--en);font-size:13px;color:var(--mute)}
   .nlist h3{font-size:16px;white-space:normal}
   .care{grid-template-columns:repeat(2,1fr)}
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .gc-t{font-size:14px}
+  .gov-g{grid-template-columns:repeat(2,1fr);gap:10px}
+  .glb-p{left:8px}.glb-n{right:8px}
   .cs{min-height:200px}
   .box.wide ul{columns:1}
   .stats{margin-top:24px}
@@ -707,8 +752,16 @@ footer a{color:var(--orange-d)}
     <p class="sub">학과 홈페이지 공개 자료 기준의 개략치입니다.</p>
   </section>
 
-  <section id="a-org" data-nav="05. 학회 조직">
-    <div class="hd"><i>05.</i><b>EMBA 학회</b></div>
+  <section id="a-gallery" data-nav="05. EMBA GALLERY">
+    <div class="hd"><i>05.</i><b>EMBA GALLERY</b></div>
+    <p class="big">행사별로 보는 <b>EMBA의 순간들</b></p>
+    <div class="gal" id="gal"></div>
+    <div id="galMore"></div>
+    <p class="sub">앨범을 누르면 행사 사진이 모두 펼쳐지고, 사진을 누르면 크게 볼 수 있습니다.</p>
+  </section>
+
+  <section id="a-org" data-nav="06. 학회 조직">
+    <div class="hd"><i>06.</i><b>EMBA 학회</b></div>
     <p class="big">원우 학회가 <b>행사를 기획하고 운영</b>합니다</p>
     <p class="txt">EMBA 재학생을 대표하는 조직으로 학술 활동을 지원하고 학기별 전공행사를 주관하며 동문과 재학생을 잇는 가교 역할을 합니다. 입학 후 3학기가 되면 전통적으로 해당 기수에서 학회장이 선출되며, 주관기수가 되면 기수회장은 학회장으로, 사무국장은 사무총장으로 자동 전환됩니다.</p>
     <div class="grid g2" style="margin-top:20px">
@@ -717,8 +770,8 @@ footer a{color:var(--orange-d)}
     </div>
   </section>
 
-  <section id="a-cal" data-nav="06. 연간 행사">
-    <div class="hd"><i>06.</i><b>ANNUAL EVENTS</b></div>
+  <section id="a-cal" data-nav="07. 연간 행사">
+    <div class="hd"><i>07.</i><b>ANNUAL EVENTS</b></div>
     <p class="big">함께 배우고, 함께 <b>어울리는 한 해</b></p>
     <div class="cal">
       <div class="box"><h3>전반기 (2월 ~ 6월)</h3><ul>
@@ -738,13 +791,6 @@ footer a{color:var(--orange-d)}
     <p class="sub">세부 일정은 학회 운영에 따라 변동될 수 있습니다. 올해 확정: 신입생 환영회·개강연 2026.3.7(토) · 제9회 EMBA TOUR 원장배 골프대회 2026.6.10(수) 서원힐스 · 원우 산행 2025.5.24(토) · 경영혁신·성장 컨퍼런스 2026.12.12(토)</p>
   </section>
 
-  <section id="a-campus" data-nav="07. 캠퍼스">
-    <div class="hd"><i>07.</i><b>CAMPUS</b></div>
-    <div class="grid g2" style="margin-top:28px">
-      <div class="box"><span class="en">강의실·행정실</span><h3>오비스홀</h3><p class="txt">경영대학원 행정실 414호, 편의점·카페·ATM·증명서 발급기(3층), 원우회실(354호), 보건소(1층). 지하주차장이 강의실과 가장 가깝습니다.</p></div>
-      <div class="box b2"><span class="en">편의시설</span><h3>청운관 · 푸른솔문화관</h3><p class="txt">청운관 지하 1·2층에 학생식당, 문구점, 서점, 우체국, ATM, 복사실이 있습니다. 푸른솔문화관 지하 2층에서 주차 정기권을 구입합니다.</p></div>
-    </div>
-  </section>
 </div>
 
 <!-- ===================== 04 네트워크 DB ===================== -->
@@ -1133,14 +1179,14 @@ loadMembers();
 // 교수진 카드 (공개: 이름·강의·보직·이메일 / 전화번호는 로그인 서버에서만 받음)
 var PROFS=[
  {n:"강창동",img:"img/prof/kang-changdong.jpg",lec:"AI유통마케팅",pos:"EMBA학과 학과장",email:"cdkang@khu.ac.kr",extra:"교과목 SCM 경영, 유통마케팅 · 연구실 글로벌 미래교육관 216호"},
- {n:"손유경",lec:"CRM개론",email:"son8027@khu.ac.kr"},
- {n:"송세영",lec:"사업계획서이론과실전",email:"ssy4743@naver.com"},
- {n:"성상용",img:"img/prof/seong-sangyong.jpg",lec:"벤처창업론",email:"ssy1952@naver.com"},
- {n:"정권택",lec:"AI시대의인적자원관리",email:"seriojkt@gmail.com"},
  {n:"김광용",img:"img/prof/kim-gwangyong.jpg",lec:"지속가능경영",email:"resultant@naver.com"},
  {n:"김태경",img:"img/prof/kim-taekyung.jpg",lec:"문화컨텐츠마케팅",email:"sdkimch123@naver.com"},
+ {n:"성상용",img:"img/prof/seong-sangyong.jpg",lec:"벤처창업론",email:"ssy1952@naver.com"},
+ {n:"손유경",lec:"CRM개론",email:"son8027@khu.ac.kr"},
+ {n:"송세영",lec:"사업계획서이론과실전",email:"ssy4743@naver.com"},
  {n:"신현주",lec:"경영정보시스템",email:"nayarexia@nate.com"},
- {n:"안여령",lec:"오케스트라리더십",email:"manito92@gmail.com"}
+ {n:"안여령",lec:"오케스트라리더십",email:"manito92@gmail.com"},
+ {n:"정권택",lec:"AI시대의인적자원관리",email:"seriojkt@gmail.com"}
 ];
 var PROF_PHONE=null;
 var SILH='<svg viewBox="0 0 88 88" aria-hidden="true"><rect width="88" height="88" fill="#fff"/><circle cx="44" cy="34" r="15" fill="#D4D4DA"/><path d="M14 88c0-20 13-31 30-31s30 11 30 31z" fill="#D4D4DA"/></svg>';
@@ -1198,6 +1244,70 @@ function renderCare(){
   $$('#care .cs').forEach(function(el){el.addEventListener('click',function(e){if(e.target.closest('a'))return;var was=el.classList.contains('open');$$('#care .cs.open').forEach(function(o){o.classList.remove('open')});if(!was)el.classList.add('open')})});
 }
 renderCare();
+var GAL_SHOW=10;
+// EMBA GALLERY: 앨범 한 개 = GAL 한 줄. p의 첫 사진이 대표(썸네일) 사진. 사진 파일: img/gallery/<id>/<번호>.jpg (원본) · <번호>_t.jpg (1:1 썸네일)
+var GAL=[{"id":"20261104-1","d":"2026.11.04","t":"재학생 친선골프","p":[["02","단체 사진"],["01","23기 라운딩"],["03","티오프 전"],["04","회식"],["05","회식"]]},{"id":"20261015-1","d":"2026.10.15","t":"EMBA 동문회장배 골프대회","p":[["02","단체 사진"],["01","김윤석 동문회장"],["03","메달리스트"],["04","시상식"],["05","신페리오 우승"]]},{"id":"20260912-1","d":"2026.09.12","t":"재학생 네트워킹데이","p":[["04","행사 포스터"],["01","발표"],["02","발표"],["03","조별 네트워킹"]]},{"id":"20260905-1","d":"2026.09.05","t":"개강연 · 신입생 환영회","p":[["01","개강연 · 신입생 환영회"],["02","25기 신입생"],["03","축하공연"],["04","축하공연"],["05","축하공연"]]},{"id":"20260822-2","d":"2026.08.22","t":"20기 학위수여식","p":[["03","학위 수여"],["01","기수회장 답사"],["02","학위 수여"],["04","학위 수여"],["05","학위 수여"],["06","학위 수여"],["07","학위 수여"],["08","학위 수여"],["09","학위 수여"],["10","학위 수여"],["11","졸업생 답사"],["12","학과장님"],["13","학과장님"],["14","행사 준비"]]},{"id":"20260822-1","d":"2026.08.22","t":"25기 신입생 오리엔테이션","p":[["01","단체 사진"],["02","선배와의 대화"],["03","선배와의 대화"],["04","학과장님 소개"]]}];
+function galSrc(a,p,t){return 'img/gallery/'+a.id+'/'+p[0]+(t?'_t':'')+'.jpg'}
+function renderGal(all){
+  var box=$('#gal');if(!box)return;
+  var arr=GAL.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
+  box.innerHTML=arr.map(function(a,i){
+    if(!all&&i>=GAL_SHOW)return '';
+    return '<button type="button" class="gc" data-i="'+GAL.indexOf(a)+'" aria-label="'+esc(a.t)+' 앨범 열기"><img src="'+galSrc(a,a.p[0],true)+'" alt="'+esc(a.t)+'" loading="lazy"><span class="gc-n">'+a.p.length+'장</span><span class="gc-h">펼쳐보기</span><span class="gc-i"><div class="gc-d">'+esc(a.d)+'</div><div class="gc-t">'+esc(a.t)+'</div></span></button>';
+  }).join('');
+  $$('#gal .gc').forEach(function(b){b.addEventListener('click',function(){openAlbum(GAL[+b.dataset.i],b)})});
+  var w=$('#galMore');
+  if(!all&&arr.length>GAL_SHOW){w.innerHTML='<button type="button" class="nmore" id="galMoreBtn">더보기 ('+(arr.length-GAL_SHOW)+')</button>';$('#galMoreBtn').addEventListener('click',function(){renderGal(true)})}
+  else w.innerHTML='';
+}
+var GOV=null,GLB=null,GLB_I=0,GLB_A=null;
+function openAlbum(a,card){
+  if(GOV)return;
+  var r=card.getBoundingClientRect();
+  var ov=document.createElement('div');ov.className='gov';
+  ov.style.cssText='top:'+r.top+'px;left:'+r.left+'px;width:'+r.width+'px;height:'+r.height+'px';
+  ov.innerHTML='<div class="gov-bg" style="background-image:url('+galSrc(a,a.p[0],true)+')"></div><div class="gov-in"><div class="gov-h"><div><div class="gov-d">'+esc(a.d)+'</div><h3 class="gov-t">'+esc(a.t)+'</h3><div class="gov-c">사진 '+a.p.length+'장 · 사진을 누르면 크게 볼 수 있습니다</div></div><button type="button" class="gov-x" aria-label="닫기">✕</button></div><div class="gov-g">'+a.p.map(function(p,i){return '<button type="button" class="gp" style="--i:'+i+'" data-k="'+i+'"><img src="'+galSrc(a,p,true)+'" alt="'+esc(p[1])+'" loading="lazy"><span>'+esc(p[1])+'</span></button>'}).join('')+'</div></div>';
+  document.body.appendChild(ov);document.body.style.overflow='hidden';
+  GOV={el:ov,card:card,a:a};
+  ov.querySelector('.gov-x').addEventListener('click',closeAlbum);
+  $$('.gp',ov).forEach(function(b){b.addEventListener('click',function(){openLb(a,+b.dataset.k)})});
+  void ov.offsetWidth;ov.classList.add('open');
+}
+function closeAlbum(){
+  if(!GOV)return;var g=GOV;GOV=null;
+  var r=g.card.getBoundingClientRect();
+  g.el.classList.remove('open');
+  g.el.style.cssText='top:'+r.top+'px;left:'+r.left+'px;width:'+r.width+'px;height:'+r.height+'px;opacity:.0';
+  document.body.style.overflow='';
+  setTimeout(function(){g.el.remove()},620);
+}
+function openLb(a,i){
+  GLB_A=a;GLB_I=i;
+  if(!GLB){
+    GLB=document.createElement('div');GLB.className='glb';
+    GLB.innerHTML='<button type="button" class="glb-x" aria-label="닫기">✕</button><button type="button" class="glb-p" aria-label="이전">‹</button><button type="button" class="glb-n" aria-label="다음">›</button><img alt=""><div class="glb-c"></div>';
+    document.body.appendChild(GLB);
+    GLB.querySelector('.glb-x').addEventListener('click',closeLb);
+    GLB.querySelector('.glb-p').addEventListener('click',function(e){e.stopPropagation();stepLb(-1)});
+    GLB.querySelector('.glb-n').addEventListener('click',function(e){e.stopPropagation();stepLb(1)});
+    GLB.addEventListener('click',function(e){if(e.target===GLB)closeLb()});
+    var sx=0;GLB.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    GLB.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)stepLb(dx<0?1:-1)});
+  }
+  GLB.classList.add('on');void GLB.offsetWidth;GLB.classList.add('show');showLb();
+}
+function showLb(){
+  var p=GLB_A.p[GLB_I],im=GLB.querySelector('img');
+  var n=im.cloneNode();n.src=galSrc(GLB_A,p,false);n.alt=p[1];im.replaceWith(n);
+  GLB.querySelector('.glb-c').innerHTML=esc(p[1])+'<small>'+esc(GLB_A.t)+' · '+(GLB_I+1)+' / '+GLB_A.p.length+'</small>';
+}
+function stepLb(d){GLB_I=(GLB_I+d+GLB_A.p.length)%GLB_A.p.length;showLb()}
+function closeLb(){if(!GLB)return;GLB.classList.remove('show');setTimeout(function(){GLB&&GLB.classList.remove('on')},250)}
+document.addEventListener('keydown',function(e){
+  if(GLB&&GLB.classList.contains('on')){if(e.key==='Escape')closeLb();else if(e.key==='ArrowLeft')stepLb(-1);else if(e.key==='ArrowRight')stepLb(1);return}
+  if(GOV&&e.key==='Escape')closeAlbum();
+});
+renderGal();
 // 로그인: 비공개 항목은 로그인 서버(Apps Script)가 원우로 확인한 경우에만 받아서 표시
 $('#loginBtn').addEventListener('click',function(){
   if(PRIV)return logout();
