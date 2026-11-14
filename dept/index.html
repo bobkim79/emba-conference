@@ -163,17 +163,41 @@ section{padding-top:80px}
 /* 동문소식 게시판 */
 .nlist{list-style:none;margin:24px 0 0;padding:0;border-top:2px solid var(--ink)}
 .nlist li[hidden]{display:none}
-.nlist a{display:grid;grid-template-columns:112px 1fr 28px;gap:18px;align-items:center;padding:20px 14px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.nlist a{display:grid;grid-template-columns:104px 1fr 24px;gap:14px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
 .nlist a:hover{background:#F9E3E8;transform:translateX(4px);box-shadow:inset 4px 0 0 var(--amber)}
-.nd{font-family:var(--en);font-size:15px;color:var(--mute);font-variant-numeric:tabular-nums}
-.nt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
-.ntag{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:#E6E8EE;color:#3E4560}
+.nd{font-family:var(--en);font-size:14px;color:var(--mute);font-variant-numeric:tabular-nums}
+.ndm{display:none}
+.nb{min-width:0}
+.nt{display:flex;gap:8px;align-items:center;min-width:0;margin-bottom:1px}
+.ntag{flex:none;font-size:12px;font-weight:600;padding:1px 9px;border-radius:999px;background:#E6E8EE;color:#3E4560}
 .ntag.ev{background:#F6D5DB;color:#8C1D40}
-.nsrc{font-size:13px;color:var(--mute)}
-.nlist h3{margin:0;font-size:19px;font-weight:700;line-height:1.4;letter-spacing:-.02em;color:var(--ink)}
-.nlist p{margin:4px 0 0;font-size:15px;color:var(--body);font-weight:300;line-height:1.55}
-.nar{font-size:20px;color:var(--amber);text-align:right;transition:transform .2s ease}
+.nsrc{flex:none;font-size:13px;font-weight:600;color:var(--body);white-space:nowrap}
+.nsum{flex:1;min-width:0;font-size:13.5px;color:var(--mute);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nsum::before{content:"·";margin-right:8px}
+.nlist h3{margin:0;font-size:17px;font-weight:700;line-height:1.4;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nar{font-size:18px;color:var(--amber);text-align:right;transition:transform .2s ease}
 .nlist a:hover .nar{transform:translate(3px,-3px)}
+/* 경조사 */
+.care{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:26px;padding:4px 8px 10px}
+.cs{position:relative;border-radius:16px;min-height:190px;padding:18px 14px;overflow:hidden;cursor:pointer;outline:none;z-index:1;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.cs:first-child{transform-origin:left center}.cs:last-child{transform-origin:right center}
+.cs.ok{background:linear-gradient(145deg,#FBDCE3,#FEF1DE);box-shadow:inset 0 0 0 1px #F0C0CB,0 3px 8px rgba(200,55,77,.08)}
+.cs.sad{background:linear-gradient(145deg,#D6D8E0,#F0F1F4);box-shadow:inset 0 0 0 1px #C3C6D0,0 3px 8px rgba(40,50,80,.08)}
+.cs .ic{position:absolute;right:-8px;bottom:-8px;width:118px;height:118px;opacity:.55;pointer-events:none}
+.cs-f{position:relative;transition:opacity .25s ease}
+.cs-tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.75);color:#8C1D40}
+.cs.sad .cs-tag{color:#3E4560}
+.cs-n{margin-top:16px;font-size:19px;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.3}
+.cs-t{margin-top:4px;font-size:17px;font-weight:300;color:var(--body)}
+.cs-b{position:absolute;inset:0;padding:16px 14px;display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.45;color:#222;opacity:0;transition:opacity .25s ease;z-index:2}
+.cs.ok .cs-b{background:linear-gradient(145deg,#F6C2CE,#FBE2CC)}
+.cs.sad .cs-b{background:linear-gradient(145deg,#C3C6D1,#E0E2E8)}
+.cs-b h4{margin:0 0 2px;font-size:14px;font-weight:700;color:var(--ink)}
+.cs-b b{font-weight:700;margin-right:5px}
+.cs-b a{margin-top:auto;align-self:flex-start;background:#fff;color:var(--ink);font-weight:600;font-size:12px;padding:5px 12px;border-radius:999px;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.cs:hover,.cs:focus-within,.cs.open{transform:scale(1.12);z-index:6;box-shadow:0 18px 34px rgba(0,0,0,.24)}
+.cs:hover .cs-b,.cs:focus-within .cs-b,.cs.open .cs-b{opacity:1}
+.cs:hover .cs-f,.cs:focus-within .cs-f,.cs.open .cs-f{opacity:0}
 .nmore{display:block;margin:22px auto 0;min-width:220px;height:48px;border-radius:13px;border:1px solid var(--line2);background:#fff;font:600 16px var(--kr);color:var(--body);cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.08);transition:background-color .2s ease,transform .2s ease}
 .nmore:hover{background:#F9E3E8;transform:translateY(-2px)}
 .box ul{list-style:none;margin:8px 0 0;padding:0;font-size:15px;font-weight:300;color:#555;display:grid;gap:5px}
@@ -338,10 +362,12 @@ footer a{color:var(--orange-d)}
   section{padding-top:60px}.tab{margin-top:50px}
   .deco{height:700px}
   footer{padding-bottom:40px}
-  .nlist a{grid-template-columns:1fr 24px;gap:6px 10px;padding:16px 8px}
-  .nd{grid-column:1/-1}
-  .nlist h3{font-size:17px}
-  .nlist p{font-size:14px}
+  .nlist a{grid-template-columns:1fr 22px;gap:6px 8px;padding:10px 6px}
+  .nd,.nsum{display:none}
+  .ndm{display:inline;flex:none;font-family:var(--en);font-size:13px;color:var(--mute)}
+  .nlist h3{font-size:16px;white-space:normal}
+  .care{grid-template-columns:repeat(2,1fr)}
+  .cs{min-height:200px}
   .box.wide ul{columns:1}
   .stats{margin-top:24px}
   .stats .box{padding:16px 18px}
@@ -643,11 +669,8 @@ footer a{color:var(--orange-d)}
     <div class="hd"><i>01.</i><b>INTRODUCE</b></div>
     <p class="big">최고경영진과 관리자를 위한<br><b>경영학 석사(MBA)</b> 학위과정</p>
     <p class="txt">기업 조직의 리더, 창업가, 미래의 경영자, 가업 승계를 준비하는 예비 경영자가 대상입니다. 최첨단 경영지식과 인문학 소양을 함께 익히는 것이 목표입니다. 경영대학원은 1966년 산업경영대학원으로 출발해 2026년 60주년을 맞았으며, <b>책임경영·국제경영·창의경영</b>을 핵심가치로 삼고 있습니다.</p>
-    <div class="grid g3" style="margin-top:20px">
-      <div class="box"><span class="en">VALUE 01</span><h3>책임경영</h3></div>
-      <div class="box b2"><span class="en">VALUE 02</span><h3>국제경영</h3></div>
-      <div class="box b3"><span class="en">VALUE 03</span><h3>창의경영</h3></div>
-    </div>
+    <p class="big profh">EMBA <b>교수진</b> <span style="font-size:15px;color:var(--mute);font-weight:400">· 전화번호는 원우 로그인(네트워크 탭) 후 보입니다</span></p>
+    <div class="people" id="people"></div>
   </section>
 
   <section id="a-feature" data-nav="02. FEATURES">
@@ -767,14 +790,8 @@ footer a{color:var(--orange-d)}
     <div class="bar n" style="margin-top:18px"><b>데이터 안내</b><span>EMBA 학생 명단 기준(2026.11.14 반영). 이름·기수·직책이 틀리거나 게재를 원하지 않으시면 bob@khu.ac.kr로 알려 주세요.</span></div>
   </section>
 
-  <section id="n-feat" data-nav="02. PROFESSORS">
-    <div class="hd"><i>02.</i><b>PROFESSORS</b></div>
-    <p class="big">EMBA <b>교수진</b> <span style="font-size:15px;color:var(--mute);font-weight:400">· 전화번호는 원우 로그인 후 보입니다</span></p>
-    <div class="people" id="people"></div>
-  </section>
-
-  <section id="n-join" data-nav="03. 등록 요청">
-    <div class="hd"><i>03.</i><b>JOIN THE DATABASE</b></div>
+  <section id="n-join" data-nav="02. 등록 요청">
+    <div class="hd"><i>02.</i><b>JOIN THE DATABASE</b></div>
     <p class="big">내 정보를 <b>네트워크에 등록</b>하고 싶다면</p>
     <div class="grid g3">
       <div class="box stepc"><span class="no">01</span><h3>메일로 요청</h3><p>이름, 기수, 소속·직함, 한 줄 소개를 보내 주세요.</p></div>
@@ -784,26 +801,19 @@ footer a{color:var(--orange-d)}
     <p style="margin-top:16px"><a class="btn-n" href="mailto:bob@khu.ac.kr?subject=%5BEMBA%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%5D%20%EB%93%B1%EB%A1%9D%20%EC%9A%94%EC%B2%AD&body=%EC%9D%B4%EB%A6%84%3A%0A%EA%B8%B0%EC%88%98%3A%0A%EC%86%8C%EC%86%8D%C2%B7%EC%A7%81%ED%95%A8%3A%0A%ED%95%9C%20%EC%A4%84%20%EC%86%8C%EA%B0%9C%3A%0A%EA%B3%B5%EA%B0%9C%20%EB%8F%99%EC%9D%98%20%ED%95%AD%EB%AA%A9%3A">등록 요청 메일 쓰기</a></p>
   </section>
 
-  <section id="n-org" data-nav="04. 조직 지도">
-    <div class="hd"><i>04.</i><b>ORGANIZATIONS</b></div>
-    <div class="org-grid">
-      <div class="box"><b>학회</b><span>재학생 · 학과 단위</span></div>
-      <div class="box b2"><b>동문회</b><span>EMBA 350여 명</span></div>
-      <div class="box"><b>원우회</b><span>대학원 전체 재학생</span></div>
-      <div class="box b2"><b>총동문회</b><span>대학원 1만 5천여 명</span></div>
-    </div>
-    <ul class="arrows">
-      <li><span><b>원우회 :</b> khmbasa.khu.ac.kr · 02-961-0365</span></li>
-      <li><span><b>총동문회 :</b> kyungheemba.com</span></li>
-    </ul>
-  </section>
-
-  <section id="n-news" data-nav="05. 동문소식">
-    <div class="hd"><i>05.</i><b>동문소식</b></div>
+  <section id="n-news" data-nav="03. EMBA LETTER">
+    <div class="hd"><i>03.</i><b>EMBA LETTER</b></div>
     <p class="big">학과와 동문의 <b>행사소식·보도</b></p>
     <ul class="nlist" id="nlist"></ul>
     <div id="nmoreWrap"></div>
     <p class="sub">제목을 누르면 원문 또는 밴드 게시글로 이동합니다. 밴드 글은 KHU EMBA학과 동문 Band 가입 회원만 열람할 수 있습니다.</p>
+  </section>
+
+  <section id="n-care" data-nav="04. 경조사">
+    <div class="hd"><i>04.</i><b>경조사</b></div>
+    <p class="big">기쁨과 슬픔을 <b>함께 나눕니다</b></p>
+    <div class="care" id="care"></div>
+    <p class="sub">카드에 마우스를 올리면 세부 내용이 보입니다. 터치 화면에서는 카드를 눌러 주세요.</p>
   </section>
 </div>
 
@@ -1160,13 +1170,34 @@ function renderNews(all){
   var arr=NEWS.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
   list.innerHTML=arr.map(function(n,i){
     var hid=(!all&&i>=NEWS_SHOW)?' hidden':'';
-    return '<li'+hid+'><a href="'+esc(n.url)+'" target="_blank" rel="noopener"><span class="nd">'+esc(n.d.replace(/-/g,'.'))+'</span><div><div class="nt"><span class="ntag'+(n.t==='event'?' ev':'')+'">'+(n.t==='event'?'행사소식':'보도')+'</span><span class="nsrc">'+esc(n.src)+'</span></div><h3>'+esc(n.title)+'</h3><p>'+esc(n.sum)+'</p></div><span class="nar" aria-hidden="true">↗</span></a></li>';
+    return '<li'+hid+'><a href="'+esc(n.url)+'" target="_blank" rel="noopener"><span class="nd">'+esc(n.d.replace(/-/g,'.'))+'</span><div class="nb"><div class="nt"><span class="ndm">'+esc(n.d.slice(2).replace(/-/g,'.'))+'</span><span class="ntag'+(n.t==='event'?' ev':'')+'">'+(n.t==='event'?'행사소식':'보도')+'</span><span class="nsrc">'+esc(n.src)+'</span><span class="nsum">'+esc(n.sum)+'</span></div><h3>'+esc(n.title)+'</h3></div><span class="nar" aria-hidden="true">↗</span></a></li>';
   }).join('');
   var w=$('#nmoreWrap');
   if(!all&&arr.length>NEWS_SHOW){w.innerHTML='<button type="button" class="nmore" id="nmoreBtn">더보기 ('+(arr.length-NEWS_SHOW)+')</button>';$('#nmoreBtn').addEventListener('click',function(){renderNews(true)})}
   else w.innerHTML='';
 }
 renderNews();
+// 경조사: 카드 한 장 = CARE 한 줄. k:"ok"(경사·축하 꽃다발) | "sad"(조사·장례화환)
+var ICON_OK='<svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 96 30 52h40z" fill="#F2B6C4"/><path d="M50 96 38 52h24z" fill="#E994A8" opacity=".7"/><ellipse cx="34" cy="47" rx="6" ry="13" transform="rotate(-35 34 47)" fill="#7DB88A"/><ellipse cx="66" cy="47" rx="6" ry="13" transform="rotate(35 66 47)" fill="#7DB88A"/><circle cx="36" cy="38" r="12" fill="#F29BB0"/><circle cx="64" cy="36" r="12" fill="#F7C85C"/><circle cx="50" cy="25" r="13" fill="#E86C8C"/><circle cx="50" cy="25" r="4.5" fill="#FBE3A0"/><circle cx="36" cy="38" r="4" fill="#FBD3DC"/><circle cx="64" cy="36" r="4" fill="#FFF0BE"/><path d="M42 60q8 6 16 0l-3 8q-5 3-10 0z" fill="#C8374D"/></svg>';
+var ICON_SAD='<svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 98V68M33 98l17-30 17 30" stroke="#7F8590" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="50" cy="40" r="31" fill="#fff" stroke="#B9BDC8" stroke-width="2"/><g fill="#fff" stroke="#AEB3BF" stroke-width="1.5"><circle cx="50" cy="14" r="7"/><circle cx="68" cy="22" r="7"/><circle cx="76" cy="40" r="7"/><circle cx="68" cy="58" r="7"/><circle cx="50" cy="66" r="7"/><circle cx="32" cy="58" r="7"/><circle cx="24" cy="40" r="7"/><circle cx="32" cy="22" r="7"/></g><g fill="#8DB59A" opacity=".85"><circle cx="60" cy="18" r="3"/><circle cx="72" cy="30" r="3"/><circle cx="72" cy="50" r="3"/><circle cx="60" cy="62" r="3"/><circle cx="40" cy="62" r="3"/><circle cx="28" cy="50" r="3"/><circle cx="28" cy="30" r="3"/><circle cx="40" cy="18" r="3"/></g><rect x="38" y="28" width="24" height="24" rx="2" fill="#1E1E24"/><path d="M44 36h12M44 44h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>';
+var CARE=[
+ {k:"sad",gen:"14기",name:"한미옥",t:"모친상",rows:[["故인","박정희님"],["별세","2026.09.12(토)"]],note:"삼가 고인의 명복을 빕니다.",url:"https://www.wooribugo4.com/page/funeral/view.php?uri=P189TXpRek5qY3cmX209MjkwOTI3MQ==",cta:"모바일 부고장"},
+ {k:"ok",gen:"23기",name:"권오규",t:"차녀 혼례",rows:[["일시","2026.09.05(토) 오후 1시 50분"],["장소","더그랜드컨벤션센터 1층 엘리제홀 (충북 제천)"]],note:"결혼을 진심으로 축하드립니다.",url:"https://www.heumcard.com/cards/suhongsohee",cta:"청첩장 보기"},
+ {k:"sad",gen:"2기",name:"신병규",t:"빙모상",rows:[["故인","이무출님 (향년 88세)"],["발인","08.02 오전 8시"],["장소","한양대학교병원 장례식장 6호실"]],note:"조화는 정중히 사양합니다.",url:"https://www.wooribugo4.com/page/funeral/view.php?_=MzM1NTE1&_m=2832831&mourner=true",cta:"모바일 부고장"},
+ {k:"sad",gen:"24기",name:"박영준",t:"부친상",rows:[["故인","박상유님"],["발인","2026.08.02(일) 오전 11시"],["장소","쉴낙원 서울장례식장 VIP 1호실"]],note:"삼가 고인의 명복을 빕니다.",url:"https://www.wooribugo4.com/page/funeral/view.php?uri=P189TXpNMU5UTXkmX209MjgzMzAzNg==",cta:"모바일 부고장"},
+ {k:"sad",gen:"22기",name:"김진선",t:"외조모상",rows:[["故인","황복례님 (외조모)"]],note:"삼가 고인의 명복을 빕니다.",url:"https://bugonara.com/funeral/view_v2/30107?ngt=1&mn_idx=256607",cta:"모바일 부고장"}
+];
+function renderCare(){
+  var box=$('#care');if(!box)return;
+  box.innerHTML=CARE.map(function(c){
+    var ok=c.k==='ok';
+    return '<div class="cs '+c.k+'" tabindex="0">'+(ok?ICON_OK:ICON_SAD)+
+      '<div class="cs-f"><span class="cs-tag">'+(ok?'축하':'근조')+'</span><div class="cs-n">'+esc(c.gen)+' '+esc(c.name)+'</div><div class="cs-t">'+esc(c.t)+'</div></div>'+
+      '<div class="cs-b"><h4>'+esc(c.gen)+' '+esc(c.name)+' '+esc(c.t)+'</h4>'+c.rows.map(function(r){return '<div><b>'+esc(r[0])+'</b>'+esc(r[1])+'</div>'}).join('')+'<div>'+esc(c.note)+'</div><a href="'+esc(c.url)+'" target="_blank" rel="noopener">'+esc(c.cta)+' ↗</a></div></div>';
+  }).join('');
+  $$('#care .cs').forEach(function(el){el.addEventListener('click',function(e){if(e.target.closest('a'))return;var was=el.classList.contains('open');$$('#care .cs.open').forEach(function(o){o.classList.remove('open')});if(!was)el.classList.add('open')})});
+}
+renderCare();
 // 로그인: 비공개 항목은 로그인 서버(Apps Script)가 원우로 확인한 경우에만 받아서 표시
 $('#loginBtn').addEventListener('click',function(){
   if(PRIV)return logout();
