@@ -172,6 +172,29 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 #v-event .grid.stats p{margin-top:5px;font-size:14px}
 .prog{display:block;height:7px;border-radius:4px;background:rgba(80,20,30,.14);margin-top:7px;overflow:hidden}
 .prog s{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#E0566B,#9E1915);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.nst{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.nst[hidden]{display:none}
+.nc{flex:1 1 300px;border-radius:16px;padding:18px 20px 20px;background:#fff;box-shadow:inset 0 0 0 1px var(--line),0 3px 10px rgba(0,0,0,.05)}
+.nc[hidden]{display:none}
+.nc.wide{flex-basis:100%}
+.nc h4{margin:0 0 12px;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.dn{display:flex;align-items:center;gap:20px}
+.dn svg{flex:none;width:124px;height:124px;transform:rotate(-90deg)}
+.dn circle{fill:none;stroke-width:17;transition:stroke-dasharray 1s cubic-bezier(.2,.8,.2,1)}
+.dn .ct{position:relative;flex:none;width:124px;height:124px}
+.dn .ct b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 20px var(--en);color:var(--ink);text-align:center;line-height:1.1}
+.dn .ct b small{display:block;font:500 11px var(--kr);color:var(--mute)}
+.lg{list-style:none;margin:0;padding:0;flex:1;display:grid;gap:7px;font-size:14px}
+.lg li{display:flex;align-items:center;gap:8px;color:var(--body)}
+.lg i{width:10px;height:10px;border-radius:3px;flex:none}
+.lg span{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.lg em{font-style:normal;color:var(--mute);font-weight:400;margin-left:4px}
+.bars{display:flex;align-items:flex-end;gap:4px;height:130px;padding-top:6px}
+.bars div{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.bars s{display:block;width:100%;max-width:26px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,#D8485E,#9E1915);height:0;transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.bars div:hover s{background:linear-gradient(180deg,#F0788C,#C8374D)}
+.bars small{font:600 10.5px var(--en);color:var(--mute);height:13px;white-space:nowrap}
+.bars em{position:absolute;font:700 11px var(--en);font-style:normal;color:var(--amber);transform:translateY(-16px)}
 .irh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:6px}
 .irh b{font-size:18px;color:var(--ink)}.irh span{font:700 16px var(--en);color:var(--amber)}.irh em{font-style:normal;font-size:13px;color:var(--mute);margin-left:auto}
 .irs{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:12px}
@@ -508,6 +531,8 @@ footer a{color:var(--orange-d)}
   #v-event .grid.stats{grid-template-columns:repeat(3,1fr);gap:6px}
   #v-event .grid.stats .box{padding:10px 9px 11px}#v-event .grid.stats .en{font-size:12px}#v-event .grid.stats .lb{display:block;font-size:11px;margin-top:1px}
   #v-event .grid.stats b{font-size:21px;margin-top:3px}#v-event .grid.stats p{display:none}.prog{margin-top:6px;height:6px}#v-event .grid.stats .lb::before{content:none}
+  .nc{flex-basis:100%;padding:14px 14px 16px}.dn{gap:14px}.dn svg,.dn .ct{width:104px;height:104px}.lg{font-size:13px}
+  .bars{gap:2px;height:110px}.bars div:nth-child(even) small{visibility:hidden}.bars small{font-size:9.5px}
   .irs{grid-template-columns:repeat(2,1fr);gap:8px}.ir{height:150px;padding-top:30px}.ir .tn{font-size:17px}.ir.em svg{width:48px;height:48px}
   .irh em{margin-left:0;width:100%}
   .ir:nth-child(odd) .dt{left:0;right:auto}.ir:nth-child(even) .dt{right:0;left:auto}
@@ -711,8 +736,8 @@ footer a{color:var(--orange-d)}
       <div class="box b3"><span class="en">평가</span><h3>중간·기말, 팀 프로젝트</h3><p class="txt">과목에 따라 팀 프로젝트와 발표가 있습니다. 강의계획서를 꼭 확인하세요.</p></div>
     </div>
     <div class="tbl"><table>
-      <thead><tr><th>2026학년도 2학기</th><th>일정</th></tr></thead>
-      <tbody>
+      <thead><tr><th id="schT">2026학년도 2학기</th><th>일정</th></tr></thead>
+      <tbody id="schB">
         <tr><th>수강신청</th><td>8월 24일(월) 11:00 ~ 8월 28일(금) 17:00</td></tr>
         <tr><th>개강</th><td>9월 1일(화)</td></tr>
         <tr><th>수강정정</th><td>9월 1일(화) 11:00 ~ 9월 5일(월) 17:00</td></tr>
@@ -720,7 +745,7 @@ footer a{color:var(--orange-d)}
         <tr><th>후반기</th><td>10월 27일 ~ 12월 21일 (8주)</td></tr>
       </tbody>
     </table></div>
-    <div class="bar"><b>필수확인</b><span>정정기간이 지나면 후반기 수업을 포함해 정정·철회가 불가합니다. 후반기 수업도 신청 시점에 함께 확인하세요.</span></div>
+    <div class="bar"><b>필수확인</b><span id="schN">정정기간이 지나면 후반기 수업을 포함해 정정·철회가 불가합니다. 후반기 수업도 신청 시점에 함께 확인하세요.</span></div>
   </section>
 
   <section id="g-grad" data-nav="03. 졸업까지">
@@ -904,6 +929,11 @@ footer a{color:var(--orange-d)}
   </div>
 
   <div class="tab"><span>네트워크</span></div>
+  <div class="nst" id="nst" hidden>
+    <div class="nc" id="ncCat" hidden><h4>구분별 비율</h4><div class="dn"></div></div>
+    <div class="nc" id="ncSex" hidden><h4>성별 비율</h4><div class="dn"></div></div>
+    <div class="nc wide" id="ncGen" hidden><h4>기수별 원우 수</h4><div class="bars"></div></div>
+  </div>
   <div class="grid g4 stats">
     <div class="box"><span class="en">MEMBERS</span><b id="cnt">0명</b><p>명단에 등록된 원우</p></div>
     <div class="box b2"><span class="en">COHORTS</span><b id="gcnt">0개</b><p>1기 ~ 25기 · 공군</p></div>
@@ -1304,6 +1334,36 @@ $('#nq').addEventListener('input',renderMembers);
 $('#ngen').addEventListener('change',renderMembers);
 renderMembers();
 // 공개 명단 불러오기 (구글시트 → Apps Script GET)
+// 네트워크 통계: 명단(구분·기수·성별)에서 자동 집계. 성별은 명단에 s(남/여) 값이 있을 때만 표시
+function donut(box,rows,center){
+  var tot=rows.reduce(function(a,r){return a+r[1]},0);if(!tot){box.parentNode.hidden=true;return}
+  var COL=['#9E1915','#D8485E','#E99AA8','#8C1D40','#7F8590','#C9CCD4'],R=44,C=2*Math.PI*R,off=0,svg='',lg='';
+  rows.forEach(function(r,i){var L=r[1]/tot*C,c=COL[i%COL.length];
+    svg+='<circle cx="62" cy="62" r="'+R+'" stroke="'+c+'" stroke-dasharray="0 '+C+'" data-d="'+Math.max(L-1.5,0)+' '+C+'" stroke-dashoffset="'+(-off)+'"/>';off+=L;
+    lg+='<li><i style="background:'+c+'"></i>'+esc(r[0])+'<span>'+r[1]+'명<em>'+Math.round(r[1]/tot*100)+'%</em></span></li>'});
+  box.innerHTML='<div class="ct"><svg viewBox="0 0 124 124">'+svg+'</svg><b>'+center(tot)+'</b></div><ul class="lg">'+lg+'</ul>';
+  box.parentNode.hidden=false;
+  setTimeout(function(){$$('circle',box).forEach(function(c){c.setAttribute('stroke-dasharray',c.dataset.d)})},200);
+}
+function tally(key,norm){var m={},o=[];MEMBERS.forEach(function(x){var k=norm?norm(x[key]):String(x[key]||'').trim();if(!k)return;if(!(k in m)){m[k]=0;o.push(k)}m[k]++});return o.map(function(k){return [k,m[k]]})}
+function renderNetStats(){
+  var w=$('#nst');if(!w||!MEMBERS.length)return;w.hidden=false;
+  var cat=tally('cat').sort(function(a,b){return b[1]-a[1]});
+  if(cat.length>1){if(cat.length>5){var rest=cat.slice(5).reduce(function(a,r){return a+r[1]},0);cat=cat.slice(0,5).concat([['기타',rest]])}donut($('#ncCat .dn'),cat,function(t){return t+'<small>명</small>'})}else $('#ncCat').hidden=true;
+  var sx=tally('s',function(v){v=String(v||'').trim();return /^(남|m|male)/i.test(v)?'남성':/^(여|f|female)/i.test(v)?'여성':''}).sort(function(a,b){return a[0]<b[0]?-1:1});
+  if(sx.length){var tm=sx.reduce(function(a,r){return a+r[1]},0);donut($('#ncSex .dn'),sx,function(t){var f=sx.filter(function(r){return r[0]==='여성'})[0];return Math.round((f?f[1]:0)/tm*100)+'%<small>여성</small>'})}else $('#ncSex').hidden=true;
+  var g=tally('g').sort(function(a,b){var x=parseInt(a[0],10),y=parseInt(b[0],10);return (isNaN(x)?999:x)-(isNaN(y)?999:y)}),mx=Math.max.apply(null,g.map(function(r){return r[1]}));
+  var gb=$('#ncGen .bars');gb.innerHTML=g.map(function(r){return '<div title="'+esc(r[0])+' '+r[1]+'명"><s data-h="'+(r[1]/mx*100)+'"></s><small>'+esc(String(r[0]).replace('기',''))+'</small></div>'}).join('');
+  $('#ncGen').hidden=false;
+  setTimeout(function(){$$('#ncGen s').forEach(function(s){s.style.height='calc('+s.dataset.h+'% - 17px)'})},200);
+}
+// 학사일정: data/schedule.json 에서 불러옴 (없으면 화면에 들어 있는 기본값 유지). 자동 수집 스크립트가 이 파일만 갱신하면 됩니다
+fetch('data/schedule.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
+  if(!d||!d.rows||!d.rows.length)return;
+  $('#schT').textContent=d.title;
+  $('#schB').innerHTML=d.rows.map(function(r){return '<tr><th>'+esc(r[0])+'</th><td>'+esc(r[1])+'</td></tr>'}).join('');
+  if(d.note)$('#schN').textContent=d.note;
+}).catch(function(){});
 function loadMembers(){
   if(!AUTH.api){MEMBERS_STATE='error';renderMembers();return}
   fetch(AUTH.api).then(function(r){return r.json()}).then(function(d){
@@ -1311,7 +1371,7 @@ function loadMembers(){
     MEMBERS=d.members.map(function(m,i){m.i=i;return m});
     GENS=[];MEMBERS.forEach(function(m){if(GENS.indexOf(m.g)<0)GENS.push(m.g)});
     $('#ngen').innerHTML='<option value="">전체 기수</option>'+GENS.map(function(g){return '<option>'+esc(g)+'</option>'}).join('');
-    MEMBERS_STATE='ok';updateCount();renderMembers();restoreSession();
+    MEMBERS_STATE='ok';updateCount();renderMembers();renderNetStats();restoreSession();
   }).catch(function(){MEMBERS_STATE='error';renderMembers()});
 }
 loadMembers();
