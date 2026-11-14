@@ -164,11 +164,12 @@ aside{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px}
 .cd-u span{font-family:var(--en);font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.6)}
 .cd-g>i{align-self:center;font-style:normal;font-family:var(--en);font-weight:800;font-size:clamp(24px,4vw,44px);color:#FF4B4B;opacity:.9;margin-top:-14px;animation:cdb 1s steps(2,jump-none) infinite}
 .cd.end .cd-t em{color:#FFD24A}
-.grid.stats .box{padding:14px 20px 15px}
-.grid.stats .en{display:block}
-.grid.stats .lb{font-style:normal;font-weight:600;color:var(--body);font-size:13px;letter-spacing:0}
-.grid.stats b{font-size:26px;margin-top:4px;font-weight:600}
-.grid.stats p{margin-top:5px;font-size:14px}
+#v-event .grid.stats .box{padding:14px 20px 15px}
+#v-event .grid.stats .en{display:block}
+#v-event .grid.stats .lb::before{content:" · "}
+#v-event .grid.stats .lb{font-style:normal;font-weight:600;color:var(--body);font-size:13px;letter-spacing:0}
+#v-event .grid.stats b{font-size:26px;margin-top:4px;font-weight:600}
+#v-event .grid.stats p{margin-top:5px;font-size:14px}
 .prog{display:block;height:7px;border-radius:4px;background:rgba(80,20,30,.14);margin-top:7px;overflow:hidden}
 .prog s{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#E0566B,#9E1915);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
 .irh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:6px}
@@ -504,9 +505,9 @@ footer a{color:var(--orange-d)}
   .stats{margin-top:16px}
   .cd{padding:10px 12px 12px;border-radius:14px}.cd-t{font-size:11px}.cd-t em{font-size:11px}
   .cd-u{padding:6px 2px 4px}.cd-u b{font-size:clamp(30px,9.5vw,44px)}.cd-u span{font-size:9.5px;letter-spacing:.12em}
-  .grid.stats{grid-template-columns:repeat(3,1fr);gap:6px}
-  .grid.stats .box{padding:10px 9px 11px}.grid.stats .en{font-size:12px}.grid.stats .lb{display:block;font-size:11px;margin-top:1px}
-  .grid.stats b{font-size:21px;margin-top:3px}.grid.stats p{display:none}.prog{margin-top:6px;height:6px}
+  #v-event .grid.stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  #v-event .grid.stats .box{padding:10px 9px 11px}#v-event .grid.stats .en{font-size:12px}#v-event .grid.stats .lb{display:block;font-size:11px;margin-top:1px}
+  #v-event .grid.stats b{font-size:21px;margin-top:3px}#v-event .grid.stats p{display:none}.prog{margin-top:6px;height:6px}#v-event .grid.stats .lb::before{content:none}
   .irs{grid-template-columns:repeat(2,1fr);gap:8px}.ir{height:150px;padding-top:30px}.ir .tn{font-size:17px}.ir.em svg{width:48px;height:48px}
   .irh em{margin-left:0;width:100%}
   .ir:nth-child(odd) .dt{left:0;right:auto}.ir:nth-child(even) .dt{right:0;left:auto}
@@ -565,9 +566,9 @@ footer a{color:var(--orange-d)}
 
   <div class="tab"><span>상세요강</span></div>
   <div class="grid g3 stats">
-    <div class="box"><span class="en">PART 1<i class="lb"> · 전문가 강연</i></span><b>7개 강연</b><p>EMBA 원우·동문 + 엑셀러레이터</p></div>
-    <div class="box b2"><span class="en">PART 2<i class="lb"> · 모의 IR 피칭</i></span><b id="stIR">1/7팀</b><i class="prog"><s id="stIRb"></s></i><p>확정 <span id="stIRn">1</span>팀 · 선착순 접수 중</p></div>
-    <div class="box"><span class="en">VISITOR<i class="lb"> · 모의투자 참관</i></span><b id="stVis">53/100명</b><i class="prog"><s id="stVisb"></s></i><p>참관 확정 · 가상 투자금 + 럭키드로우</p></div>
+    <div class="box"><span class="en">PART 1<i class="lb">전문가 강연</i></span><b>7개</b><p>EMBA 원우·동문 + 엑셀러레이터</p></div>
+    <div class="box b2"><span class="en">PART 2<i class="lb">모의 IR 피칭</i></span><b id="stIR">1/7팀</b><i class="prog"><s id="stIRb"></s></i><p>확정 <span id="stIRn">1</span>팀 · 선착순 접수 중</p></div>
+    <div class="box"><span class="en">VISITOR<i class="lb">모의투자 참관</i></span><b id="stVis">53/100명</b><i class="prog"><s id="stVisb"></s></i><p>참관 확정 · 가상 투자금 + 럭키드로우</p></div>
   </div>
 
   <section id="e-overview" data-nav="01. OVERVIEW">
