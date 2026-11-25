@@ -118,14 +118,16 @@
     list.forEach(function (f) {
       if (ITEMS.length >= MAX) { over = true; return }
       if (f.size > 25 * 1024 * 1024) { alert(f.name + ': 25MB를 넘는 파일은 올릴 수 없습니다.'); return }
-      ITEMS.push({ file: f, img: /^image\/(jpe?g|png|webp|gif|heic|heif)/i.test(f.type) || /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name), url: URL.createObjectURL(f) });
+      var it = { file: f, img: /^image\/(jpe?g|png|webp|gif|heic|heif)/i.test(f.type) || /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name), url: '' };
+      ITEMS.push(it);
+      if (it.img) { shrink(f, 240, 0.6).then(function (b) { var r = new FileReader(); r.onload = function () { it.url = r.result; drawItems() }; r.readAsDataURL(b) }).catch(function () { it.bad = true; drawItems() }) }
     });
     if (over) alert('사진·파일은 합쳐서 최대 ' + MAX + '개까지입니다.');
     drawItems();
   }
   function drawItems() {
     var th = $('#pmTh'); if (!th) return;
-    th.innerHTML = ITEMS.map(function (it, i) { return '<div class="pm-i">' + (it.img ? '<img src="' + it.url + '" alt="">' : '<span>' + esc(it.file.name) + '</span>') + '<button type="button" class="pm-rm" data-i="' + i + '" aria-label="삭제">✕</button></div>' }).join('');
+    th.innerHTML = ITEMS.map(function (it, i) { return '<div class="pm-i">' + (it.img && it.url ? '<img src="' + it.url + '" alt="">' : it.img ? '<span>' + (it.bad ? '미리보기 불가' : '…') + '</span>' : '<span>' + esc(it.file.name) + '</span>') + '<button type="button" class="pm-rm" data-i="' + i + '" aria-label="삭제">✕</button></div>' }).join('');
     $('#pmCnt').textContent = ITEMS.length + ' / ' + MAX;
   }
 
@@ -166,16 +168,27 @@
 
   // ── 사진 줄이기 + 올리기 ──
   function shrink(file, max, q) {
+    function draw(src, w, h, done, no) {
+      var s = Math.min(1, max / Math.max(w, h)), c = document.createElement('canvas');
+      c.width = Math.round(w * s); c.height = Math.round(h * s);
+      c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+      c.toBlob(function (b) { b ? done(b) : no(new Error('사진 변환 실패')) }, 'image/jpeg', q);
+    }
     return new Promise(function (ok, no) {
-      var im = new Image(), u = URL.createObjectURL(file);
-      im.onload = function () {
-        var s = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas');
-        c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
-        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
-        c.toBlob(function (b) { URL.revokeObjectURL(u); b ? ok(b) : no(new Error('사진 변환 실패')) }, 'image/jpeg', q);
-      };
-      im.onerror = function () { URL.revokeObjectURL(u); no(new Error('사진을 읽지 못했습니다 (JPG·PNG 형식인지 확인)')) };
-      im.src = u;
+      function viaImg() {
+        var r = new FileReader();
+        r.onerror = function () { no(new Error('사진을 읽지 못했습니다')) };
+        r.onload = function () {
+          var im = new Image();
+          im.onload = function () { draw(im, im.width, im.height, ok, no) };
+          im.onerror = function () { no(new Error('사진을 읽지 못했습니다 (JPG·PNG 형식인지 확인)')) };
+          im.src = r.result;
+        };
+        r.readAsDataURL(file);
+      }
+      if (window.createImageBitmap) {
+        createImageBitmap(file).then(function (bm) { draw(bm, bm.width, bm.height, ok, no) }, viaImg);
+      } else viaImg();
     });
   }
   function up(blob, name, type) {
