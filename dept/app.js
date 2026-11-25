@@ -91,7 +91,8 @@ document.addEventListener('click',function(e){
 // 현황 수정: 참관 확정 인원은 CONF.vis, 피칭 확정 팀은 IRTEAMS에 한 줄 추가하면 자동 반영
 var CONF={vis:79,visMax:100,irMax:7,start:new Date(2026,11,12,14,0,0)};
 var IRTEAMS=[
- {team:"NEXT50",name:"김동언",desc:"NEXT50은 50대의 경력과 생활 조건을 AI로 분석해 3가지 미래 역할과 90일 실행계획을 제안하는 세컨드 커리어 전환 서비스"}
+ {team:"NEXT50",name:"김동언",desc:"NEXT50은 50대의 경력과 생활 조건을 AI로 분석해 3가지 미래 역할과 90일 실행계획을 제안하는 세컨드 커리어 전환 서비스"},
+ {team:"Railess",name:"김윤석",desc:"Railess는 모의 IR 피칭데이에 두 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."}
 ];
 function two(n){return (n<10?'0':'')+n}
 function tickCd(){
