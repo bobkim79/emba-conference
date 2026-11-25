@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const ROSTER_API = process.env.ROSTER_API ||
   'https://script.google.com/macros/s/AKfycbzpy6zsDu75rY2ZqlUvMX9I2NDML0OWYTS59Lzd0Utpn73Lejrw_L11hZAX0fJ7cq5M/exec';
 const SECRET = process.env.SESSION_SECRET || '';
-const ADMINS = list(process.env.ADMIN_EMAILS || 'bob@khu.ac.kr');
+const ADMINS = list(process.env.ADMIN_EMAILS || 'bob@khu.ac.kr,ethereumlab@gmail.com');
 const EXTRA = list(process.env.EXTRA_EMAILS || '');
 const SESSION_MS = 2 * 60 * 60 * 1000;
 
