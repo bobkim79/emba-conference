@@ -172,9 +172,9 @@
         var s = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas');
         c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
         c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
-        c.toBlob(function (b) { URL.revokeObjectURL(u); b ? ok(b) : no() }, 'image/jpeg', q);
+        c.toBlob(function (b) { URL.revokeObjectURL(u); b ? ok(b) : no(new Error('사진 변환 실패')) }, 'image/jpeg', q);
       };
-      im.onerror = function () { URL.revokeObjectURL(u); no() };
+      im.onerror = function () { URL.revokeObjectURL(u); no(new Error('사진을 읽지 못했습니다 (JPG·PNG 형식인지 확인)')) };
       im.src = u;
     });
   }
