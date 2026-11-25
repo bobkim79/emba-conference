@@ -63,7 +63,9 @@
         if (d.ok) { TOKEN = d.token; ssSet('emba_post', TOKEN); ME = d; return stepType(); }
         if (d.error === 'not_allowed') return stepEmail('이 이메일은 소식을 올릴 수 있는 대상이 아닙니다. (현재 3학기 원우 · 다음 기수 회장·부회장·사무총장) 문의: bob@khu.ac.kr');
         if (d.error === 'wrong_code') return stepCode('인증번호가 맞지 않습니다. (남은 횟수 ' + d.left + '번)');
-        stepEmail('인증번호가 만료됐거나 확인하지 못했습니다. 다시 받아 주세요.');
+        if (d.error === 'no_secret') return stepEmail('서버 설정(SESSION_SECRET)이 아직 끝나지 않았습니다. 관리자에게 알려 주세요.');
+        if (d.error === 'server' || d._s >= 500) return stepEmail('서버 오류로 확인하지 못했습니다. 인증번호는 한 번만 쓸 수 있으니 새로 받아 다시 시도해 주세요.');
+        stepEmail('인증번호가 만료됐거나 맞지 않습니다. 새로 받아 주세요.');
       }).catch(function () { stepCode('서버에 연결하지 못했습니다.') });
     } else if (f.id === 'pmW') compose(f);
     else if (f.id === 'pmP') publish(f);

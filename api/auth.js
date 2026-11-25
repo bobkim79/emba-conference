@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
       return L.send(res, 200, { ok: !!d.ok, error: d.error });
     }
     if (b.action === 'verify') {
+      // 서버 설정이 빠져 있으면 인증번호를 쓰기 전에 알려 준다 (번호가 소진되지 않게)
+      if (!process.env.SESSION_SECRET) return L.send(res, 200, { ok: false, error: 'no_secret' });
       const d = await L.rosterPost({ action: 'verify', email, code: L.clean(b.code, 8) });
       if (!d || !d.ok) return L.send(res, 200, { ok: false, error: d && d.error, left: d && d.left });
       // 명단에서 이 이메일의 행(기수·직책·이름)을 찾는다. (공개 명단과 비공개 명단은 같은 순서)
@@ -33,6 +35,7 @@ module.exports = async (req, res) => {
     }
     return L.send(res, 400, { ok: false });
   } catch (e) {
+    console.error('auth error', e && e.message);
     return L.send(res, 500, { ok: false, error: 'server' });
   }
 };
