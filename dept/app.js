@@ -525,7 +525,7 @@ renderCare();
 var GAL_SHOW=10;
 // EMBA GALLERY: 앨범 한 개 = GAL 한 줄. p의 첫 사진이 대표(썸네일) 사진. 사진 파일: img/gallery/<id>/<번호>.jpg (원본) · <번호>_t.jpg (1:1 썸네일)
 var GAL=[{"id":"20261104-1","d":"2026.11.04","t":"재학생 친선골프","p":[["02","단체 사진"],["01","23기 라운딩"],["03","티오프 전"],["04","회식"],["05","회식"]]},{"id":"20261015-1","d":"2026.10.15","t":"EMBA 동문회장배 골프대회","p":[["02","단체 사진"],["01","김윤석 동문회장"],["03","메달리스트"],["04","시상식"],["05","신페리오 우승"]]},{"id":"20260912-1","d":"2026.09.12","t":"재학생 네트워킹데이","p":[["04","행사 포스터"],["01","발표"],["02","발표"],["03","조별 네트워킹"]]},{"id":"20260905-1","d":"2026.09.05","t":"개강연 · 신입생 환영회","p":[["01","개강연 · 신입생 환영회"],["02","25기 신입생"],["03","축하공연"],["04","축하공연"],["05","축하공연"]]},{"id":"20260822-2","d":"2026.08.22","t":"20기 학위수여식","p":[["03","학위 수여"],["01","기수회장 답사"],["02","학위 수여"],["04","학위 수여"],["05","학위 수여"],["06","학위 수여"],["07","학위 수여"],["08","학위 수여"],["09","학위 수여"],["10","학위 수여"],["11","졸업생 답사"],["12","학과장님"],["13","학과장님"],["14","행사 준비"]]},{"id":"20260822-1","d":"2026.08.22","t":"25기 신입생 오리엔테이션","p":[["01","단체 사진"],["02","선배와의 대화"],["03","선배와의 대화"],["04","학과장님 소개"]]}];
-function galSrc(a,p,t){return 'img/gallery/'+a.id+'/'+p[0]+(t?'_t':'')+'.jpg'}
+function galSrc(a,p,t){if(a.r)return t?(p[2]||p[0]):p[0];return 'img/gallery/'+a.id+'/'+p[0]+(t?'_t':'')+'.jpg'}
 function renderGal(all){
   var box=$('#gal');if(!box)return;
   var arr=GAL.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
@@ -589,6 +589,26 @@ document.addEventListener('keydown',function(e){
   if(GOV&&e.key==='Escape')closeAlbum();
 });
 renderGal();
+// 소식 전하기로 올라온 글(경조사·갤러리)을 서버(/api/posts)에서 받아 화면에 합친다
+function loadPosts(){
+  fetch('/api/posts',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
+    if(!d||!d.ok||!d.posts)return;
+    CARE=CARE.filter(function(c){return !c.rid});GAL=GAL.filter(function(a){return !a.r});NEWS=NEWS.filter(function(n){return !n.rid});
+    var care=[];
+    d.posts.forEach(function(p){
+      if(p.type==='care')care.push({rid:p.id,k:p.k,gen:p.gen,name:p.name,t:p.t,rows:p.rows||[],note:p.note||'',url:p.url||'',cta:p.cta||''});
+      else if(p.type==='gallery'&&p.p&&p.p.length){
+        var id='r'+p.id;
+        GAL.push({id:id,r:1,d:p.d,t:p.t,p:p.p.map(function(x){return [x.u,x.c||'',x.t||x.u]})});
+        if(p.s)NEWS.push({rid:p.id,d:p.d.replace(/\./g,'-'),t:'event',src:'학과 소식',title:p.t,sum:p.s,url:SITE+'?a='+id+'#/about'});
+      }
+    });
+    CARE=care.concat(CARE);
+    renderCare();renderGal();renderNews();
+  }).catch(function(){});
+}
+window.EMBA_loadPosts=loadPosts;
+loadPosts();
 $('#siteShare').addEventListener('click',function(){openShare({title:'경희 EMBA | 경희대학교 경영대학원 EMBA학과',text:'경희 EMBA',url:SITE})});
 // 로그인: 비공개 항목은 로그인 서버(Apps Script)가 원우로 확인한 경우에만 받아서 표시
 $('#loginBtn').addEventListener('click',function(){
