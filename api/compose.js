@@ -73,7 +73,8 @@ function normalize(type, o, s, nPhotos, today) {
     const caps = Array.isArray(o.captions) ? o.captions : [];
     const captions = []; for (let i = 0; i < nPhotos; i++) captions.push(L.clean(caps[i], 40));
     const h = String(o.h || '').replace(/대$/, '기').trim();
-    return { t: L.clean(o.t, 40).replace(/^20\d\d(학년도)?\s*/, ''), h: /^\d{1,2}기$/.test(h) ? h : '', d, s: L.clean(o.s, 200), captions };
+    const hh = /^\d{1,2}기$/.test(h) ? h : L.genAtDate(d);
+    return { t: L.clean(o.t, 40).replace(/^20\d\d(학년도)?\s*/, ''), h: hh, d, s: L.clean(o.s, 200), captions };
   }
   return { co: L.clean(o.co, 60), job: L.clean(o.job, 40), desc: L.clean(o.desc, 120), web: L.okUrl(o.web) || L.clean(o.web, 100) };
 }

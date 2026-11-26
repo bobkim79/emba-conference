@@ -21,6 +21,15 @@ function currentGen(now) {
   return 23 + (sem - (2 * 2026 + 1));
 }
 
+// 날짜(YYYY.MM.DD)로 그때의 주관 기수를 추정: 6개월(3월·9월)마다 기수가 바뀐다. 2026.09~2027.02 = 23기
+function genAtDate(d) {
+  const m = String(d || '').match(/^(\d{4})[.\-\/](\d{1,2})/);
+  if (!m) return '';
+  const y = +m[1], mo = +m[2], sem = 2 * y + (mo >= 9 ? 1 : (mo >= 3 ? 0 : -1));
+  const g = 23 + (sem - (2 * 2026 + 1));
+  return g > 0 ? g + '기' : '';
+}
+
 // 허용 규칙: 현재 3학기 기수 전원 + 다음 기수의 회장·부회장·사무총장 (+ 관리자·추가 허용 이메일)
 function canPost(member, email) {
   email = String(email || '').toLowerCase();
@@ -106,4 +115,4 @@ function okUrl(u) { try { const x = new URL(String(u)); return (x.protocol === '
 function blobUrl(u) { const x = okUrl(u); return /^https:\/\/[a-z0-9-]+\.public\.blob\.vercel-storage\.com\//.test(x) ? x : ''; }
 function rid() { return crypto.randomBytes(5).toString('hex'); }
 
-module.exports = { ROSTER_API, ADMINS, currentGen, canPost, newSession, sessionFrom, verify, send, readBody, readJson, limited, rosterPost, rosterPublic, clean, cleanLong, okUrl, blobUrl, rid };
+module.exports = { genAtDate, ROSTER_API, ADMINS, currentGen, canPost, newSession, sessionFrom, verify, send, readBody, readJson, limited, rosterPost, rosterPublic, clean, cleanLong, okUrl, blobUrl, rid };
