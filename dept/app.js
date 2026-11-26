@@ -2,12 +2,12 @@
 // 컨퍼런스 FAQ (원본 e-mba.io 질문 구성. 답변은 확정된 사실만 기재)
 var EVENT_FAQ = [
  ["경희 EMBA 경영혁신·성장 컨퍼런스는 언제, 어디서 열리나요?","<p>2026년 12월 12일(토) 14:00, 경희대학교 경영대학원 오비스홀 111호에서 열립니다.</p>"],
- ["컨퍼런스는 어떻게 구성되나요?","<p>Part 1은 7개의 전문가 실무 강연(14:10~16:40), Part 2는 7개 팀이 발표하는 모의 IR 피칭데이입니다. 참관자는 모의투자에 참여합니다.</p>"],
+ ["컨퍼런스는 어떻게 구성되나요?","<p>Part 1은 7개의 전문가 실무 강연(14:10~16:40), Part 2는 7개 팀이 발표하는 IR 피칭데이입니다. 참관자는 투자에 참여합니다.</p>"],
  ["참관은 어떻게 신청하나요?","<p>온오프믹스에서 신청합니다. 문의는 bob@khu.ac.kr로 받습니다.</p>"],
  ["EMBA란 무엇인가요?","<p>Executive MBA의 약자로, 기업 경영자와 전문직 원우가 함께 배우고 교류하는 경영학 석사 과정입니다. 자세한 내용은 ‘학과 소개’ 탭을 보세요.</p>"],
  ["EMBA 재학생·동문만 신청할 수 있나요?","<p>아닙니다. EMBA 원우·동문뿐 아니라 경희대학교 구성원 중 창업을 준비하는 분 모두 신청할 수 있습니다. 참관은 가족도 함께하실 수 있습니다.</p>"],
  ["아직 사업 초기라 자료가 부족해도 되나요?","<p>완성본이 아니어도 지금 가진 자료로 괜찮습니다. 팀 소개와 PDF 또는 PPT 한 부를 보내 주세요.</p>"],
- ["실제 투자를 받을 수 있나요?","<p>이 자리는 실제 투자 유치가 목적이 아닌 모의고사형 피칭데이이며, 모의투자도 가상 투자금으로 진행합니다.</p>"],
+ ["실제 투자를 받을 수 있나요?","<p>이 자리는 실제 투자 유치가 목적이 아닌 피칭 연습형 데이이며, 투자도 가상 투자금으로 진행합니다.</p>"],
  ["7팀이 넘으면 어떻게 되나요?","<p>마감 후 신청은 대기로 받고, 취소가 나오면 접수 순서대로 올라갑니다.</p>"],
  ["발표 자료는 언제까지 보내야 하나요?","<p>접수 마감일은 최종 확정 후 이 페이지와 별도 공지로 안내합니다. 신청 메일에 지금 가진 자료를 먼저 보내 주세요.</p>"]
 ];
@@ -92,8 +92,8 @@ document.addEventListener('click',function(e){
 var CONF={vis:101,visMax:101,irMax:7,start:new Date(2026,11,12,14,0,0)};
 var IRTEAMS=[
  {team:"NEXT50",name:"김동언",desc:"NEXT50은 50대의 경력과 생활 조건을 AI로 분석해 3가지 미래 역할과 90일 실행계획을 제안하는 세컨드 커리어 전환 서비스"},
- {team:"Railess",name:"김윤석",desc:"Railess는 모의 IR 피칭데이에 두 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."},
- {team:"ONE HAND MEDIA",name:"손소희",desc:"ONE HAND MEDIA는 모의 IR 피칭데이에 세 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."}
+ {team:"Railess",name:"김윤석",desc:"Railess는 IR 피칭데이에 두 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."},
+ {team:"ONE HAND MEDIA",name:"손소희",desc:"ONE HAND MEDIA는 IR 피칭데이에 세 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."}
 ];
 function two(n){return (n<10?'0':'')+n}
 function tickCd(){
@@ -128,7 +128,7 @@ var DDAY=dd>0?'D-'+dd:(dd===0?'D-DAY':'종료');
 
 /* ================= 오른쪽 카드(페이지별) ================= */
 var ASIDE={
- event:'<div class="info"><div class="st"><span class="pill">모집중</span><span>행사까지 <b>'+DDAY+'</b></span></div><h2>2026 경영혁신·성장 컨퍼런스</h2><dl><div><dt>일시</dt><dd>2026.12.12 (토) 14:00</dd></div><div><dt>장소</dt><dd class="s">경희대 경영대학원 오비스홀 111호</dd></div><div><dt>Part 1</dt><dd class="s">전문가 강연 7개 (14:10~16:40)</dd></div><div><dt>Part 2 모집</dt><dd class="s">모의 IR 7팀 선착순 · 발표 7분<br>+ 질의응답 3분</dd></div><div><dt>접수</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="e-apply">IR 피칭 신청 방법</button></div><a class="btn-o" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">참관 신청하기</a>',
+ event:'<div class="info"><div class="st"><span class="pill">모집중</span><span>행사까지 <b>'+DDAY+'</b></span></div><h2>2026 경영혁신·성장 컨퍼런스</h2><dl><div><dt>일시</dt><dd>2026.12.12 (토) 14:00</dd></div><div><dt>장소</dt><dd class="s">경희대 경영대학원 오비스홀 111호</dd></div><div><dt>Part 1</dt><dd class="s">전문가 강연 7개 (14:10~16:40)</dd></div><div><dt>Part 2 모집</dt><dd class="s">IR 7팀 선착순 · 발표 7분<br>+ 질의응답 3분</dd></div><div><dt>접수</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="e-apply">IR 피칭 신청 방법</button></div><a class="btn-o" href="https://onoffmix.com/event/352720" target="_blank" rel="noopener">참관 신청하기</a>',
  guide:'<div class="info"><div class="st"><span class="pill">신입생</span><span>2026 2학기 이후</span></div><h2>한눈에 보기</h2><dl><div><dt>수업연한</dt><dd>4학기</dd></div><div><dt>졸업이수학점</dt><dd>30학점</dd></div><div><dt>수업</dt><dd class="s">토요일 1교시 10:00 · 2교시 14:00</dd></div><div><dt>등록금</dt><dd>700만원 / 학기</dd></div><div><dt>입학금</dt><dd class="s">100만원 (최초 1회)</dd></div></dl><button class="btn-w" data-go="g-faq">질문 검색하기</button></div><a class="btn-o" href="tel:029612384">신입생 상담 전화</a>',
  about:'<div class="info"><div class="st"><span class="pill">EMBA</span><span>SINCE 1966</span></div><h2>경희 EMBA학과</h2><dl><div><dt>소속</dt><dd class="s">경희대학교 경영대학원</dd></div><div><dt>방향</dt><dd class="s">함께 배우고, 도전하고, 성장의 길을 연결하다</dd></div><div><dt>학과장</dt><dd>강창동 교수</dd></div><div><dt>행정실</dt><dd class="s">오비스홀 414호 · 02-961-2384~5</dd></div></dl><button class="btn-w" data-go="a-curri">커리큘럼 보기</button></div><a class="btn-o" href="#/guide">신입생 안내 보기</a>',
  network:'<div class="info"><div class="st"><span class="pill">DB</span><span>교수·동문·재학생</span></div><h2>EMBA 네트워크</h2><dl><div><dt>등록 원우</dt><dd id="cnt2">0명</dd></div><div><dt>동문회</dt><dd class="s">EMBA 350여 명</dd></div><div><dt>총동문회</dt><dd class="s">경영대학원 1만 5천여 명</dd></div><div><dt>등록 요청</dt><dd class="s">bob@khu.ac.kr</dd></div></dl><button class="btn-w" data-go="n-join">등록 방법 보기</button></div><a class="btn-o" href="mailto:bob@khu.ac.kr?subject=%5BEMBA%20%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%5D%20%EB%93%B1%EB%A1%9D%20%EC%9A%94%EC%B2%AD">등록 요청하기</a>'
@@ -431,7 +431,7 @@ renderProfs();
 // 동문소식 게시판: 아래 목록에 한 줄씩 추가하면 날짜순(최신순)으로 자동 정렬되고, 10개까지 보이며 나머지는 더보기로 열립니다.
 // t: "news"(보도) | "event"(행사소식)
 var NEWS=[
- {d:"2026-11-04",t:"news",src:"서울경제TV",title:"경희대 경영대학원 EMBA학과, 내달 12일 '경영혁신·성장 컨퍼런스' 개최",sum:"12월 12일 오후 2시, 강연 7개 세션과 선착순 7개 팀의 모의 IR 피칭으로 열리는 학과 컨퍼런스 소식입니다.",url:"https://www.sentv.co.kr/article/view/sentv202611030199"},
+ {d:"2026-11-04",t:"news",src:"서울경제TV",title:"경희대 경영대학원 EMBA학과, 내달 12일 '경영혁신·성장 컨퍼런스' 개최",sum:"12월 12일 오후 2시, 강연 7개 세션과 선착순 7개 팀의 IR 피칭으로 열리는 학과 컨퍼런스 소식입니다.",url:"https://www.sentv.co.kr/article/view/sentv202611030199"},
  {d:"2026-08-28",t:"news",src:"비욘드포스트",title:"경희대 경영대학원 EMBA 관련 보도",sum:"비욘드포스트에 실린 경희대 경영대학원 EMBA 기사입니다. 제목을 누르면 원문으로 이동합니다.",url:"http://www.beyondpost.co.kr/view.php?ud=2026082816271318159aeda69934_30"},
  {d:"2026-08-21",t:"event",src:"밴드 · 제23대 학회",title:"방향성 사전미팅 회의록 공유",sum:"7월 25일 열린 ‘미래지향적인 EMBA로 나아가기 위한 방향성 사전미팅’의 회의록을 학회가 공유했습니다.",url:"https://band.us/band/53620165/post/926300192"},
  {d:"2026-08-19",t:"event",src:"밴드 · 제23대 학회",title:"20기 학위수여식 초대장 안내",sum:"8월 22일(토) 오후 4시, 오비스홀 308호에서 열린 20기 학위수여식 초대장을 공유했습니다.",url:"https://band.us/band/53620165/post/926300176"},
