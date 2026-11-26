@@ -46,6 +46,7 @@ module.exports = async (req, res) => {
       rec.t = L.clean(d.t, 40);
       rec.d = /^\d{4}\.\d{2}\.\d{2}$/.test(String(d.d || '')) ? d.d : new Date(now + 9 * 3600e3).toISOString().slice(0, 10).replace(/-/g, '.');
       rec.s = L.clean(d.s, 200);
+      rec.h = /^\d{1,2}기$/.test(String(d.h || '').trim()) ? String(d.h).trim() : '';
       const caps = Array.isArray(d.captions) ? d.captions : [];
       rec.p = (Array.isArray(b.photos) ? b.photos : []).slice(0, 20).map((x, i) => ({ u: L.blobUrl(x.u), t: L.blobUrl(x.t) || L.blobUrl(x.u), c: L.clean(caps[i], 40) })).filter(x => x.u);
       rec.f = (Array.isArray(b.files) ? b.files : []).slice(0, 5).map(x => ({ u: L.blobUrl(x.u), n: L.clean(x.n, 60) })).filter(x => x.u);

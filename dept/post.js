@@ -156,7 +156,7 @@
       if (d.error === 'login') { TOKEN = ''; return stepEmail('로그인이 만료됐습니다. 다시 인증해 주세요.') }
       var why = d.error === 'no_ai' ? 'AI 키(ANTHROPIC_API_KEY)가 서버에 없습니다' : (d.detail || d.error || ('HTTP ' + d._s));
       LASTWHY = why;
-      DRAFT = TYPE === 'gallery' ? { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }
+      DRAFT = TYPE === 'gallery' ? { t: '', h: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }
         : TYPE === 'care' ? { k: 'ok', gen: '', name: '', t: '', rows: [['일시', ''], ['장소', '']], note: TEXT.slice(0, 60), url: '', cta: '' }
         : { co: '', job: '', desc: TEXT.slice(0, 120), web: '' };
       return stepPreview();
@@ -170,7 +170,7 @@
         fld('d_gen', '기수', d.gen || (ME && ME.gen) || '') + fld('d_name', '이름', d.name || (ME && ME.name) || '') + fld('d_t', '제목', d.t) +
         d.rows.map(function (r, i) { return fld('d_r' + i, esc(r[0]), r[1]) }).join('') + fld('d_note', '인사말', d.note) + fld('d_url', '링크 (청첩장·부고장)', d.url);
     } else if (TYPE === 'gallery') {
-      h = fld('d_t', '제목', d.t) + fld('d_d', '날짜 (YYYY.MM.DD)', d.d) + fld('d_s', '소식 요약', d.s, 1) +
+      h = fld('d_t', '행사명 (연도 없이)', d.t) + fld('d_h', '주관 기수 (예: 22기)', d.h) + fld('d_d', '날짜 (YYYY.MM.DD)', d.d) + fld('d_s', '소식 요약', d.s, 1) +
         (ITEMS.filter(function (x) { return x.img }).length ? '<p class="lhint">사진 ' + ITEMS.filter(function (x) { return x.img }).length + '장 · 설명 문구는 AI가 사진 순서대로 붙였습니다.</p>' : '<p class="lmsg">갤러리에는 사진이 1장 이상 필요합니다.</p>');
     } else {
       h = '<p class="lmsg">로그인한 <b>' + esc(EMAIL) + '</b> 의 명단 행만 바뀝니다. 비워 둔 칸은 그대로 둡니다.</p>' + fld('d_co', '회사명', d.co) + fld('d_job', '직책', d.job) + fld('d_desc', '회사 소개', d.desc, 1) + fld('d_web', '홈페이지', d.web);
@@ -182,7 +182,7 @@
   function readDraft() {
     var d = DRAFT;
     if (TYPE === 'care') return { k: val('d_k'), gen: val('d_gen'), name: val('d_name'), t: val('d_t'), rows: d.rows.map(function (r, i) { return [r[0], val('d_r' + i)] }), note: val('d_note'), url: val('d_url'), cta: d.cta };
-    if (TYPE === 'gallery') return { t: val('d_t'), d: val('d_d'), s: val('d_s'), captions: d.captions };
+    if (TYPE === 'gallery') return { t: val('d_t'), h: val('d_h'), d: val('d_d'), s: val('d_s'), captions: d.captions };
     return { co: val('d_co'), job: val('d_job'), desc: val('d_desc'), web: val('d_web') };
   }
 

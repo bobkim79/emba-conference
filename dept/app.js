@@ -532,7 +532,7 @@ function renderGal(all){
   var arr=GAL.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
   box.innerHTML=arr.map(function(a,i){
     if(!all&&i>=GAL_SHOW)return '';
-    return '<button type="button" class="gc" data-i="'+GAL.indexOf(a)+'" aria-label="'+esc(a.t)+' 앨범 열기"><img src="'+galSrc(a,a.p[0],true)+'" alt="'+esc(a.t)+'" loading="lazy"><span class="gc-n">'+a.p.length+'장</span><span class="gc-h">펼쳐보기</span><span class="gc-i"><div class="gc-d">'+esc(a.d)+'</div><div class="gc-t">'+esc(a.t)+'</div></span></button>';
+    return '<button type="button" class="gc'+(a.h?' ho':'')+'" data-i="'+GAL.indexOf(a)+'" aria-label="'+esc(a.t)+' 앨범 열기"><img src="'+galSrc(a,a.p[0],true)+'" alt="'+esc(a.t)+'" loading="lazy"><span class="gc-n">'+a.p.length+'장</span>'+(a.h?'<span class="gc-o">'+esc(a.h)+' 주관</span>':'')+'<span class="gc-h">펼쳐보기</span><span class="gc-i"><div class="gc-d">'+esc(a.d)+'</div><div class="gc-t">'+esc(a.t)+'</div></span></button>';
   }).join('');
   $$('#gal .gc').forEach(function(b){b.addEventListener('click',function(){openAlbum(GAL[+b.dataset.i],b)})});
   var w=$('#galMore');
@@ -547,7 +547,7 @@ function openAlbum(a,card){
   var r=card.getBoundingClientRect();
   var ov=document.createElement('div');ov.className='gov';
   ov.style.cssText='top:'+r.top+'px;left:'+r.left+'px;width:'+r.width+'px;height:'+r.height+'px';
-  ov.innerHTML='<div class="gov-bg" style="background-image:url('+galSrc(a,a.p[0],true)+')"></div><div class="gov-in"><div class="gov-h"><div><div class="gov-d">'+esc(a.d)+'</div><h3 class="gov-t">'+esc(a.t)+'</h3><div class="gov-c">사진 '+a.p.length+'장 · 사진을 누르면 크게 볼 수 있습니다</div></div><div class="gov-b"><button type="button" class="gov-s">공유</button><button type="button" class="gov-x" aria-label="닫기">✕</button></div></div><div class="gov-g">'+a.p.map(function(p,i){return '<button type="button" class="gp" style="--i:'+i+'" data-k="'+i+'"><img src="'+galSrc(a,p,true)+'" alt="'+esc(p[1])+'" loading="lazy"><span>'+esc(p[1])+'</span></button>'}).join('')+'</div></div>';
+  ov.innerHTML='<div class="gov-bg" style="background-image:url('+galSrc(a,a.p[0],true)+')"></div><div class="gov-in"><div class="gov-h"><div><div class="gov-d">'+esc(a.d)+(a.h?' · '+esc(a.h)+' 주관':'')+'</div><h3 class="gov-t">'+esc(a.t)+'</h3><div class="gov-c">사진 '+a.p.length+'장 · 사진을 누르면 크게 볼 수 있습니다</div></div><div class="gov-b"><button type="button" class="gov-s">공유</button><button type="button" class="gov-x" aria-label="닫기">✕</button></div></div><div class="gov-g">'+a.p.map(function(p,i){return '<button type="button" class="gp" style="--i:'+i+'" data-k="'+i+'"><img src="'+galSrc(a,p,true)+'" alt="'+esc(p[1])+'" loading="lazy"><span>'+esc(p[1])+'</span></button>'}).join('')+'</div></div>';
   document.body.appendChild(ov);document.body.style.overflow='hidden';
   GOV={el:ov,card:card,a:a};
   ov.querySelector('.gov-x').addEventListener('click',closeAlbum);
@@ -600,7 +600,7 @@ function loadPosts(){
       if(p.type==='care')care.push({rid:p.id,k:p.k,gen:p.gen,name:p.name,t:p.t,rows:p.rows||[],note:p.note||'',url:p.url||'',cta:p.cta||''});
       else if(p.type==='gallery'&&p.p&&p.p.length){
         var id='r'+p.id;
-        GAL.push({id:id,r:1,d:p.d,t:p.t,p:p.p.map(function(x){return [x.u,x.c||'',x.t||x.u]})});
+        GAL.push({id:id,r:1,d:p.d,t:String(p.t||'').replace(/^20\d\d(학년도)?\s*/,''),h:p.h||(function(m){return m?m[1]+'기':''})(String(p.s||'').match(/(\d{1,2})(?:기|대 학회|대학회)\s*주관/)),p:p.p.map(function(x){return [x.u,x.c||'',x.t||x.u]})});
         if(p.s)NEWS.push({rid:p.id,d:p.d.replace(/\./g,'-'),t:'event',src:'학과 소식',title:p.t,sum:p.s,url:SITE+'?a='+id+'#/about'});
       }
     });
