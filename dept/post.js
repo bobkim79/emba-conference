@@ -32,6 +32,7 @@
   function open() { M.classList.add('on'); document.body.style.overflow = 'hidden'; TOKEN && ME ? stepType() : (TOKEN ? check() : stepEmail()) }
   function close() { if (BUSY && !confirm('올리는 중입니다. 닫으면 중단됩니다. 닫을까요?')) return; M.classList.remove('on'); document.body.style.overflow = '' }
   M.addEventListener('click', function (e) { if (e.target === M || e.target.closest('.pm-x')) close() });
+  ['click', 'keydown', 'input', 'dragover'].forEach(function (n) { M.addEventListener(n, function () { if (TOKEN) ssSet('emba_post', TOKEN) }) }); // 쓰는 동안은 30분이 계속 연장됨
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && M.classList.contains('on')) close() });
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-post]'); if (b) { e.preventDefault(); open() } });
 

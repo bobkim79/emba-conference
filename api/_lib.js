@@ -7,7 +7,7 @@ const ROSTER_API = process.env.ROSTER_API ||
 const SECRET = process.env.SESSION_SECRET || '';
 const ADMINS = list(process.env.ADMIN_EMAILS || 'bob@khu.ac.kr,ethereumlab@gmail.com');
 const EXTRA = list(process.env.EXTRA_EMAILS || '');
-const SESSION_MS = 2 * 60 * 60 * 1000;
+const SESSION_MS = 12 * 60 * 60 * 1000; // 서버 한도(넉넉히). 화면에서는 마지막 사용 후 30분 무사용 시 로그아웃
 
 function list(s) { return String(s).split(',').map(x => x.trim().toLowerCase()).filter(Boolean); }
 
