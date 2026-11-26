@@ -172,7 +172,7 @@
         fld('d_gen', '기수', d.gen || (ME && ME.gen) || '') + fld('d_name', '이름', d.name || (ME && ME.name) || '') + fld('d_t', '제목', d.t) +
         d.rows.map(function (r, i) { return fld('d_r' + i, esc(r[0]), r[1]) }).join('') + fld('d_note', '인사말', d.note) + fld('d_url', '링크 (청첩장·부고장)', d.url);
     } else if (TYPE === 'gallery') {
-      h = fld('d_t', '행사명 (연도 없이)', d.t) + fld('d_h', '주관 학회 (예: 22대)', d.h) + fld('d_d', '날짜 (YYYY.MM.DD)', d.d) + fld('d_s', '소식 요약', d.s, 1) +
+      h = fld('d_t', '행사명 (연도 없이)', d.t) + fld('d_h', '주관 (예: 22대 / 동문회)', d.h) + fld('d_d', '날짜 (YYYY.MM.DD)', d.d) + fld('d_s', '소식 요약', d.s, 1) +
         (ITEMS.filter(function (x) { return x.img }).length ? '<p class="lhint">사진 ' + ITEMS.filter(function (x) { return x.img }).length + '장 · 설명 문구는 AI가 사진 순서대로 붙였습니다.</p>' : '<p class="lmsg">갤러리에는 사진이 1장 이상 필요합니다.</p>');
     } else {
       h = '<p class="lmsg">로그인한 <b>' + esc(EMAIL) + '</b> 의 명단 행만 바뀝니다. 비워 둔 칸은 그대로 둡니다.</p>' + fld('d_co', '회사명', d.co) + fld('d_job', '직책', d.job) + fld('d_desc', '회사 소개', d.desc, 1) + fld('d_web', '홈페이지', d.web);
