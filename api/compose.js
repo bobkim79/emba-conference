@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
     const d = await r.json();
     const out = d && d.content && d.content[0] && d.content[0].text || '';
     const m = out.match(/\{[\s\S]*\}/);
-    if (!m) { console.error('compose no json', r.status, JSON.stringify(d).slice(0, 300)); return L.send(res, 502, { ok: false, error: 'ai' }) }
+    if (!m) { console.error('compose no json', r.status, JSON.stringify(d).slice(0, 300)); return L.send(res, 502, { ok: false, error: 'ai', detail: r.status + ' ' + String(d && d.error && (d.error.type + ': ' + d.error.message) || '').slice(0, 160) }) }
     return L.send(res, 200, { ok: true, draft: normalize(type, JSON.parse(m[0]), s, nPhotos, today) });
   } catch (e) { console.error('compose', e && e.message); return L.send(res, 502, { ok: false, error: 'ai' }); }
 };

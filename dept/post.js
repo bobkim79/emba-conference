@@ -7,7 +7,7 @@
   function ssGet(k) { try { return sessionStorage.getItem(k) || '' } catch (e) { return '' } }
   function ssSet(k, v) { try { v ? sessionStorage.setItem(k, v) : sessionStorage.removeItem(k) } catch (e) {} }
 
-  var TOKEN = ssGet('emba_post'), ME = null, EMAIL = '', TYPE = '', ITEMS = [], DRAFT = null, BUSY = false, TEXT = '';
+  var LASTWHY = '', TOKEN = ssGet('emba_post'), ME = null, EMAIL = '', TYPE = '', ITEMS = [], DRAFT = null, BUSY = false, TEXT = '';
   var MAX = 20, TYPES = {
     care: { name: '경조사', desc: '결혼·부고·돌잔치 등 기쁜 일과 슬픈 일', ph: '예) 23기 홍길동 모친상, 12월 3일 발인, 서울아산병원 장례식장 5호실\n모바일 부고장 https://…' },
     gallery: { name: 'EMBA 갤러리 (학과 소식)', desc: '행사·모임 사진과 소식', ph: '예) 11월 20일 23기 송년 골프모임, 20명 참석, 즐거운 시간이었습니다' },
@@ -151,10 +151,11 @@
       return shrink(x.file, 800, .6).then(function (b) { return new Promise(function (ok) { var r = new FileReader(); r.onload = function () { ok(r.result) }; r.onerror = function () { ok('') }; r.readAsDataURL(b) }) }, function () { return '' });
     })) : Promise.resolve([]);
     look.then(function (im) { return api('/api/compose', { type: TYPE, text: TEXT, photos: np, images: im.filter(Boolean) }) }).then(function (d) {
-      if (d.ok) { DRAFT = d.draft; return stepPreview() }
+      if (d.ok) { LASTWHY = ''; DRAFT = d.draft; return stepPreview() }
       if (d.error === 'login') { TOKEN = ''; return stepEmail('로그인이 만료됐습니다. 다시 인증해 주세요.') }
-      if (TYPE === 'gallery') { DRAFT = { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }; return stepPreview() }
-      stepWrite('정리하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+      var why = d.error === 'no_ai' ? 'AI 키(ANTHROPIC_API_KEY)가 서버에 없습니다' : (d.detail || d.error || ('HTTP ' + d._s));
+      if (TYPE === 'gallery') { LASTWHY = why; DRAFT = { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }; return stepPreview() }
+      stepWrite('정리하지 못했습니다. (' + why + ')');
     }).catch(function () { stepWrite('서버에 연결하지 못했습니다.') });
   }
   function fld(id, label, val, long) { return '<label class="pm-f"><span>' + label + '</span>' + (long ? '<textarea id="' + id + '" rows="2">' + esc(val) + '</textarea>' : '<input id="' + id + '" value="' + esc(val) + '">') + '</label>' }
@@ -170,7 +171,7 @@
     } else {
       h = '<p class="lmsg">로그인한 <b>' + esc(EMAIL) + '</b> 의 명단 행만 바뀝니다. 비워 둔 칸은 그대로 둡니다.</p>' + fld('d_co', '회사명', d.co) + fld('d_job', '직책', d.job) + fld('d_desc', '회사 소개', d.desc, 1) + fld('d_web', '홈페이지', d.web);
     }
-    body('<form id="pmP"><p>AI가 정리한 내용입니다. 고칠 곳이 있으면 고친 뒤 올려 주세요.</p>' + h +
+    body('<form id="pmP">' + (LASTWHY ? '<p class="lmsg">AI 정리가 안 돼 직접 입력으로 넘어왔습니다. (' + esc(LASTWHY) + ') 제목·날짜를 적어 올려 주세요.</p>' : '<p>AI가 정리한 내용입니다. 고칠 곳이 있으면 고친 뒤 올려 주세요.</p>') + h +
       '<div class="pm-act"><button type="button" class="pm-s" id="pmToWrite">← 다시 쓰기</button><button class="btn-lg" type="submit">' + (TYPE === 'profile' ? '명단에 반영하기' : '사이트에 올리기') + '</button></div></form>', '미리보기');
   }
   function val(id) { var e = $('#' + id); return e ? e.value.trim() : '' }
