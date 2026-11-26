@@ -262,7 +262,7 @@
       BUSY = false;
       if (d.ok) return done('올렸습니다. 사이트에 바로 반영됩니다.');
       if (d.error === 'login') { TOKEN = ''; RESUME = true; return stepEmail('로그인이 만료됐습니다. 다시 인증하면 쓰던 글과 사진이 그대로 이어집니다.') }
-      stepPreview(); alert(d.error === 'empty' ? '필요한 내용(제목 또는 사진)이 비어 있습니다.' : '올리지 못했습니다. 잠시 후 다시 시도해 주세요.');
+      stepPreview(); alert(d.error === 'dup' ? '같은 날짜·같은 제목의 앨범이 이미 올라가 있어 올리지 않았습니다. 제목이나 날짜가 다르면 고쳐서 다시 올려 주세요.' : d.error === 'empty' ? '필요한 내용(제목 또는 사진)이 비어 있습니다.' : '올리지 못했습니다. 잠시 후 다시 시도해 주세요.');
     }).catch(function (e) {
       BUSY = false;
       var m = e && e.message || '';

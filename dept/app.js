@@ -603,7 +603,8 @@ function loadPosts(){
     d.posts.forEach(function(p){
       if(p.type==='care')care.push({rid:p.id,k:p.k,gen:p.gen,name:p.name,t:p.t,rows:p.rows||[],note:p.note||'',url:p.url||'',cta:p.cta||''});
       else if(p.type==='gallery'&&p.p&&p.p.length){
-        var id='r'+p.id;
+        var id='r'+p.id,nt=function(x){return String(x||'').replace(/^20\d\d(학년도)?\s*/,'').replace(/\s+/g,'')};
+        if(GAL.some(function(a){return a.d===p.d&&nt(a.t)===nt(p.t)}))return; // 같은 날짜·같은 제목은 중복으로 보고 올리지 않음
         GAL.push({id:id,r:1,d:p.d,t:String(p.t||'').replace(/^20\d\d(학년도)?\s*/,''),h:/동문회\s*(?:가\s*)?주관/.test(String(p.s||''))||p.h==='동문회'?'동문회':p.h||(function(m){return m?m[1]+'대':''})(String(p.s||'').match(/(\d{1,2})\s*(?:기|대)\s*(?:학회)?\s*주관/)),p:p.p.map(function(x){return [x.u,x.c||'',x.t||x.u]})});
         if(p.s)NEWS.push({rid:p.id,d:p.d.replace(/\./g,'-'),t:'event',src:'학과 소식',title:p.t,sum:p.s,url:SITE+'?a='+id+'#/about'});
       }

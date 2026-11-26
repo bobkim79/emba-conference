@@ -1,6 +1,6 @@
 'use strict';
 // 미리보기를 확인한 내용을 사이트에 올린다. 이력 업데이트는 로그인한 본인 이메일의 명단 행만 고친다.
-const { put } = require('@vercel/blob');
+const { put, list } = require('@vercel/blob');
 const L = require('./_lib');
 
 const WRITER = process.env.PROFILE_WRITER_URL || '';
@@ -51,6 +51,13 @@ module.exports = async (req, res) => {
       rec.p = (Array.isArray(b.photos) ? b.photos : []).slice(0, 20).map((x, i) => ({ u: L.blobUrl(x.u), t: L.blobUrl(x.t) || L.blobUrl(x.u), c: L.clean(caps[i], 40) })).filter(x => x.u);
       rec.f = (Array.isArray(b.files) ? b.files : []).slice(0, 5).map(x => ({ u: L.blobUrl(x.u), n: L.clean(x.n, 60) })).filter(x => x.u);
       if (!rec.t || !rec.p.length) return L.send(res, 400, { ok: false, error: 'empty' });
+      // 같은 날짜·같은 제목의 앨범이 이미 있으면 올리지 않는다
+      try {
+        const nt = x => String(x || '').replace(/^20\d\d(학년도)?\s*/, '').replace(/\s+/g, '');
+        const ex = await list({ prefix: 'posts/', limit: 150 });
+        const all = await Promise.all(ex.blobs.map(bl => fetch(bl.url).then(r => r.json()).catch(() => null)));
+        if (all.some(x => x && x.type === 'gallery' && x.d === rec.d && nt(x.t) === nt(rec.t))) return L.send(res, 200, { ok: false, error: 'dup' });
+      } catch (e) { console.error('dup check', e && e.message); }
     } else return L.send(res, 400, { ok: false });
 
     // 새 글이 위로 오도록 시간 역순 이름을 쓴다
