@@ -107,7 +107,7 @@
   function stepWrite(msg) {
     var T = TYPES[TYPE], hasFiles = TYPE !== 'profile';
     body((msg ? '<p class="lmsg">' + msg + '</p>' : '') + '<form id="pmW"><p><b>' + T.name + '</b> · 대충 적어 주세요. 정리는 AI가 합니다.</p>' +
-      '<textarea id="pmTx" rows="6" maxlength="3000" placeholder="' + esc(T.ph) + '\n\n(사진·파일을 이 칸에 끌어다 놓아도 됩니다)" required>' + esc(TEXT) + '</textarea>' +
+      '<textarea id="pmTx" rows="6" maxlength="3000" placeholder="' + esc(T.ph) + '\n\n(사진·파일을 이 칸에 끌어다 놓아도 됩니다. 날짜는 \'11/20\', \'지난주 토요일\'처럼 대충 적어도 되고, 갤러리는 글 없이 사진만 올려도 AI가 사진을 보고 정리합니다)">' + esc(TEXT) + '</textarea>' +
       (hasFiles ? '<div class="pm-fl"><label class="pm-add"><input type="file" id="pmFile" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp,.hwpx,.txt" hidden>사진·파일 추가</label><span class="lhint" id="pmCnt"></span></div><div class="pm-th" id="pmTh"></div>' : '') +
       '<div class="pm-act"><button type="button" class="pm-s" id="pmToType">← 처음으로</button><button class="btn-lg" type="submit">AI로 정리하기</button></div></form>', T.name);
     if (hasFiles) {
@@ -142,12 +142,18 @@
 
   // ── AI 정리 ──
   function compose(f) {
-    TEXT = $('#pmTx').value.trim(); lock(f, 1);
-    var np = ITEMS.filter(function (x) { return x.img }).length;
-    body('<p>AI가 정리하는 중입니다…</p>');
-    api('/api/compose', { type: TYPE, text: TEXT, photos: np }).then(function (d) {
+    TEXT = $('#pmTx').value.trim();
+    if (TEXT.length < 2 && !(TYPE === 'gallery' && ITEMS.some(function (x) { return x.img }))) return alert('내용을 적어 주세요.');
+    lock(f, 1);
+    var ph = ITEMS.filter(function (x) { return x.img }), np = ph.length;
+    body('<p>AI가 글과 사진을 함께 보고 정리하는 중입니다…</p>');
+    var look = TYPE === 'gallery' ? Promise.all(ph.slice(0, 8).map(function (x) {
+      return shrink(x.file, 800, .6).then(function (b) { return new Promise(function (ok) { var r = new FileReader(); r.onload = function () { ok(r.result) }; r.onerror = function () { ok('') }; r.readAsDataURL(b) }) }, function () { return '' });
+    })) : Promise.resolve([]);
+    look.then(function (im) { return api('/api/compose', { type: TYPE, text: TEXT, photos: np, images: im.filter(Boolean) }) }).then(function (d) {
       if (d.ok) { DRAFT = d.draft; return stepPreview() }
       if (d.error === 'login') { TOKEN = ''; return stepEmail('로그인이 만료됐습니다. 다시 인증해 주세요.') }
+      if (TYPE === 'gallery') { DRAFT = { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }; return stepPreview() }
       stepWrite('정리하지 못했습니다. 잠시 후 다시 시도해 주세요.');
     }).catch(function () { stepWrite('서버에 연결하지 못했습니다.') });
   }
@@ -200,9 +206,16 @@
       } else viaImg();
     });
   }
-  function up(blob, name, type) {
+  function up(blob, name, type, tries) {
+    tries = tries == null ? 3 : tries;
+    return up1(blob, name, type).catch(function (e) {
+      if (tries <= 1 || (e && e.fatal)) throw e;
+      return new Promise(function (ok) { setTimeout(ok, 1200) }).then(function () { return up(blob, name, type, tries - 1) });
+    });
+  }
+  function up1(blob, name, type) {
     return fetch('/api/upload?name=' + encodeURIComponent(name), { method: 'POST', headers: { 'Content-Type': type, Authorization: 'Bearer ' + TOKEN }, body: blob })
-      .then(function (r) { return r.json() }).then(function (d) { if (!d.ok) throw new Error(d.error || 'upload'); return d });
+      .then(function (r) { return r.json().catch(function () { return { ok: false, error: 'HTTP ' + r.status } }).then(function (d) { if (!d.ok) { var e = new Error(d.error || ('HTTP ' + r.status)); e.fatal = r.status === 401 || r.status === 403; throw e } return d }) });
   }
   function publish(f) {
     var data = readDraft(); BUSY = true; lock(f, 1);
