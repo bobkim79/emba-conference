@@ -595,6 +595,7 @@ document.addEventListener('keydown',function(e){
 });
 renderGal();
 // 소식 전하기로 올라온 글(경조사·갤러리)을 서버(/api/posts)에서 받아 화면에 합친다
+var HIDE_PHOTOS=['fa7c533e05-p1.jpg']; // 화면에서 뺄 사진(파일명 일부)
 function loadPosts(){
   fetch('/api/posts',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
     if(!d||!d.ok||!d.posts)return;
@@ -602,7 +603,7 @@ function loadPosts(){
     var care=[];
     d.posts.forEach(function(p){
       if(p.type==='care')care.push({rid:p.id,k:p.k,gen:p.gen,name:p.name,t:p.t,rows:p.rows||[],note:p.note||'',url:p.url||'',cta:p.cta||''});
-      else if(p.type==='gallery'&&p.p&&p.p.length){
+      else if(p.type==='gallery'&&p.p&&(p.p=p.p.filter(function(x){return !HIDE_PHOTOS.some(function(h){return String(x.u).indexOf(h)>-1})})).length){
         var id='r'+p.id,nt=function(x){return String(x||'').replace(/^20\d\d(학년도)?\s*/,'').replace(/\s+/g,'')};
         if(GAL.some(function(a){return a.d===p.d&&nt(a.t)===nt(p.t)}))return; // 같은 날짜·같은 제목은 중복으로 보고 올리지 않음
         GAL.push({id:id,r:1,d:p.d,t:String(p.t||'').replace(/^20\d\d(학년도)?\s*/,''),h:/동문회\s*(?:가\s*)?주관/.test(String(p.s||''))||p.h==='동문회'?'동문회':p.h||(function(m){return m?m[1]+'대':''})(String(p.s||'').match(/(\d{1,2})\s*(?:기|대)\s*(?:학회)?\s*주관/)),p:p.p.map(function(x){return [x.u,x.c||'',x.t||x.u]})});
