@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return L.send(res, 405, { ok: false });
   const s = L.sessionFrom(req);
   if (!s) return L.send(res, 401, { ok: false, error: 'login' });
-  if (L.limited('up:' + s.e, 90, 60 * 60 * 1000)) return L.send(res, 429, { ok: false, error: 'too_many' });
+  if (L.limited('up:' + s.e, 400, 60 * 60 * 1000)) return L.send(res, 429, { ok: false, error: 'too_many' });
   const ct = String(req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
   let ext = TYPES[ct];
   const url = new URL(req.url, 'http://x');
@@ -31,5 +31,5 @@ module.exports = async (req, res) => {
   try {
     const r = await put(path, buf, { access: 'public', contentType: ct || 'application/octet-stream', addRandomSuffix: false });
     return L.send(res, 200, { ok: true, url: r.url, name: base + '.' + ext });
-  } catch (e) { return L.send(res, 500, { ok: false, error: 'storage' }); }
+  } catch (e) { console.error('upload put', e && e.message); return L.send(res, 500, { ok: false, error: 'storage: ' + String(e && e.message || '').slice(0, 80) }); }
 };

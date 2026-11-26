@@ -9,7 +9,7 @@
   function ssGet(k) { try { var o = JSON.parse(localStorage.getItem(k) || 'null'); if (o && o.t && Date.now() - o.at < KEEP) return o.t } catch (e) {} return '' }
   function ssSet(k, v) { try { v ? localStorage.setItem(k, JSON.stringify({ t: v, at: Date.now() })) : localStorage.removeItem(k) } catch (e) {} }
 
-  var LASTWHY = '', TOKEN = ssGet('emba_post'), ME = null, EMAIL = '', TYPE = '', ITEMS = [], DRAFT = null, BUSY = false, TEXT = '';
+  var RESUME = false, LASTWHY = '', TOKEN = ssGet('emba_post'), ME = null, EMAIL = '', TYPE = '', ITEMS = [], DRAFT = null, BUSY = false, TEXT = '';
   var MAX = 20, TYPES = {
     care: { name: '경조사', desc: '결혼·부고·돌잔치 등 기쁜 일과 슬픈 일', ph: '예) 23기 홍길동 모친상, 12월 3일 발인, 서울아산병원 장례식장 5호실\n모바일 부고장 https://…' },
     gallery: { name: 'EMBA 갤러리 (학과 소식)', desc: '행사·모임 사진과 소식', ph: '예) 11월 20일 23기 송년 골프모임, 20명 참석, 즐거운 시간이었습니다' },
@@ -75,7 +75,8 @@
 
   // ── 종류 선택 ──
   function stepType() {
-    TYPE = ''; ITEMS = []; DRAFT = null; TEXT = '';
+    if (RESUME && TYPE && (DRAFT || ITEMS.length || TEXT)) { RESUME = false; return DRAFT ? stepPreview() : stepWrite() }
+    RESUME = false; TYPE = ''; ITEMS = []; DRAFT = null; TEXT = '';
     body('<p>' + (ME && ME.name ? '<b>' + esc(ME.name) + '</b> 님, ' : '') + '무엇을 전할까요?</p><div class="pm-types">' +
       Object.keys(TYPES).map(function (k) { return '<button type="button" class="pm-t" data-t="' + k + '"><b>' + TYPES[k].name + '</b><span>' + TYPES[k].desc + '</span></button>' }).join('') +
       '</div><p class="lhint"><a href="#" id="pmMine">내가 올린 글 보기·삭제</a></p>', '소식 전하기');
@@ -153,7 +154,7 @@
     })) : Promise.resolve([]);
     look.then(function (im) { return api('/api/compose', { type: TYPE, text: TEXT, photos: np, images: im.filter(Boolean) }) }).then(function (d) {
       if (d.ok) { LASTWHY = ''; DRAFT = d.draft; return stepPreview() }
-      if (d.error === 'login') { TOKEN = ''; return stepEmail('로그인이 만료됐습니다. 다시 인증해 주세요.') }
+      if (d.error === 'login') { TOKEN = ''; RESUME = true; return stepEmail('로그인이 만료됐습니다. 다시 인증하면 쓰던 글과 사진이 그대로 이어집니다.') }
       var why = d.error === 'no_ai' ? 'AI 키(ANTHROPIC_API_KEY)가 서버에 없습니다' : (d.detail || d.error || ('HTTP ' + d._s));
       LASTWHY = why;
       DRAFT = TYPE === 'gallery' ? { t: '', h: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }
@@ -239,18 +240,19 @@
     var chain = Promise.resolve();
     list.forEach(function (it, i) {
       chain = chain.then(function () {
+        if (it.res) { if (it.res.photo) photos.push(it.res.photo); if (it.res.file) files.push(it.res.file); return } // 앞서 올린 것은 다시 올리지 않음
         if (it.img && TYPE === 'gallery') {
           return Promise.all([shrink(it.file, 1600, .82), shrink(it.file, 420, .75)]).then(function (bs) {
             return up(bs[0], 'p' + (i + 1) + '.jpg', 'image/jpeg').then(function (a) {
-              return up(bs[1], 'p' + (i + 1) + '_t.jpg', 'image/jpeg').then(function (t) { photos.push({ u: a.url, t: t.url }) });
+              return up(bs[1], 'p' + (i + 1) + '_t.jpg', 'image/jpeg').then(function (t) { it.res = { photo: { u: a.url, t: t.url } }; photos.push(it.res.photo) });
             });
           });
         }
         if (it.img) { // 경조사에 올린 사진은 첨부 파일로 취급
-          return shrink(it.file, 1600, .82).then(function (b) { return up(b, it.file.name.replace(/\.\w+$/, '') + '.jpg', 'image/jpeg') }).then(function (a) { files.push({ u: a.url, n: a.name }) });
+          return shrink(it.file, 1600, .82).then(function (b) { return up(b, it.file.name.replace(/\.\w+$/, '') + '.jpg', 'image/jpeg') }).then(function (a) { it.res = { file: { u: a.url, n: a.name } }; files.push(it.res.file) });
         }
         var ty = it.file.type || (/\.hwpx?$/i.test(it.file.name) ? 'application/x-hwp' : 'application/octet-stream');
-        return up(it.file, it.file.name, ty).then(function (a) { files.push({ u: a.url, n: a.name }) });
+        return up(it.file, it.file.name, ty).then(function (a) { it.res = { file: { u: a.url, n: a.name } }; files.push(it.res.file) });
       }).then(function () { n++; prog() });
     });
     chain.then(function () {
@@ -258,9 +260,16 @@
     }).then(function (d) {
       BUSY = false;
       if (d.ok) return done('올렸습니다. 사이트에 바로 반영됩니다.');
+      if (d.error === 'login') { TOKEN = ''; RESUME = true; return stepEmail('로그인이 만료됐습니다. 다시 인증하면 쓰던 글과 사진이 그대로 이어집니다.') }
       stepPreview(); alert(d.error === 'empty' ? '필요한 내용(제목 또는 사진)이 비어 있습니다.' : '올리지 못했습니다. 잠시 후 다시 시도해 주세요.');
-    }).catch(function (e) { BUSY = false; stepPreview(); alert('올리는 중 문제가 생겼습니다. (' + (e && e.message || '') + ') 사진이 너무 크거나 많으면 줄여서 다시 시도해 주세요.') });
+    }).catch(function (e) {
+      BUSY = false;
+      var m = e && e.message || '';
+      if (m === 'login') { TOKEN = ''; RESUME = true; return stepEmail('로그인이 만료됐습니다. 다시 인증하면 쓰던 글과 사진이 그대로 이어집니다.') }
+      stepPreview();
+      alert('올리는 중 문제가 생겼습니다. (' + m + ')\n사진과 글은 그대로 있습니다. 같은 버튼을 다시 누르면 이미 올라간 사진은 건너뛰고 이어서 올립니다.');
+    });
   }
   function reload() { if (window.EMBA_loadPosts) window.EMBA_loadPosts() }
-  function done(msg) { reload(); body('<p class="lmsg">' + msg + '</p><p class="lhint"><a href="#" id="pmToType">소식 더 올리기</a></p>', '완료'); }
+  function done(msg) { ITEMS = []; DRAFT = null; TEXT = ''; TYPE = ''; reload(); body('<p class="lmsg">' + msg + '</p><p class="lhint"><a href="#" id="pmToType">소식 더 올리기</a></p>', '완료'); }
 })();
