@@ -75,7 +75,7 @@ function normalize(type, o, s, nPhotos, today) {
     const captions = []; for (let i = 0; i < nPhotos; i++) captions.push(L.clean(caps[i], 40));
     const h0 = String(o.h || '');
     const h = /동문회/.test(h0) ? '동문회' : h0.replace(/\s*(대|기)(\s*학회)?(\s*주관)?$/, '').trim() + (/동문회/.test(h0) ? '' : '대');
-    const hh = h === '동문회' ? '동문회' : L.genAtDate(d) || (/^\d{1,2}대$/.test(h) ? h : '');
+    const hh = (h === '동문회' || /동문회/.test(String(o.t || ''))) ? '동문회' : L.genAtDate(d) || (/^\d{1,2}대$/.test(h) ? h : '');
     return { t: L.clean(o.t, 40).replace(/^20\d\d(학년도)?\s*/, ''), h: hh, d, s: L.clean(o.s, 200), captions };
   }
   return { co: L.clean(o.co, 60), job: L.clean(o.job, 40), desc: L.clean(o.desc, 120), web: L.okUrl(o.web) || L.clean(o.web, 100) };

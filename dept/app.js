@@ -532,7 +532,7 @@ function galGen(d){var m=String(d||'').match(/^(\d{4})\.(\d{1,2})/);if(!m)return
 function galSrc(a,p,t){if(a.r)return t?(p[2]||p[0]):p[0];return 'img/gallery/'+a.id+'/'+p[0]+(t?'_t':'')+'.jpg'}
 function renderGal(all){
   var box=$('#gal');if(!box)return;
-  GAL.forEach(function(a){if(a.h!=='동문회')a.h=galGen(a.d)||a.h||''});
+  GAL.forEach(function(a){if(/동문회/.test(a.t)||a.h==='동문회')a.h='동문회';else a.h=galGen(a.d)||a.h||''});
   var arr=GAL.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
   box.innerHTML=arr.map(function(a,i){
     if(!all&&i>=GAL_SHOW)return '';
