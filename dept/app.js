@@ -535,7 +535,7 @@ function renderGal(all){
   var arr=GAL.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0});
   box.innerHTML=arr.map(function(a,i){
     if(!all&&i>=GAL_SHOW)return '';
-    return '<button type="button" class="gc'+(a.h?' ho':'')+'" data-i="'+GAL.indexOf(a)+'" aria-label="'+esc(a.t)+' 앨범 열기"><img src="'+galSrc(a,a.p[0],true)+'" alt="'+esc(a.t)+'" loading="lazy"><span class="gc-n">'+a.p.length+'장</span>'+(a.h?'<span class="gc-o">'+esc(hostTxt(a.h))+'</span>':'')+'<span class="gc-h">펼쳐보기</span><span class="gc-i"><div class="gc-d">'+esc(a.d)+'</div><div class="gc-t">'+esc(a.t)+'</div></span></button>';
+    return '<button type="button" class="gc'+(a.h?' ho':'')+'" data-i="'+GAL.indexOf(a)+'" aria-label="'+esc(a.t)+' 앨범 열기"><img src="'+galSrc(a,a.p[0],true)+'" alt="'+esc(a.t)+'" loading="lazy">'+(a.h?'<span class="gc-o">'+esc(hostTxt(a.h))+'</span>':'<span class="gc-n">'+a.p.length+'장</span>')+'<span class="gc-h">펼쳐보기</span><span class="gc-i"><div class="gc-d">'+esc(a.d)+'</div><div class="gc-t">'+esc(a.t)+'</div></span></button>';
   }).join('');
   $$('#gal .gc').forEach(function(b){b.addEventListener('click',function(){openAlbum(GAL[+b.dataset.i],b)})});
   var w=$('#galMore');
