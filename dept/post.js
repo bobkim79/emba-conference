@@ -107,13 +107,22 @@
   function stepWrite(msg) {
     var T = TYPES[TYPE], hasFiles = TYPE !== 'profile';
     body((msg ? '<p class="lmsg">' + msg + '</p>' : '') + '<form id="pmW"><p><b>' + T.name + '</b> · 대충 적어 주세요. 정리는 AI가 합니다.</p>' +
-      '<textarea id="pmTx" rows="6" maxlength="3000" placeholder="' + esc(T.ph) + '" required>' + esc(TEXT) + '</textarea>' +
+      '<textarea id="pmTx" rows="6" maxlength="3000" placeholder="' + esc(T.ph) + '\n\n(사진·파일을 이 칸에 끌어다 놓아도 됩니다)" required>' + esc(TEXT) + '</textarea>' +
       (hasFiles ? '<div class="pm-fl"><label class="pm-add"><input type="file" id="pmFile" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp,.hwpx,.txt" hidden>사진·파일 추가</label><span class="lhint" id="pmCnt"></span></div><div class="pm-th" id="pmTh"></div>' : '') +
       '<div class="pm-act"><button type="button" class="pm-s" id="pmToType">← 처음으로</button><button class="btn-lg" type="submit">AI로 정리하기</button></div></form>', T.name);
-    if (hasFiles) { drawItems(); $('#pmFile').addEventListener('change', onFiles) }
+    if (hasFiles) {
+      drawItems(); $('#pmFile').addEventListener('change', onFiles);
+      var F = $('#pmW');
+      ['dragenter', 'dragover'].forEach(function (n) { F.addEventListener(n, function (e) { e.preventDefault(); F.classList.add('drag') }) });
+      ['dragleave', 'drop'].forEach(function (n) { F.addEventListener(n, function (e) { e.preventDefault(); if (n === 'drop' || e.target === F) F.classList.remove('drag') }) });
+      F.addEventListener('drop', function (e) { var fl = e.dataTransfer && e.dataTransfer.files; if (fl && fl.length) addFiles([].slice.call(fl)) });
+    }
   }
   function onFiles(e) {
     var list = [].slice.call(e.target.files); e.target.value = '';
+    addFiles(list);
+  }
+  function addFiles(list) {
     var over = false;
     list.forEach(function (f) {
       if (ITEMS.length >= MAX) { over = true; return }
