@@ -89,7 +89,7 @@ document.addEventListener('click',function(e){
 
 /* ================= 컨퍼런스 카운트다운 · 확정 현황 ================= */
 // 현황 수정: 참관 확정 인원은 CONF.vis, 피칭 확정 팀은 IRTEAMS에 한 줄 추가하면 자동 반영
-var CONF={vis:79,visMax:100,irMax:7,start:new Date(2026,11,12,14,0,0)};
+var CONF={vis:101,visMax:101,irMax:7,start:new Date(2026,11,12,14,0,0)};
 var IRTEAMS=[
  {team:"NEXT50",name:"김동언",desc:"NEXT50은 50대의 경력과 생활 조건을 AI로 분석해 3가지 미래 역할과 90일 실행계획을 제안하는 세컨드 커리어 전환 서비스"},
  {team:"Railess",name:"김윤석",desc:"Railess는 모의 IR 피칭데이에 두 번째로 확정된 팀입니다. 사업 소개는 발표 자료가 확정되면 업데이트합니다."},
@@ -107,7 +107,7 @@ tickCd();setInterval(tickCd,1000);
 function renderConfStats(){
   var n=IRTEAMS.length;
   $('#stIR').textContent=n+'/'+CONF.irMax+'팀';$('#stIRn').textContent=n;
-  $('#stVis').textContent=CONF.vis+'/'+CONF.visMax+'명';
+  $('#stVis').textContent=CONF.vis+'명';
   setTimeout(function(){$('#stIRb').style.width=(n/CONF.irMax*100)+'%';$('#stVisb').style.width=(CONF.vis/CONF.visMax*100)+'%'},300);
   $('#irCnt').textContent=n+' / '+CONF.irMax+'팀';
   var EM='<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="34" r="19" fill="#1a0507"/><path d="M12 96c2-24 17-36 38-36s36 12 38 36z" fill="#1a0507"/></svg>';
