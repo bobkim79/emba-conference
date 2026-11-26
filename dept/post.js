@@ -4,8 +4,10 @@
   'use strict';
   var $ = function (s, r) { return (r || document).querySelector(s) };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
-  function ssGet(k) { try { return sessionStorage.getItem(k) || '' } catch (e) { return '' } }
-  function ssSet(k, v) { try { v ? sessionStorage.setItem(k, v) : sessionStorage.removeItem(k) } catch (e) {} }
+  // 로그인은 마지막 사용 후 30분간 유지 (새로고침·창 닫기와 무관)
+  var KEEP = 30 * 60 * 1000;
+  function ssGet(k) { try { var o = JSON.parse(localStorage.getItem(k) || 'null'); if (o && o.t && Date.now() - o.at < KEEP) return o.t } catch (e) {} return '' }
+  function ssSet(k, v) { try { v ? localStorage.setItem(k, JSON.stringify({ t: v, at: Date.now() })) : localStorage.removeItem(k) } catch (e) {} }
 
   var LASTWHY = '', TOKEN = ssGet('emba_post'), ME = null, EMAIL = '', TYPE = '', ITEMS = [], DRAFT = null, BUSY = false, TEXT = '';
   var MAX = 20, TYPES = {
@@ -18,7 +20,7 @@
     var o = { method: method || 'POST', headers: { 'Content-Type': 'application/json' } };
     if (TOKEN) o.headers.Authorization = 'Bearer ' + TOKEN;
     if (body && o.method !== 'GET') o.body = JSON.stringify(body);
-    return fetch(path, o).then(function (r) { return r.json().catch(function () { return { ok: false } }).then(function (j) { j._s = r.status; return j }) });
+    return fetch(path, o).then(function (r) { return r.json().catch(function () { return { ok: false } }).then(function (j) { j._s = r.status; if (TOKEN && r.status < 400) ssSet('emba_post', TOKEN); return j }) });
   }
 
   // ── 모달 ──
@@ -32,7 +34,6 @@
   M.addEventListener('click', function (e) { if (e.target === M || e.target.closest('.pm-x')) close() });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && M.classList.contains('on')) close() });
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-post]'); if (b) { e.preventDefault(); open() } });
-  window.addEventListener('pagehide', function () { ssSet('emba_post', '') });
 
   // ── 로그인 ──
   function check() { // 새로고침 뒤 세션이 남아 있으면 내 글 요청으로 유효성 확인
@@ -154,8 +155,11 @@
       if (d.ok) { LASTWHY = ''; DRAFT = d.draft; return stepPreview() }
       if (d.error === 'login') { TOKEN = ''; return stepEmail('로그인이 만료됐습니다. 다시 인증해 주세요.') }
       var why = d.error === 'no_ai' ? 'AI 키(ANTHROPIC_API_KEY)가 서버에 없습니다' : (d.detail || d.error || ('HTTP ' + d._s));
-      if (TYPE === 'gallery') { LASTWHY = why; DRAFT = { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }; return stepPreview() }
-      stepWrite('정리하지 못했습니다. (' + why + ')');
+      LASTWHY = why;
+      DRAFT = TYPE === 'gallery' ? { t: '', d: new Date().toISOString().slice(0, 10).replace(/-/g, '.'), s: TEXT.slice(0, 200), captions: [] }
+        : TYPE === 'care' ? { k: 'ok', gen: '', name: '', t: '', rows: [['일시', ''], ['장소', '']], note: TEXT.slice(0, 60), url: '', cta: '' }
+        : { co: '', job: '', desc: TEXT.slice(0, 120), web: '' };
+      return stepPreview();
     }).catch(function () { stepWrite('서버에 연결하지 못했습니다.') });
   }
   function fld(id, label, val, long) { return '<label class="pm-f"><span>' + label + '</span>' + (long ? '<textarea id="' + id + '" rows="2">' + esc(val) + '</textarea>' : '<input id="' + id + '" value="' + esc(val) + '">') + '</label>' }
@@ -171,7 +175,7 @@
     } else {
       h = '<p class="lmsg">로그인한 <b>' + esc(EMAIL) + '</b> 의 명단 행만 바뀝니다. 비워 둔 칸은 그대로 둡니다.</p>' + fld('d_co', '회사명', d.co) + fld('d_job', '직책', d.job) + fld('d_desc', '회사 소개', d.desc, 1) + fld('d_web', '홈페이지', d.web);
     }
-    body('<form id="pmP">' + (LASTWHY ? '<p class="lmsg">AI 정리가 안 돼 직접 입력으로 넘어왔습니다. (' + esc(LASTWHY) + ') 제목·날짜를 적어 올려 주세요.</p>' : '<p>AI가 정리한 내용입니다. 고칠 곳이 있으면 고친 뒤 올려 주세요.</p>') + h +
+    body('<form id="pmP">' + (LASTWHY ? '<p class="lmsg">AI 정리가 안 돼 직접 입력으로 넘어왔습니다. (' + esc(LASTWHY) + ') 내용을 확인·수정해 올려 주세요.</p>' : '<p>AI가 정리한 내용입니다. 고칠 곳이 있으면 고친 뒤 올려 주세요.</p>') + h +
       '<div class="pm-act"><button type="button" class="pm-s" id="pmToWrite">← 다시 쓰기</button><button class="btn-lg" type="submit">' + (TYPE === 'profile' ? '명단에 반영하기' : '사이트에 올리기') + '</button></div></form>', '미리보기');
   }
   function val(id) { var e = $('#' + id); return e ? e.value.trim() : '' }
