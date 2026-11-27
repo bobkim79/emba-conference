@@ -21,11 +21,11 @@ function currentGen(now) {
   return 23 + (sem - (2 * 2026 + 1));
 }
 
-// 날짜(YYYY.MM.DD)로 그때의 주관 학회(N대)를 추정: 6개월(3월·9월)마다 기수가 바뀐다. 2026.09~2027.02 = 23기
+// 날짜(YYYY.MM.DD)로 그때의 주관 학회(N대)를 추정: 주관 학회는 1~6월 / 7~12월 두 학기로 바뀐다. 2026.07~12 = 23대
 function genAtDate(d) {
   const m = String(d || '').match(/^(\d{4})[.\-\/](\d{1,2})/);
   if (!m) return '';
-  const y = +m[1], mo = +m[2], sem = 2 * y + (mo >= 9 ? 1 : (mo >= 3 ? 0 : -1));
+  const y = +m[1], mo = +m[2], sem = 2 * y + (mo >= 7 ? 1 : 0);
   const g = 23 + (sem - (2 * 2026 + 1));
   return g > 0 ? g + '대' : '';
 }
